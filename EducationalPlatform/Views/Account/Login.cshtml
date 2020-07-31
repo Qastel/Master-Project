@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Log in";
 }
-
+<!--
 <h2>@ViewBag.Title.</h2>
 <div class="row">
     <div class="col-md-8">
@@ -58,6 +58,79 @@
     </div>
 </div>
 
+-->
+
+
+@section AddToHead {
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700" rel="stylesheet">
+    <link rel="shortcut icon" href="~/Content/assets/images/fav.jpg">
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/fontawsom-all.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/css/style.css" />
+}
+
+<div class="asfd">dafsfs </div>
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="col-xl-10 col-lg-11 login-container">
+            <div class="row">
+                <div class="col-lg-7 img-box">
+                    <img src="~/Content/assets/images/login-banner.png" alt="">
+                </div>
+                <div class="col-lg-5 no-padding">
+                    <div class="login-box">
+                        <h5>Welcome Back!</h5>
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="login-row row no-margin">
+                                <i class="fas fa-envelope"></i><label for="Email Address" class="form-label-email"> Email Address </label>
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-sm form-textbox-email" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="login-row row no-margin">
+                                <i class="fas fa-unlock-alt"></i> <label for="" class="form-label-psw"> Password </label> 
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-sm form-textbox-psw" })
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="login-row row forrr no-margin">
+                                <!-- <p> <input type="checkbox"> Remember Me</p> -->
+                                 <div class="checkbox">
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    @Html.LabelFor(m => m.RememberMe)
+                                </div>
+                                <p><a href="">Forget Password?</a></p>
+                            </div>
+
+                            <div class="login-row btnroo row no-margin">
+                                <button type="submit" value="Log in" class="btn btn-primary btn-sm"> Log in</button>
+                                <!-- <button class="btn btn-light  btn-sm">  @Html.ActionLink("Create Account", "Register")</button> -->
+                            </div>
+                            <div class="login-row donroo row no-margin">
+                                <p>Dont have an Account ?  @Html.ActionLink("Sign Up", "Register")</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="copyc">
+    <p>Designed by <a href="https://www.smarteyeapps.com/">www.smarteyeapps.com</a></p>
+</div>
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/assets/js/jquery-3.2.1.min.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <script src="~/Content/assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+    <script src="~/Content/assets/js/script.js"></script>
 }

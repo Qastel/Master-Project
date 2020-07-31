@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.props" Condition="Exists('..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.props')" />
+  <Import Project="..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.props" Condition="Exists('..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.props')" />
+  <Import Project="..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.props" Condition="Exists('..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -186,16 +189,188 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\css\animate.css" />
+    <Content Include="Content\assets\css\bootstrap.min.css" />
+    <Content Include="Content\assets\css\fontawsom-all.min.css" />
+    <Content Include="Content\assets\css\style.css" />
+    <Content Include="Content\assets\images\html5-template-login-page.jpg" />
+    <Content Include="Content\assets\images\login-banner.png" />
+    <Content Include="Content\assets\images\login-bg.jpg" />
+    <Content Include="Content\assets\images\logo.png" />
+    <Content Include="Content\assets\images\testimonial\member-01.jpg" />
+    <Content Include="Content\assets\images\testimonial\member-02.jpg" />
+    <Content Include="Content\assets\images\testimonial\member-03.jpg" />
+    <Content Include="Content\assets\js\bootstrap.min.js" />
+    <Content Include="Content\assets\js\jquery-3.2.1.min.js" />
+    <Content Include="Content\assets\js\popper.js" />
+    <Content Include="Content\assets\js\popper.min.js" />
+    <Content Include="Content\assets\js\script.js" />
+    <Content Include="Content\assets\plugins\grid-gallery\css\grid-gallery.css" />
+    <Content Include="Content\assets\plugins\grid-gallery\css\grid-gallery.min.css" />
+    <Content Include="Content\assets\plugins\grid-gallery\js\grid-gallery.js" />
+    <Content Include="Content\assets\plugins\grid-gallery\js\grid-gallery.min.js" />
+    <Content Include="Content\assets\plugins\owl\owl.carousel.min.css" />
+    <Content Include="Content\assets\plugins\owl\owl.carousel.min.js" />
+    <Content Include="Content\assets\plugins\owl\owl.theme.css" />
+    <Content Include="Content\assets\plugins\scroll-fixed\jquery-scrolltofixed-min.js" />
+    <Content Include="Content\assets\plugins\slider\css\owl.carousel.min.css" />
+    <Content Include="Content\assets\plugins\slider\css\owl.theme.default.css" />
+    <Content Include="Content\assets\plugins\slider\js\owl.carousel.min.js" />
+    <Content Include="Content\assets\plugins\slider\js\slider.js" />
+    <Content Include="Content\assets\plugins\testimonial\css\owl.carousel.min.css" />
+    <Content Include="Content\assets\plugins\testimonial\css\owl.theme.min.css" />
+    <Content Include="Content\assets\plugins\testimonial\js\owl.carousel.min.js" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\assets\webfonts\Simple-Line-Icons.svg" />
+    <Content Include="Content\assets\webfonts\Simple-Line-Iconsb26c.svg" />
+    <Content Include="Content\assets\webfonts\themify.svg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\animate.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap\bootstrap-grid.css" />
+    <Content Include="css\bootstrap\bootstrap-reboot.css" />
+    <Content Include="css\bootstrap\bootstrap.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\jquery.DonutWidget.min.css" />
+    <Content Include="css\jquerysctipttop.css" />
+    <Content Include="css\linearicons.css" />
+    <Content Include="css\magnific-popup.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="css\nice-select.css" />
+    <Content Include="css\owl.carousel.css" />
+    <Content Include="css\theme\pages.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\Linearicons-Free.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\Images\about.jpg" />
+    <Content Include="Content\Images\banner-bg.png" />
+    <Content Include="Content\Images\blog\ads-banner.jpg" />
+    <Content Include="Content\Images\blog\blog-home-banner.jpg" />
+    <Content Include="Content\Images\blog\c1.jpg" />
+    <Content Include="Content\Images\blog\c2.jpg" />
+    <Content Include="Content\Images\blog\c3.jpg" />
+    <Content Include="Content\Images\blog\c4.jpg" />
+    <Content Include="Content\Images\blog\c5.jpg" />
+    <Content Include="Content\Images\blog\c6.jpg" />
+    <Content Include="Content\Images\blog\cat-widget1.jpg" />
+    <Content Include="Content\Images\blog\cat-widget2.jpg" />
+    <Content Include="Content\Images\blog\cat-widget3.jpg" />
+    <Content Include="Content\Images\blog\feature-img1.jpg" />
+    <Content Include="Content\Images\blog\feature-img2.jpg" />
+    <Content Include="Content\Images\blog\feature-img3.jpg" />
+    <Content Include="Content\Images\blog\feature-img4.jpg" />
+    <Content Include="Content\Images\blog\feature-img5.jpg" />
+    <Content Include="Content\Images\blog\next.jpg" />
+    <Content Include="Content\Images\blog\post-img1.jpg" />
+    <Content Include="Content\Images\blog\post-img2.jpg" />
+    <Content Include="Content\Images\blog\pp1.jpg" />
+    <Content Include="Content\Images\blog\pp2.jpg" />
+    <Content Include="Content\Images\blog\pp3.jpg" />
+    <Content Include="Content\Images\blog\pp4.jpg" />
+    <Content Include="Content\Images\blog\prev.jpg" />
+    <Content Include="Content\Images\blog\s-img.jpg" />
+    <Content Include="Content\Images\blog\user-info.png" />
+    <Content Include="Content\Images\elements\d.jpg" />
+    <Content Include="Content\Images\elements\disabled-check.png" />
+    <Content Include="Content\Images\elements\disabled-radio.png" />
+    <Content Include="Content\Images\elements\f1.jpg" />
+    <Content Include="Content\Images\elements\f2.jpg" />
+    <Content Include="Content\Images\elements\f3.jpg" />
+    <Content Include="Content\Images\elements\f4.jpg" />
+    <Content Include="Content\Images\elements\f5.jpg" />
+    <Content Include="Content\Images\elements\f6.jpg" />
+    <Content Include="Content\Images\elements\f7.jpg" />
+    <Content Include="Content\Images\elements\f8.jpg" />
+    <Content Include="Content\Images\elements\g1.jpg" />
+    <Content Include="Content\Images\elements\g2.jpg" />
+    <Content Include="Content\Images\elements\g3.jpg" />
+    <Content Include="Content\Images\elements\g4.jpg" />
+    <Content Include="Content\Images\elements\g5.jpg" />
+    <Content Include="Content\Images\elements\g6.jpg" />
+    <Content Include="Content\Images\elements\g7.jpg" />
+    <Content Include="Content\Images\elements\g8.jpg" />
+    <Content Include="Content\Images\elements\primary-check.png" />
+    <Content Include="Content\Images\elements\primary-radio.png" />
+    <Content Include="Content\Images\elements\success-check.png" />
+    <Content Include="Content\Images\elements\success-radio.png" />
+    <Content Include="Content\Images\faculty\f1.jpg" />
+    <Content Include="Content\Images\faculty\f2.jpg" />
+    <Content Include="Content\Images\faculty\f3.jpg" />
+    <Content Include="Content\Images\faculty\f4.jpg" />
+    <Content Include="Content\Images\fav.png" />
+    <Content Include="Content\Images\header-bg.png" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\quote.png" />
+    <Content Include="Content\Images\rocket.png" />
+    <Content Include="Content\Images\testimonial\t1.jpg" />
+    <Content Include="Content\Images\testimonial\t2.jpg" />
+    <Content Include="Content\Images\testimonial\t3.jpg" />
+    <Content Include="Content\Images\testimonial\t4.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\Images\.DS_Store" />
+    <Content Include="Content\Images\blog\.DS_Store" />
+    <Content Include="Content\Images\faculty\.DS_Store" />
+    <Content Include="Content\Images\testimonial\.DS_Store" />
+    <Content Include="css\.DS_Store" />
+    <Content Include="css\bootstrap.map" />
+    <Content Include="css\main.css.map" />
+    <Content Include="css\main.map" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\Linearicons-Free.eot" />
+    <Content Include="fonts\Linearicons-Free.ttf" />
+    <Content Include="fonts\Linearicons-Free.woff" />
+    <Content Include="fonts\Linearicons-Free.woff2" />
+    <Content Include="Content\assets\config-scss.bat" />
+    <Content Include="Content\assets\css\bootstrap.min.css.map" />
+    <Content Include="Content\assets\css\style.css.map" />
+    <Content Include="Content\assets\fonts\Montserrat-Bold.ttf" />
+    <Content Include="Content\assets\fonts\Montserrat-Regular.ttf" />
+    <Content Include="Content\assets\js\bootstrap.min.js.map" />
+    <Content Include="Content\assets\js\popper.min.js.map" />
+    <Content Include="Content\assets\scss\.sass-cache\87f88134b2e274406d696eddf2817a21a5f37943\style.scssc" />
+    <Content Include="Content\assets\scss\.sass-cache\87f88134b2e274406d696eddf2817a21a5f37943\_variable.scssc" />
+    <Content Include="Content\assets\scss\base\basic_setup.scss" />
+    <Content Include="Content\assets\scss\base\Untitled-6" />
+    <Content Include="Content\assets\scss\components\login.scss" />
+    <Content Include="Content\assets\scss\style.css.map" />
+    <Content Include="Content\assets\scss\style.scss" />
+    <Content Include="Content\assets\scss\_variable.scss" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\assets\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\assets\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\assets\webfonts\fa-solid-900.woff2" />
+    <Content Include="Content\assets\webfonts\Simple-Line-Icons.eot" />
+    <Content Include="Content\assets\webfonts\Simple-Line-Icons.ttf" />
+    <Content Include="Content\assets\webfonts\Simple-Line-Icons.woff" />
+    <Content Include="Content\assets\webfonts\Simple-Line-Icons.woff2" />
+    <Content Include="Content\assets\webfonts\Simple-Line-Iconsb26c.eot" />
+    <Content Include="Content\assets\webfonts\Simple-Line-Iconsb26c.ttf" />
+    <Content Include="Content\assets\webfonts\Simple-Line-Iconsb26c.woff" />
+    <Content Include="Content\assets\webfonts\Simple-Line-Iconsb26c.woff2" />
+    <Content Include="Content\assets\webfonts\themify.eot" />
+    <Content Include="Content\assets\webfonts\themify.ttf" />
+    <Content Include="Content\assets\webfonts\themify.woff" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -206,7 +381,27 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\easing.min.js" />
+    <Content Include="Scripts\js\hoverIntent.js" />
+    <Content Include="Scripts\js\jquery.ajaxchimp.min.js" />
+    <Content Include="Scripts\js\jquery.counterup.min.js" />
+    <Content Include="Scripts\js\jquery.magnific-popup.min.js" />
+    <Content Include="Scripts\js\jquery.nice-select.min.js" />
+    <Content Include="Scripts\js\jquery.sticky.js" />
+    <Content Include="Scripts\js\mail-script.js" />
+    <Content Include="Scripts\js\main.js" />
+    <Content Include="Scripts\js\owl-carousel-thumb.min.js" />
+    <Content Include="Scripts\js\owl.carousel.min.js" />
+    <Content Include="Scripts\js\parallax.min.js" />
+    <Content Include="Scripts\js\slick.js" />
+    <Content Include="Scripts\js\superfish.js" />
+    <Content Include="Scripts\js\superfish.min.js" />
+    <Content Include="Scripts\js\vendor\bootstrap.min.js" />
+    <Content Include="Scripts\js\vendor\jquery-2.2.4.min.js" />
+    <Content Include="Scripts\js\waypoints.min.js" />
+    <Content Include="Scripts\js\wow.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Home\index.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -241,9 +436,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Scripts\js\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\assets\images\gallery\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -291,7 +488,16 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.targets'))" />
   </Target>
+  <Import Project="..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.targets" Condition="Exists('..\packages\Microsoft.Build.Tasks.Git.1.0.0\build\Microsoft.Build.Tasks.Git.targets')" />
+  <Import Project="..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.targets" Condition="Exists('..\packages\Microsoft.SourceLink.Common.1.0.0\build\Microsoft.SourceLink.Common.targets')" />
+  <Import Project="..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.targets" Condition="Exists('..\packages\Microsoft.SourceLink.GitHub.1.0.0\build\Microsoft.SourceLink.GitHub.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

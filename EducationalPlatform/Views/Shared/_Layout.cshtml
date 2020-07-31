@@ -2,13 +2,24 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <link rel="shortcut icon" href="@Url.Content("~/Content/Images/fav.png")">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,500,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500i" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" rel="stylesheet" type="text/css" />
+
+    
+    @RenderSection("AddToHead", required: false)
+    
+
+
 </head>
 <body>
+    <!--
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -29,6 +40,40 @@
             </div>
         </div>
     </div>
+    <-->
+
+    <!-- Start Header Area -->
+    <header id="header">
+        <div class="container shrink">
+            <div class="row align-items-center justify-content-between d-flex">
+                <div id="logo">
+                    <a href="@Url.Action("Index", "Home")"><img src="~/Content/Images/logo.png" alt="" title="" /></a>
+                </div>
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu" >
+                        <li class="menu-active nav-item" >@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li class="nav-item">@Html.ActionLink("About", "About", "Home")</li>
+                        <li class="nav-item">@Html.ActionLink("Codebases", "Codebases", "Home")</li>
+
+                        <!--
+                        <li class="menu-has-children">
+                            <a href="">Pages</a>
+                            <ul>
+                                <li><a href="elements.html">Elements</a></li>
+                            </ul>
+                        </li>
+
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        -->
+                    </ul>
+                 
+                    @Html.Partial("_LoginPartial")
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- End Header Area -->
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -40,5 +85,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
 </body>
 </html>

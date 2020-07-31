@@ -20,11 +20,37 @@ namespace EducationalPlatform
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/js/main.js",
+                      "~/Scripts/js/vendor/jquery - 2.2.4.min.js",
+                      "~/Scripts/js/vendor/bootstrap.min.js",
+                      "~/Scripts/js/easing.min.js",
+                      "~/Scripts/js/hoverIntent.js",
+                      "~/Scripts/js/superfish.min.js",
+                      "~/Scripts/js/jquery.ajaxchimp.min.js",
+                      "~/Scripts/js/jquery.magnific-popup.min.js",
+                      "~/Scripts/js/owl.carousel.min.js",
+                      "~/Scripts/js/owl-carousel-thumb.min.js",
+                      "~/Scripts/js/jquery.sticky.js",
+                      "~/Scripts/js/jquery.nice-select.min.js",
+                      "~/Scripts/js/parallax.min.js",
+                      "~/Scripts/js/waypoints.min.js",
+                      "~/Scripts/js/wow.min.js",
+                      "~/Scripts/js/jquery.counterup.min.js",
+                      "~/Scripts/js/mail-script.js"
+                      ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                     "~/css/bootstrap.css",
+                     "~/Content/main.css",
+                     "~/Content/Site.css",
+                     "~/css/linearicons.css",
+                     "~/css/font-awesome.min.css",
+                     "~/css/magnific-popup.css",
+                     "~/css/nice-select.css",
+                     "~/css/animate.min.css",
+                     "~/css/owl.carousel.css"
+                     ));
         }
     }
 }
