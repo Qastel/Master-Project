@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EducationalPlatform.Models;
+using System.Security.Claims;
 
 namespace EducationalPlatform.Controllers
 {
@@ -333,7 +334,9 @@ namespace EducationalPlatform.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+       
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

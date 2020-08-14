@@ -8,6 +8,14 @@ $( document ).ready(function() {
         $('#menu-jk').scrollToFixed();
     }
 
+    $(".form-textbox-fullname").blur(function () {
+        ($(".form-textbox-fullname").val() === "") ? $(".form-label-fullname").show() : $(".form-label-fullname").hide();
+    });
+
+    $(".form-textbox-fullname").focus(function () {
+        $(".form-label-fullname").show();
+    });
+
     $(".form-textbox-email").blur(function () {
         ($(".form-textbox-email").val() === "") ? $(".form-label-email").show() : $(".form-label-email").hide();
     });

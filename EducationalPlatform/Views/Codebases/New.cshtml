@@ -1,0 +1,38 @@
+﻿@model EducationalPlatform.Models.Codebases
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+
+<form method="post" action="/Codebases/New">
+    @Html.HiddenFor(m => m.UserId)
+
+
+    @Html.Label("CodebaseName", "Codebase Name")
+    <br />
+    @Html.TextBox("CodebaseName", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.CodebaseName, null, new { @class = "text-danger " })
+    <br /><br />
+
+    @Html.Label("Description", "Codebase Description")
+    <br />
+    @Html.TextBox("Description", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger " })
+    <br /><br />
+
+
+    @Html.DropDownListFor(m => m.SelectedTechnology, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Technology))), "App Type", new { @class = "" })
+
+    <br /><br />
+
+    @Html.DropDownListFor(m => m.SelectedDifficulty, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Difficulty))), "Difficulty", new { @class = "" })
+
+    @Html.DropDownListFor(m => m.SelectedProgrammingLanguage, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Language))), "Language", new { @class = "" })
+
+    <button class="btn btn-sm btn-success" type="submit">Add Codebase</button>
+</form>
+
+
