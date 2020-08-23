@@ -26,6 +26,11 @@ namespace EducationalPlatform.Models
         [DisplayName("Upload Codebase")]
         public string CodebasePath { get; set; }
 
+        public string GoogleFormsLink { get; set; }
+
+        [AllowHtml]
+        public string GoogleFormsEmbedded { get; set;}
+
         [NotMapped]
         public HttpPostedFileBase CodebaseFile { get; set; }
 
@@ -42,24 +47,25 @@ namespace EducationalPlatform.Models
         public string Environment { get; set; }
 
         //[Required(ErrorMessage = "The codebase Description is Required!")]
-        public Technology SelectedTechnology { get; set; }
+        public Technology? SelectedTechnology { get; set; }
 
         //[Required(ErrorMessage = "The codebase Description is Required!")]
         //public string SelectedProgrammingLanguage { get; set; }
         //public IEnumerable<SelectListItem> ProgrammingLanguages { get; set; }
-        public Language SelectedProgrammingLanguage { get; set; }
+        public Language? SelectedProgrammingLanguage { get; set; }
+
+        public Difficulty? SelectedDifficulty { get; set; }
 
         //[Required(ErrorMessage = "The codebase Description is Required!")]
-        public string TimeLimit { get; set; }
+        public int TimeLimit { get; set; }
 
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 
-        public Difficulty SelectedDifficulty{ get; set; }
-
-        public List <string> Tags { get; set; }
-
+        public string Tags { get; set; }
+        
+        public int MeanRating { get; set; }
     }
 
     public enum Difficulty

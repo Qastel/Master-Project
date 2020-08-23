@@ -87,6 +87,9 @@ namespace EducationalPlatform.Models
         [Required]
         [Display(Name = "Account Type")]
         public string AccountType { get; set; }
+
+        [Display(Name = "Qualification")]
+        public string Qualification { get; set; }
     }
 
     public class ResetPasswordViewModel

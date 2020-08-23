@@ -14,6 +14,8 @@ namespace EducationalPlatform.Models
     {
         public string FullName { get; internal set; }
 
+        public string Qualification { get; internal set; }
+
         public IEnumerable<SelectListItem> AllRoles { get; internal set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -38,6 +40,10 @@ namespace EducationalPlatform.Models
         }
 
         public DbSet <Codebases> Codebases { get; set; }
+        public DbSet <Paragraph> Paragraphs { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<ForumTopic> ForumTopics { get; set; }
+        public DbSet<ForumResponse> ForumResponses { get; set; }
 
         public static ApplicationDbContext Create()
         {

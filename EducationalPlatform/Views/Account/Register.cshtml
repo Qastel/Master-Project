@@ -44,7 +44,6 @@
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700" rel="stylesheet">
     <link rel="shortcut icon" href="~/Content/assets/images/fav.jpg">
     <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/assets/css/fontawsom-all.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/assets/css/style.css" />
 }
 
@@ -64,47 +63,46 @@
                         {
                             @Html.AntiForgeryToken()
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
                             <div class="login-row row no-margin">
                                 <i class="fas fa-user"></i> <label for="" class="form-label-fullname"> Full Name </label>
                                 @Html.TextBoxFor(m => m.FullName, new { @class = "form-control form-control-sm form-textbox-fullname" })
                                 @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
                             </div>
-
                             <div class="login-row row no-margin">
                                 <i class="fas fa-envelope"></i> <label for="" class="form-label-email"> Email Address </label>
                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-sm form-textbox-email" })
                                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                             </div>
-
                             <div class="login-row row no-margin">
                                 <i class="fas fa-unlock-alt"></i><label for="" class="form-label-psw"> Password </label>
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-sm form-textbox-psw" })
                                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div>
-
                             <div class="login-row row forrr no-margin">
                                 <i class="fas fa-unlock-alt"></i><label for="" class="form-label-repsw"> Confirm Password </label>
                                 @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control form-control-sm form-textbox-repsw" })
                                 @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                             </div>
-
-                            <br />
-                            <p> Choose your profile:</p>
-                    
-
+                            <br /><br />
+                            <p> Choose your profile: </p>
                             @Html.LabelFor(m => m.AccountType, "", new { @class = "col-md-2 control-label" })
                             <div class="form-group form-check-inline">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" value="Instructor" name="AccountType">Instructor
+                                    <input type="radio" class="form-check-input" value="Instructor" name="AccountType" onclick="showCompetenceTextBox()">Instructor
                                 </label>
                             </div>
                             <div class="form-group form-check-inline">
                                 <label class="form-check-label">
-                                    <input type="radio" class="form-check-input" value="Learner" name="AccountType">Learner
+                                    <input type="radio" class="form-check-input" value="Learner" name="AccountType" onclick="hideCompetenceTextBox()">Learner
                                 </label>
                             </div>
-                       
+                            <div class="competence">
+                                <a  data-toggle="tooltip" title="You need to have the right experience" style="cursor: help;">
+                                    <i class="fas fa-certificate"></i><label for="" class="form-label-qualification"> Qualification/Competence </label> 
+                                    <span class="" style="font-size:12px; color:cornflowerblue;">(?)</span>
+                                </a>
+                                @Html.TextBoxFor(m => m.Qualification, new { @class = "form-textbox-qualification" })
+                            </div>
                             <div class="login-row btnroo row no-margin">
                                 <button type="submit" value="Register" class="btn btn-primary btn-sm"> Register </button>
                                 <!-- <button class="btn btn-light  btn-sm">  @Html.ActionLink("Login", "Login")</button> -->

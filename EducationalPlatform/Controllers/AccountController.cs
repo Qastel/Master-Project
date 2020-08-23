@@ -19,6 +19,7 @@ namespace EducationalPlatform.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+      
 
         public AccountController()
         {
@@ -155,7 +156,7 @@ namespace EducationalPlatform.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName = model.FullName };
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName = model.FullName, Qualification = model.Qualification};
                     var result = await UserManager.CreateAsync(user, model.Password);
 
                     var roleStore = new RoleStore<IdentityRole>(context);
@@ -163,12 +164,13 @@ namespace EducationalPlatform.Controllers
 
                     var userStore = new UserStore<ApplicationUser>(context);
                     var userManager = new UserManager<ApplicationUser>(userStore);
-                    userManager.AddToRole(user.Id, model.AccountType);
+                  
 
                     if (result.Succeeded)
                     {
                         await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
+                        userManager.AddToRole(user.Id, model.AccountType);
 
                         // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
@@ -438,7 +440,8 @@ namespace EducationalPlatform.Controllers
             base.Dispose(disposing);
         }
 
-  
+
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

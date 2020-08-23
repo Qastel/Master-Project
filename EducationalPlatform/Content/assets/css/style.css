@@ -16,6 +16,10 @@ Description: This Template is created for Youtubers
     opacity: 0.9;
 }
 
+.competence {
+    display: none;
+}
+
 .nav-menu li {
     color: white;
 }
@@ -24,11 +28,11 @@ Description: This Template is created for Youtubers
     color: #39cfca !important;
 }
 
-.form-label-email, .form-label-psw, .form-label-repsw, .form-label-fullname {
-    margin-left: 10px;
+.form-label-email, .form-label-psw, .form-label-repsw, .form-label-fullname, .form-label-qualification {
+    margin-left: 12px;
 }
 
-.form-textbox-email, .form-textbox-psw, .form-textbox-repsw, .form-textbox-fullname {
+.form-textbox-email, .form-textbox-psw, .form-textbox-repsw, .form-textbox-fullname, .form-textbox-qualification {
     margin-left: 20px;
 }
 
@@ -297,7 +301,7 @@ body {
     background-color: rgba(255, 255, 255, 0.72);
     margin-left:auto;
     margin-right:auto;
-    margin-top: 15%; 
+    margin-top: 10%; 
     margin-bottom:15%;
 }
 
@@ -325,7 +329,7 @@ body {
     margin-top: 25px; }
 
 .login-box .login-row input {
-      margin-bottom: 0px; }
+    margin-bottom: 0px; }
 
 .login-box .forrr p {
     font-size: .9rem; }
@@ -364,7 +368,8 @@ body {
     border-radius: 0px;
     border-bottom: 1px solid #CCC;
     background-color: #fcfbfc1f;
-    margin-top: -23px; }
+    /*margin-top: -5px; move the input down on focus */ 
+}
 
 .login-box input:focus {
     border: 0px !important;

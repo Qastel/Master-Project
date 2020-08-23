@@ -1,0 +1,19 @@
+﻿@model EducationalPlatform.Models.Review
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        @foreach (EducationalPlatform.Models.Review review in ViewBag.Reviews)
+        {
+            <div class="d-flex justify-content-between pb-20 pt-20 mb-10 pl-5 pr-5" style="background-color:#F0F8FF;">
+                <h6> @review.Description </h6><p>  </p> by @review.User.FullName
+            </div>
+
+        }
+    </div>
+</div>
+

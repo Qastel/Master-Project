@@ -1,87 +1,131 @@
 ﻿@model EducationalPlatform.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "My Profile";
 }
 
-<h2>@ViewBag.Title.</h2>
+<!-- Start Banner Area -->
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    @ViewBag.Title
+                </h1>
+                <p>
+                    Change your profile settings 
+                </p>
+                <div class="link-nav">
+                    <span class="box">
+                        <a href="@Url.Action("Index", "Home")"> Home </a>
+                        <i class="lnr lnr-arrow-right"></i>
+                        <a href="@Url.Action("Index", "Codebases")">My Profile</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rocket-img">
+        <img src="~/Content/Images/rocket.png" alt="">
+    </div>
+</section>
+<!-- End Banner Area -->
 
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    <h4>Change your account settings</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>Password:</dt>
-        <dd>
-            [
-            @if (Model.HasPassword)
+
+<section class="feature-area ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <p class="text-success">@ViewBag.StatusMessage</p>
+                <div>
+                    <h4>Change your account settings</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>Password:</dt>
+                        <dd>
+                            [
+                            @if (Model.HasPassword)
+                            {
+                                @Html.ActionLink("Change your password", "ChangePassword")
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Create", "SetPassword")
+                            }
+                            ]
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-70">
+            <div class="col-lg-8">
+                 <h4>Your uploaded Codebases</h4>
+                 <hr />
+            </div>
+        </div>
+
+        <div class="feature-inner row justify-content-center mt-20">
+        @if (ViewBag.UserCodebase == null)
+        {
+            <h3> You do not have any codebases uploaded yet!</h3>
+        }
+        else
+        {
+            foreach (EducationalPlatform.Models.Codebases codebase in ViewBag.UserCodebases)
             {
-                @Html.ActionLink("Change your password", "ChangePassword")
+                <div class="col-lg-6 col-md-6 ">
+                    <a href="" class="codebase-box">
+                        <div class="feature-item">
+                            <h4 style="display:inline-block;">@codebase.CodebaseName</h4>
+                            @if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Easy)
+                            {
+                                <span class="codebase-difficulty level-easy"> @codebase.SelectedDifficulty </span>
+                            }
+                            else if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Medium)
+                            {
+                                <span class="codebase-difficulty level-medium"> @codebase.SelectedDifficulty </span>
+                            }
+                            else if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Hard)
+                            {
+                                <span class="codebase-difficulty level-hard"> @codebase.SelectedDifficulty </span>
+                            }
+                            <h5 class="wow fadeInRight" style="display:inline-block; float:right;">@codebase.SelectedProgrammingLanguage, @codebase.SelectedTechnology App</h5>
+                            <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
+                                <p class="description">
+                                    @codebase.Description
+                                </p>
+                            </div>
+                            <br>
+                            <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
+                                <span class=""> Instructor: @codebase.User.FullName</span>
+                                <span class="vertical-line"></span>
+                                <span class=""> Qualification: @codebase.User.Qualification</span>
+                                <span class="vertical-line"></span>
+                                <span class=""> Project Limit: @codebase.TimeLimit hours</span>
+                                <hr>
+                            </div>
+                            <div class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".1s">
+                                @if (codebase.Tags != null)
+                                {
+                                    foreach (string tag in codebase.Tags.Split(','))
+                                    {
+                                        <span class="codebase-topics">@tag</span>
+                                    }
+                                }
+                            </div>
+                            <br>
+                            <form method="post" style="display:inline" action="/Codebases/Delete/@codebase.Id">
+                                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                <button class="btn btn-sm btn-danger" role="button" type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </a>
+                </div>
             }
-            else
-            {
-                @Html.ActionLink("Create", "SetPassword")
-            }
-            ]
-        </dd>
-        <dt>External Logins:</dt>
-        <dd>
-            @Model.Logins.Count [
-            @Html.ActionLink("Manage", "ManageLogins") ]
-        </dd>
-        @*
-            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
-             
-             See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
-             
-             Uncomment the following block after you have set up two-factor authentication
-        *@
-        @*  
-            <dt>Phone Number:</dt>
-            <dd>
-                @(Model.PhoneNumber ?? "None")
-                @if (Model.PhoneNumber != null)
-                {
-                    <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Change", "AddPhoneNumber")&nbsp;&nbsp;]</text>
-                    using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>[<input type="submit" value="Remove" class="btn-link" />]</text>
-                    }
-                }
-                else
-                {
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
-                }
-            </dd>
-        *@
-        <dt>Two-Factor Authentication:</dt>
-        <dd>
-            <p>
-                There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication.
-            </p>
-            @*@if (Model.TwoFactor)
-                {
-                    using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Enabled
-                        <input type="submit" value="Disable" class="btn btn-link" />
-                        </text>
-                    }
-                }
-                else
-                {
-                    using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <text>Disabled
-                        <input type="submit" value="Enable" class="btn btn-link" />
-                        </text>
-                    }
-                }*@
-        </dd>
-    </dl>
-</div>
+        }
+        </div>
+     
+    </div>
+
+</section>

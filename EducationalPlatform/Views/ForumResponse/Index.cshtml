@@ -1,0 +1,82 @@
+﻿@model EducationalPlatform.Models.ForumResponse
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Forum Responses 
+                </h1>
+                <p>
+                    Do you have something to add? Write your opinion bellow.
+                </p>
+                <div class="link-nav">
+                    <span class="box">
+                        <a href="@Url.Action("Index", "Codebases")"> Codebases </a>
+                        <i class="lnr lnr-arrow-right"></i>
+                        <a href="@Url.Action("Show", "Codebases", new { Id = Model.Id} )"> Alien Invasion</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rocket-img">
+        <img src="~/Content/Images/rocket.png" alt="">
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<section class="feature-area section">
+    <div class="container shrink codebase-step">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="section-title text-center">
+                    <h1>Responses for "@Model.Topic.Description"</h1>
+                    <hr>
+                </div>
+
+            </div>
+        </div>
+        <div class="row justify-content-center" >
+            <div class="col-lg-11">
+               @foreach (EducationalPlatform.Models.ForumResponse response in ViewBag.ForumResponses)
+               {
+
+                <div class="pb-20 pt-20 mb-10 pl-5 pr-5 overflow-hidden" style="background-color:#F5F5F5; border: 1px solid gray;">
+                    @if (response.FatherResponse != null)
+                    {
+                        <div class=" pb-20 pt-20 mb-10 pl-5 pr-5 overflow-hidden" style="background-color:#ECF1EF; border: 1px solid gray;">
+                            <h6>Replied to: @response.FatherResponse.Description</h6> by  @response.FatherResponse.User.FullName
+                        </div>
+                    }
+                    <h6> @response.Description </h6> by @response.User.FullName, @response.CreationDate
+                    <button id="reply" onclick="display_reply(@response.Id)" class="float-right genric-btn default">Reply</button>
+                    <div id="reply-div-@response.Id" class="ml-20" style="display:none;">
+                        @Html.Action("New", "ForumResponse", new { TopicId = response.TopicId, FatherId = response.Id })
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        @Html.Action("New", "ForumResponse")
+    </div>
+</section>
+
+<script>
+   
+    document.getElementById("reply-div").style.display = 'none';
+
+    function display_reply(divId) {
+        var x = document.getElementById("reply-div" + "-" + divId);
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>

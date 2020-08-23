@@ -15,50 +15,24 @@
 </head>
 
 <body>
-    <!--
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <-->
-    
     <!-- Start Nav Area -->
     <header id="header">
         <div class="container shrink">
             <div class="row align-items-center justify-content-between d-flex">
                 <div id="logo">
-                    <a href="@Url.Action("Index", "Home")"><img src="~/Content/Images/logo.png" alt="logo" title="logo" /></a>
+                    <a href="@Url.Action("Index", "Home")"><img src="~/Content/Images/logo.png" alt="logo" title="logo"/></a>
                 </div>
                 <nav id="nav-menu-container" class="d-flex">
-                   
                     <ul class="nav-menu" >
                         <li class="menu-active nav-item" >@Html.ActionLink("Home", "Index", "Home")</li>
                         <li class="nav-item">@Html.ActionLink("About", "About", "Home")</li>
                         <li class="nav-item menu-has-children">@Html.ActionLink("Codebases", "Index", "Codebases")
                             @if (User.IsInRole("Instructor")){
                                 <ul>
-                                    <li>@Html.ActionLink("Add Codebase", "New", "Codebases")</li>
+                                    <li>@Html.ActionLink("New Codebase", "New", "Codebases")</li>
                                 </ul>
                             }
                         </li>
-
-             
                         <!--
                         <li class="menu-has-children">
                             <a href="">Pages</a>
@@ -66,8 +40,6 @@
                                 <li><a href="elements.html">Elements</a></li>
                             </ul>
                         </li>
-
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                         -->
                     </ul>
                     @Html.Partial("_LoginPartial")
@@ -84,57 +56,35 @@
         <footer class="footer-area section-gap">
             <div class="container shrink">
                 <div class="row">
-                    <div class="col-lg-2 col-md-6 single-footer-widget">
-                        <h4>Top Products</h4>
+                    <div class="col-lg-3 col-md-6 single-footer-widget">
+                        <h4>Codebase Exploration</h4>
                         <ul>
-                            <li><a href="#">Managed Website</a></li>
-                            <li><a href="#">Manage Reputation</a></li>
-                            <li><a href="#">Power Tools</a></li>
-                            <li><a href="#">Marketing Service</a></li>
+                            <li>Resolve exercises</li>
+                            <li>View Feedback</li>
+                            <li>Timed Tasks</li>
                         </ul>
                     </div>
-                    <div class="col-lg-2 col-md-6 single-footer-widget">
-                        <h4>Quick Links</h4>
+                    <div class="col-lg-3 col-md-6 single-footer-widget">
+                        <h4>Review Codebases</h4>
                         <ul>
-                            <li><a href="#">Jobs</a></li>
-                            <li><a href="#">Brand Assets</a></li>
-                            <li><a href="#">Investor Relations</a></li>
-                            <li><a href="#">Terms of Service</a></li>
+                            <li>Add Commenets</li>
+                            <li>Add Rating</li>
                         </ul>
                     </div>
-                    <div class="col-lg-2 col-md-6 single-footer-widget">
-                        <h4>Features</h4>
+                    <div class="col-lg-3 col-md-6 single-footer-widget">
+                        <h4>Access Forum</h4>
                         <ul>
-                            <li><a href="#">Jobs</a></li>
-                            <li><a href="#">Brand Assets</a></li>
-                            <li><a href="#">Investor Relations</a></li>
-                            <li><a href="#">Terms of Service</a></li>
+                            <li>Add Topics</li>
+                            <li>Add Responses</li>
+                            <li>Reply to another learner</li>
                         </ul>
                     </div>
-                    <div class="col-lg-2 col-md-6 single-footer-widget">
-                        <h4>Resources</h4>
+                    <div class="col-lg-3 col-md-6 single-footer-widget">
+                        <h4>Manage Profiles</h4>
                         <ul>
-                            <li><a href="#">Guides</a></li>
-                            <li><a href="#">Research</a></li>
-                            <li><a href="#">Experts</a></li>
-                            <li><a href="#">Agencies</a></li>
+                            <li>Be a Learner</li>
+                            <li>Be an Instructor</li>
                         </ul>
-                    </div>
-                    <div class="col-lg-4 col-md-6 single-footer-widget">
-                        <h4>Newsletter</h4>
-                        <p>You can trust us. we only send promo offers,</p>
-                        <div class="form-wrap" id="mc_embed_signup">
-                            <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                  method="get" class="form-inline">
-                                <input class="form-control" name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '"
-                                       required="" type="email">
-                                <button class="click-btn btn btn-default"><span class="lnr lnr-arrow-right"></span></button>
-                                <div style="position: absolute; left: -5000px;">
-                                    <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
-                                </div>
-                                <div class="info"></div>
-                            </form>
-                        </div>
                     </div>
                 </div>
                 <div class="footer-bottom row align-items-center">
@@ -144,17 +94,11 @@
                         <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
-                    <div class="col-lg-4 col-md-12 footer-social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-dribbble"></i></a>
-                        <a href="#"><i class="fa fa-behance"></i></a>
-                    </div>
+            
                 </div>
             </div>
         </footer>
         <!-- End Footer Area -->
-
     </div>
 
     @Scripts.Render("~/bundles/jquery")

@@ -7,11 +7,35 @@
 /*  Basic Style 
 /* =================================== */
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    width: 100%;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+.description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 1500px;
+}
 
 ::-moz-selection {
     /* Code for Firefox */
     background-color: #39cfca;
-    color: #fff; }
+    color: #fff;
+}
 
 ::selection {
     background-color: #39cfca;
@@ -3004,13 +3028,26 @@ height: 600px; }
 /*# sourceMappingURL=main.css.map */
 
 .codebase-difficulty {
-    color: #38a4ff;
-    border: 1px solid #38a4ff;
     border-radius: 20px;
     padding:3px;
     padding-left: 10px;
     padding-right: 10px;
     margin-left: 10px;
+}
+
+.level-easy {
+    color: #38a4ff;
+    border: 1px solid #38a4ff;
+}
+
+.level-medium {
+    color: #F5D300;
+    border: 1px solid #F5D300;
+}
+
+.level-hard {
+    color: #ff4000;
+    border: 1px solid #ff4000;
 }
 
 .codebase-topics {
@@ -3043,6 +3080,13 @@ height: 600px; }
     margin-bottom: 50px;
     display: flex;
     justify-content: space-between;
+}
+
+.section-wrapper {
+    border: 2px solid #f9f9ff;
+    padding: 10px;
+    margin: 20px;
+    margin-bottom: 50px;
 }
 
 .codebase-search {

@@ -1,0 +1,48 @@
+﻿@model EducationalPlatform.Models.Review
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "New";
+    Layout = null;
+}
+
+<section class="about-area section">
+    <div class="container shrink codebase-step">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="section-title text-center">
+                    <h1>Check the Reviews</h1>
+                    <p>
+                        Do you have anything to add? Leave your review in order to help instructors improve the system.
+                    </p>
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+        @Html.Partial("_Index")
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <form method="post" action="/Review/New" class="overflow-hidden">
+                    <div class="d-flex justify-content-center">
+                        @Html.HiddenFor(m => m.UserId)
+                        @Html.HiddenFor(m => m.CodebaseId)
+                        <div class="mt-10">
+                            @Html.TextArea("Description", null, new { @class = "single-input-primary", @placeholder = "Write review here...", style = "width: 600px;" })
+                            @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger " })
+                        </div>
+                        <div class="mt-10 overflow-hidden">
+                            <div class="float-right ml-20">
+                                @Html.Label("Rating")
+                                @Html.TextBox("Rating", null, new { @class = "single-input-primary", @placeholder = "Rating", @type = "number", @min = "1", @max = "5", style = "width: 100px;" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Rating, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br>
+                    <button class="btn search-btn float-right" type="submit">Add review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

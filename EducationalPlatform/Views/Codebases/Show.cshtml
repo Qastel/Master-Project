@@ -1,8 +1,9 @@
-﻿
+﻿@model EducationalPlatform.Models.Codebases
+
 @{
     ViewBag.Title = "Show";
-}
 
+}
 
 <!-- Start Banner Area -->
 <section class="banner-area relative">
@@ -13,13 +14,13 @@
                     Alien Invasion
                 </h1>
                 <p>
-                    ........project description ........
+                    @Model.Description
                 </p>
                 <div class="link-nav">
                     <span class="box">
                         <a href="@Url.Action("Index", "Codebases")"> Codebases </a>
                         <i class="lnr lnr-arrow-right"></i>
-                        <a href="@Url.Action("Show", "Codebases")"> Alien Invasion</a>
+                        <a href="@Url.Action("Show", "Codebases", new { Id = Model.Id} )"> Alien Invasion</a>
                     </span>
                 </div>
             </div>
@@ -50,12 +51,12 @@
                 </div>
             </div>
             <div class="offset-lg-2 col-lg-5 offset-md-0 col-md-12 about-right">
-                <div class="wow fadeIn" data-wow-duration="2s" >
+                <div class="wow fadeIn" data-wow-duration="2s">
                     <h3>
                         Project management:
                     </h3>
                     <br>
-                    <ul >
+                    <ul>
                         <li> <b>Environment</b> - Visual Studio Code  </li>
                         <li> <b>Members</b> - 1  </li>
                         <li> <b>Programming Language</b> - Python  </li>
@@ -85,7 +86,7 @@
             </div>
         </div>
 
-        <div class="row justify-content-center codebase-build-background" >
+        <div class="row justify-content-center codebase-build-background">
             <ol class="ordered-list">
                 <li class="li-gap">
                     <h5>Explore Python language Conventions/ Best Practices/ Design Patterns </h5>
@@ -122,4 +123,30 @@
     </div>
 </section>
 
+
+@Html.Action("New", "Review", new { CodebaseId = Model.Id })
+
+<div style="position: fixed; bottom: 20px; right: 20px;">
+    <a href="@Url.Action("Index", "ForumTopic", new { CodebaseId = Model.Id })">
+        <svg width="2em" height="1.5em" viewBox="0 0 16 16" class="bi bi-chat-right-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M2 1h12a1 1 0 0 1 1 1v11.586l-2-2A2 2 0 0 0 11.586 11H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zm12-1a2 2 0 0 1 2 2v12.793a.5.5 0 0 1-.854.353l-2.853-2.853a1 1 0 0 0-.707-.293H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12z" />
+            <path fill-rule="evenodd" d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+        </svg>
+        Forum
+    </a>
+</div>
+
+<iframe id="myFrame" src="" frameborder="0" marginheight="0" marginwidth="0" border="0" style="margin:0; padding:0;"></iframe>
+
+
+
+<script>
+    @if (@Model.GoogleFormsEmbedded != null) {
+        <text>
+        document.getElementById("myFrame").src = "@Model.GoogleFormsEmbedded.Split('"')[1]";
+        document.getElementById("myFrame").width = "100%";
+        document.getElementById("myFrame").height = "3000px";
+        </text>
+    }
+</script>
 

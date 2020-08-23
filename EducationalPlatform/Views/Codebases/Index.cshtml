@@ -1,9 +1,10 @@
 ﻿@model EducationalPlatform.Models.Codebases
 
-
 @{
     ViewBag.Title = "Codebases";
 }
+
+@ViewBag.Test
 
 <!-- Start Banner Area -->
 <section class="banner-area relative">
@@ -20,7 +21,7 @@
                     <span class="box">
                         <a href="@Url.Action("Index", "Home")"> Home </a>
                         <i class="lnr lnr-arrow-right"></i>
-                        <a href="@Url.Action("Index", "Codebase")">Codebases</a>
+                        <a href="@Url.Action("Index", "Codebases")">Codebases</a>
                     </span>
                 </div>
             </div>
@@ -32,8 +33,7 @@
 </section>
 <!-- End Banner Area -->
 
-
-<!--Start Feature Area -->
+<!--Start Codebases Area -->
 <section class="feature-area ">
     <div class="container">
         <div class="row justify-content-center">
@@ -41,24 +41,24 @@
                 <div class="section-title text-center">
                     <h1>Discover, Search and Improve your Skills</h1>
                     <p>
-                        If you are looking at blank cassettes on the web, you may be very confused at the difference in price. You may see some for
-                        as low as $.17 each.
+                        Try to find out the best codebase that suits for you. Take a look at specifications, filter after your preferences and come back for more!
+                        You will find all the support you need. Have fun!
                     </p>
                 </div>
             </div>
         </div>
         <div class="codebase-category-wrapper">
             <div class="d-flex justify-content-start">
-                <form method="post" action="/Codebases/ApplyFilter">
+                <form method="post" action="@Url.Action("Index", "Codebases", new { pagination = ViewBag.ActivePage })">
                     <div class="codebase-category">
                         <div class="default-select codebase-category" id="default-select">
-                            @Html.DropDownListFor(m => m.SelectedProgrammingLanguage, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Language))), "Language", new { @class = "" })
+                            @Html.DropDownListFor(m => m.SelectedProgrammingLanguage, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Language))),"Select Language", new { @class = "" })
                         </div>
                         <div class="default-select codebase-category" id="default-select">
-                            @Html.DropDownListFor(m => m.SelectedDifficulty, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Difficulty))), "Difficulty", new { @class = "" })
+                            @Html.DropDownListFor(m => m.SelectedDifficulty, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Difficulty))),"Select Difficulty", new { @class = "" })
                         </div>
                         <div class="default-select codebase-category" id="default-select">
-                            @Html.DropDownListFor(m => m.SelectedTechnology, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Technology))), "Technology", new { @class = "" })
+                            @Html.DropDownListFor(m => m.SelectedTechnology, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Technology))),"Select Technology", new { @class = "" })
                         </div>
                     </div>
                     <button type="submit" class="btn search-btn" style="margin-top:-32px; margin-right:10px">Apply Filter</button>
@@ -67,26 +67,40 @@
                     <button type="submit" class="btn search-btn">Clear All</button>
                 </form>
             </div>
-            
             <div class="input-wrap codebase-category right" style="">
-                <form action="" class="form-box d-flex justify-content-between">
-                    <input type="text" placeholder="Search Courses" class="form-control codebase-search" name="username">
+                <form method="post" action="@Url.Action("Index", "Codebases")" class="form-box d-flex justify-content-between">
+                    <input type="text" placeholder="Search by codebase's or instructor's name" class="form-control codebase-search" name="search" size="35">
                     <button type="submit" class="btn search-btn">Search</button>
                 </form>
             </div>
         </div>
-
         <div class="feature-inner row">
+            @if (ViewBag.CodebasesPages == 0) {
+                <div class="section-title text-center justify-content-center">
+                    <h3>"No codebases added yet!"</h3>
+                </div>
+            }
             @foreach (EducationalPlatform.Models.Codebases codebase in ViewBag.Codebases)
             {
                 <div class="col-lg-6 col-md-6 ">
-                    <a href="" class="codebase-box">
+                    <a href="@Url.Action("Show", "Codebases", new { Id = codebase.Id} )" class="codebase-box">
                         <div class="feature-item">
                             <h4 style="display:inline-block;">@codebase.CodebaseName</h4>
-                            <span class="codebase-difficulty"> @codebase.SelectedDifficulty </span>
+                            @if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Easy)
+                            {
+                                <span class="codebase-difficulty level-easy"> @codebase.SelectedDifficulty </span>
+                            }
+                            else if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Medium)
+                            {
+                                <span class="codebase-difficulty level-medium"> @codebase.SelectedDifficulty </span>
+                            }
+                            else if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Hard)
+                            {
+                                <span class="codebase-difficulty level-hard"> @codebase.SelectedDifficulty </span>
+                            }
                             <h5 class="wow fadeInRight" style="display:inline-block; float:right;">@codebase.SelectedProgrammingLanguage, @codebase.SelectedTechnology App</h5>
                             <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
-                                <p>
+                                <p class="description">
                                     @codebase.Description
                                 </p>
                             </div>
@@ -94,70 +108,77 @@
                             <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
                                 <span class=""> Instructor: @codebase.User.FullName</span>
                                 <span class="vertical-line"></span>
-                                <span class=""> Qualification: University of Glasgow</span>
+                                <span class=""> Qualification: @codebase.User.Qualification</span>
                                 <span class="vertical-line"></span>
-                                <span class=""> Project Limit: 2 days</span>
+                                <span class=""> Project Limit: @codebase.TimeLimit hours</span>
                                 <hr>
                             </div>
-                            <div class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".1s">
-                                <span class="codebase-topics"> game </span>
-                                <span class="codebase-topics"> pygame </span>
-                                <span class="codebase-topics"> class division </span>
-                                <span class="codebase-topics"> OOP </span>
+                            <div class="wow fadeInLeft d-flex justify-content-between" data-wow-duration="1s" data-wow-delay=".1s">
+                                <div>
+                                    @if (codebase.Tags != null)
+                                    {
+                                        foreach (string tag in codebase.Tags.Split(','))
+                                        {
+                                            <span class="codebase-topics">@tag</span>
+                                        }
+                                    }
+                                </div>
+                                <div style="color:#DAA520">
+                                    @if (codebase.MeanRating != 0)
+                                    {
+                                        <text>Rating:</text>  @codebase.MeanRating <text>/5</text>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </a>
                 </div>
             }
-
         </div>
     </div>
 </section>
-<!-- End Feature Area -->
-
+<!-- End Codebases Area -->
 
 <!-- Start Pagination Area  -->
 <nav class="blog-pagination justify-content-center d-flex">
     <ul class="pagination">
-        <li class="page-item">
-            <a href="#" class="page-link" aria-label="Previous">
-                <span aria-hidden="true">
-                    <span class="lnr lnr-chevron-left"></span>
-                </span>
-            </a>
-        </li>
-        <li class="page-item active"><a href="#" class="page-link">01</a></li>
-        <li class="page-item"><a href="#" class="page-link">02</a></li>
-        <li class="page-item"><a href="#" class="page-link">03</a></li>
-        <li class="page-item"><a href="#" class="page-link">04</a></li>
-        <li class="page-item"><a href="#" class="page-link">09</a></li>
-        <li class="page-item">
-            <a href="#" class="page-link" aria-label="Next">
-                <span aria-hidden="true">
-                    <span class="lnr lnr-chevron-right"></span>
-                </span>
-            </a>
-        </li>
+        @if(ViewBag.LeftArrow)
+        { 
+            <li class="page-item">
+                <a href="@Url.Action("Index", "Codebases", new { pagination = ViewBag.ActivePage - 1 })" class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">
+                        <span class="lnr lnr-chevron-left"></span>
+                    </span>
+                </a>
+            </li>
+        }
+        @for (int i = 1; i <= ViewBag.CodebasesPages; i++)
+        {
+            if (i == ViewBag.ActivePage)
+            {
+                <li class="page-item active"><a href="@Url.Action("Index", "Codebases", new { pagination = i })" class="page-link">@i</a></li>
+            }
+            else
+            {
+                <li class="page-item"><a href="@Url.Action("Index", "Codebases", new { pagination = i })" class="page-link">@i</a></li>
+            }
+        }
+        @if(ViewBag.RightArrow)
+        {
+            <li class="page-item">
+                <a href="@Url.Action("Index", "Codebases", new { pagination = ViewBag.ActivePage + 1 })" class="page-link" aria-label="Next">
+                    <span aria-hidden="true">
+                        <span class="lnr lnr-chevron-right"></span>
+                    </span>
+                </a>
+            </li>
+        }
     </ul>
 </nav>
 <!-- End Pagination Area  -->
-
 
 <!-- ####################### Start Scroll to Top Area ####################### -->
 <div id="back-top">
     <a title="Go to Top" href="#"></a>
 </div>
 <!-- ####################### End Scroll to Top Area ####################### -->
-
-<script>
-     $('.level').change(function () {
-                 var url = '@Url.Action("GetLanguageLabels", "yourControllerName")';
-                  $('#SelectedLanguage').change() {
-                    $.getJSON(url, { ID: $(this).val() }, function(response) {
-                      // Note you will need to give your labels an id attribute
-                      $('#Label1').text(response.Label1);
-                      $('#Label2').text(response.Label2);
-                    })
-                });
-            
-</script>

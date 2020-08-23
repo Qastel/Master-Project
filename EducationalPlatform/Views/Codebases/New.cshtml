@@ -5,34 +5,407 @@
     ViewBag.Title = "New";
 }
 
-<h2>New</h2>
-
-<form method="post" action="/Codebases/New">
-    @Html.HiddenFor(m => m.UserId)
-
-
-    @Html.Label("CodebaseName", "Codebase Name")
-    <br />
-    @Html.TextBox("CodebaseName", null, new { @class = "form-control" })
-    @Html.ValidationMessageFor(model => model.CodebaseName, null, new { @class = "text-danger " })
-    <br /><br />
-
-    @Html.Label("Description", "Codebase Description")
-    <br />
-    @Html.TextBox("Description", null, new { @class = "form-control" })
-    @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger " })
-    <br /><br />
+@section AddToHead {
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/start/jquery-ui.css" />    
+}
 
 
-    @Html.DropDownListFor(m => m.SelectedTechnology, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Technology))), "App Type", new { @class = "" })
+<!-- Start Banner Area -->
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    New Codebase
+                </h1>
+                <p>
+                    Extend your knowledge starting from pre-build projects.
+                </p>
+                <div class="link-nav">
+                    <span class="box">
+                        <a href="@Url.Action("Index", "Home")"> Home </a>
+                        <i class="lnr lnr-arrow-right"></i>
+                        <a href="@Url.Action("New", "Codebase")">New Codebase</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rocket-img">
+        <img src="~/Content/Images/rocket.png" alt="">
+    </div>
+</section>
+<!-- End Banner Area -->
 
-    <br /><br />
+<section class="mt-150 mb-150 ">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="section-title text-center">
+                    <h3>We were waiting for you...</h3>
+                    <br>
+                    <p>
+                        Hi there! Thank you for your help in building this community! You can contribute by adding the following requirements. Take your time,
+                        your help is highly valuable!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    @Html.DropDownListFor(m => m.SelectedDifficulty, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Difficulty))), "Difficulty", new { @class = "" })
+<section class="mt-100 mb-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="codebase-category-wrapper col-lg-8 col-md-8 justify-content-center">
+                <h3 class="mr-15">Instructors' Agenda </h3>
+                <br>
+                <div></div>
+                <br>
+                <ol>
+                    <li> <b>Firstly, we need to make sure that you understand how to create the tasks. </b></li>
 
-    @Html.DropDownListFor(m => m.SelectedProgrammingLanguage, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Language))), "Language", new { @class = "" })
+                    <li>1. This platform recommend to use a roleplay technique. You may change it, but we think that is important to simulate a real context as much as possible. </li>
 
-    <button class="btn btn-sm btn-success" type="submit">Add Codebase</button>
-</form>
+                    <li>2. After a long research we discovered two learning models of understanding a codebase: top-down and bottom-up. </li>
+
+                    <li>3. The steps of the top down approach are: </li>
+
+                    <li>
+                        4. This system represents a learning platform for picking up codebases. Setting as much support as it can for users.
+                        Going one layer indepth the platform wants to create a learning environment for the codebases. This will offer support for the codebase, and knowledge needed.
+                        And once again going deeper we find the learning model which implies different exercises for gathering codebase information.
+                        This 3 layer system tries to obtain the best experience from different perspectives.
+                    </li>
+                    <li>
+                        5. We always want the learners to know what is the result of each section.
+                    </li>
+
+                    <li>6. During the task creation you will find different sections and some explanations. Some information will be seen only by instructors. </li>
+
+                    <li>
+                        7. The sections are divided in two smaller categories: presentation/overeaching purpose and task generation.
+                        Some sections will be only for communicating information, such that, they will include only the presentation.
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-100 mb-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class=" col-lg-8 col-md-8 justify-content-center">
+                <div class="section-title text-center">
+                    <h3><i class="fas fa-info-circle mr-10"></i>The next section is an introduction that welcome the learners and set the meaning of the learning techniques used for a proper codebase exploration.</h3>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-100 mb-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="codebase-category-wrapper col-lg-8 col-md-8 justify-content-center">
+                <div class="text-justify">
+                    <h3 class="text-center"> Introduction </h3>
+                    <br>
+
+                    <p>We recommend you to follow the next structure:</p>
+                    <br />
+
+                    <span class="codebase-topics font-weight-bold">Welcome and roleplay presentation</span>
+                    <p>- make it interactive, write about the person responsible for the mentoring during the codebase exploration and his support.</p>
+                    <br>
+
+                    <span class="codebase-topics font-weight-bold">What is the learning method? </span>
+                    <p>
+                        - explain the learning technique: bottom-up vs top-down, and its insights. Explain how the codebase will be tackled.
+                        (we do not explain yet why we are using it because we do not have the codebase presentation yet)
+                    </p>
+                    <br>
+
+                    <span class="codebase-topics font-weight-bold">Purpose of the learning method</span>
+                    <p>
+                        - make learners aware of the more generic reusable model (roadmap) and skills.
+                        Overall, the lerners' purpose is to get the necessary experience and skills to faster and better understand new codebases.
+                        The learning will happen at different levels: one for this particular codebase and one for any similar project.
+                        The students will understand their goals from the start.
+                    </p>
+                    <br>
+
+                    <span class="codebase-topics font-weight-bold">Learning Environment and Learning Model</span>
+                    <p>
+                        - clarify the idea of the knolewdge corpus and the structure of it. Embed the tasks into different layers.
+                        A recommended explanation will be:
+                    </p>
+                    <p class="font-italic">
+                        The learning model of this codebase is extended to a learning environment. The sections that will build your learning environment are marked with E and the ones that will build your learning model are marked with M.
+                        What is the difference?
+                        The learning environment set up all the tools and techniques needed in picking up the codebase.
+                        The learning model is strictly designed to improve your knowledge over the project behaviour and functionalities.
+                    </p>
+                    <br>
+                    <span class="codebase-topics font-weight-bold">Side Notes and Annotations</span>
+                    <p>
+                        - explain any sidenotes, their purpose and where the learners can find them.
+                        Overall, these sidenotes are ment to complete the learning technique.
+                        In this paragraph you can mention any information that you will use to help the learners' experience.
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-100 mb-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class=" col-lg-8 col-md-8 justify-content-center">
+                <div class="section-title text-center">
+                    <h3><i class="fas fa-info-circle mr-10"></i>The next section is a prerequisite for the codebase, helping learners in gathering the minumum amount of knowledge needed for the codebase exploration. 
+                    This section can also be used as a learning resource.</h3>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="codebase-category-wrapper col-lg-8 col-md-8 justify-content-center">
+                <div class=" text-justify">
+                    <h3> E.1 Prerequisite / Learning Resources</h3>
+                    <br>
+
+                    <p>We recommend you to follow the next structure:</p>
+                    <br />
+
+                    <span class="codebase-topics font-weight-bold"> Section General Purpose </span>
+                    <p>
+                        - explain what is the purpose of this section and why is it important to be read. We always want the learners to know what is the result of each section.
+                        Try to convince the learners that even is not part of the codebase it will improve their experienc. A recommended explanation will be:
+                    </p>
+                    <p class="font-italic">
+                        This section will help you level your knowledge and prepare you for the codebase exploration.
+                        We want all students to have at least the minimum amount of knowledge to explore the codebase.
+                        Do you already know some of the things? That's great! You can skip this step but we highly recommend you to revise them.
+                        Do not forget that working on this project already implies having some understanding of different programming areas.
+                        You did not see these things before? No problem, you will be guided through each step.
+                    </p>
+                    <br>
+
+
+                    <span class="codebase-topics font-weight-bold">Section Benefits</span>
+                    <p>
+                        - mention specifically the benefits that will be aquired after this reading. A recommended explanation will be:
+                    </p>
+                    <p class="font-italic">
+                        What are the benefits of reading these? You will better understand the purpose of the tasks and what we are following during the codebase exploration in the next steps.
+                        As a consequence of these, the time to answer each question will be reduced and will improve your future technique.
+                    </p>
+                    <br>
+
+                    <span class="codebase-topics font-weight-bold">Grounding Base of the Resources</span>
+                    <p>
+                        - talk about the nature of the resources, generic or specific to the codebase, convention vs configuration.  A recommended explanation will be:
+                    </p>
+                    <p class="font-italic">
+                        What are they based on? The resources contain both generic information like language conventions, and specific information that helped the team of developers implementing this particular application. So you already get that these will improve your experience not only with this codebase but with similar architectures. Build your knowledge with every occasion!
+                    </p>
+                    <br>
+
+                    <span class="codebase-topics font-weight-bold">Side Notes</span>
+                    <p>
+                        Is it recommended to mention what you can do when you lack resources.
+                    </p>
+                    <p class="font-italic">
+                        Side Note: For an arbitrary codebase you can build your own prerequisite. Take a look at the programming language, system and project environment, IDE if mentioned, programming style (OOP), best practices and project structure and architecture.
+                    </p>
+                    <br>
+
+                    <hr>
+                    <h5>Start Tasks Generation</h5> <br>
+                    <p> Some Ideas: add language conventions, explore IDE, best practices and design patterns, generic project structure, documentation,
+                        .gitignore, licence, setup.py, main, requirements.txt. Add links for each of them.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="feature-area">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="codebase-category-wrapper col-lg-8 col-md-8 justify-content-center">
+                <form method="post" action="/Codebases/New">
+                    @Html.HiddenFor(m => m.UserId)
+                    <div class="mt-10">
+                        @Html.TextBox("CodebaseName", null, new { @class = "single-input-primary", @placeholder = "Codebase Name", style = "width: 600px;" })
+                        @Html.ValidationMessageFor(model => model.CodebaseName, null, new { @class = "text-danger " })
+                    </div>
+                    <div class="mt-10">
+                        @Html.TextArea("Description", null, new { @class = "single-textarea", @placeholder = "Description" })
+                        @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger " })
+                    </div>
+                    <div class="mt-10">
+                        @Html.TextBox("CodebaseLink", null, new { @class = "single-input-primary", @placeholder = "Link for the Codebase" })
+                        @Html.ValidationMessageFor(model => model.CodebaseLink, null, new { @class = "text-danger " })
+                    </div>
+                    <div class="mt-10">
+                        @Html.TextBox("GoogleFormsLink", null, new { @class = "single-input-primary", @placeholder = "Link for the Google Forms" })
+                        @Html.ValidationMessageFor(model => model.GoogleFormsLink, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="mt-10">
+                        @Html.TextBox("GoogleFormsEmbeded", null, new { @class = "single-input-primary", @placeholder = "Embed Google Forms" })
+                        @Html.ValidationMessageFor(model => model.GoogleFormsEmbedded, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="mt-10">
+                        @Html.TextBox("Role", null, new { @class = "single-input-primary", @placeholder = "Position/Role" })
+                        @Html.ValidationMessageFor(model => model.Role, null, new { @class = "text-danger " })
+                    </div>
+                    <div class="mt-10">
+                        <div class="d-flex justify-content-between">
+                            <div class="mr-20 ml-20">
+                                @Html.Label("Sprints")
+                            </div>
+                            @Html.TextBox("Sprints", null, new { @class = "single-input-primary", @placeholder = "Sprints", @type = "number", @min = "1", style = "width: 200px;" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Sprints, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="mt-10">
+                        <div class="d-flex justify-content-between">
+                            <div class="mr-20 ml-20">
+                                @Html.Label("Members")
+                            </div>
+                            @Html.TextBox("Members", null, new { @class = "single-input-primary", @placeholder = "Members", @type = "number", @min = "1", style = "width: 200px;" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Members, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="mt-10">
+                        <div class="d-flex justify-content-between">
+                            <div class="mr-20 ml-20">
+                                @Html.Label("Time Limit (Hours)")
+                            </div>
+                            @Html.TextBox("TimeLimit", null, new { @class = "single-input-primary", @placeholder = "Hours", @type = "number", @min = "1", style = "width: 200px;" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Members, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="mt-10">
+                        @Html.TextBox("Environment", null, new { @class = "single-input-primary", @placeholder = "Project Environment" })
+                        @Html.ValidationMessageFor(model => model.Environment, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="mt-10">
+                        <div class="d-flex justify-content-between">
+                            <div class="mr-20 ml-20">
+                                @Html.Label("Technology")
+                            </div>
+                            <div class="default-select" id="default-select">
+                                @Html.DropDownListFor(m => m.SelectedTechnology, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Technology))), new { style = "width: 200px;" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-10">
+                        <div class="d-flex justify-content-between">
+                            <div class="mr-20 ml-20">
+                                @Html.Label("Difficulty")
+                            </div>
+                            <div class="default-select mr-1" id="default-select">
+                                @Html.DropDownListFor(m => m.SelectedDifficulty, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Difficulty))), new { @style = "width:200px;" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-10">
+                        <div class="d-flex justify-content-between">
+                            <div class="mr-20 ml-20">
+                                @Html.Label("Programming Language")
+                            </div>
+                            <div class="default-select mr-1" id="default-select">
+                                @Html.DropDownListFor(m => m.SelectedProgrammingLanguage, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Language))))
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-10">
+                        @Html.TextArea("Tags", null, new { @class = "single-textarea tags", @id = "tags_1", @type = "text", @placeholder = "Tags" })
+
+                        <!--<input id="tags_1" type="text" class="tags single-textarea tags" name="topics" value="" />-->
+                    </div>
+                    <br>
+                    <button class="btn search-btn" type="submit">Add Codebase</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="feature-area">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="codebase-category-wrapper col-lg-8 col-md-8 justify-content-center">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- To test using the original jQuery.autocomplete, uncomment the following -->
+<!--
+<script type='text/javascript' src='http://xoxco.com/x/tagsinput/jquery-autocomplete/jquery.autocomplete.min.js'></script>
+<link rel="stylesheet" type="text/css" href="http://xoxco.com/x/tagsinput/jquery-autocomplete/jquery.autocomplete.css" />
+-->
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js'></script>
+
+<script type="text/javascript">
+
+    function onAddTag(tag) {
+        alert("Added a tag: " + tag);
+    }
+    function onRemoveTag(tag) {
+        alert("Removed a tag: " + tag);
+    }
+
+    function onChangeTag(input, tag) {
+        alert("Changed a tag: " + tag);
+    }
+
+    $(function () {
+
+        $('#tags_1').tagsInput({ width: 'auto' });
+        $('#tags_2').tagsInput({
+            width: 'auto',
+            onChange: function (elem, elem_tags) {
+                var languages = ['php', 'ruby', 'javascript'];
+                $('.tag', elem_tags).each(function () {
+                    if ($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0)
+                        $(this).css('background-color', 'yellow');
+                });
+            }
+        });
+        $('#tags_3').tagsInput({
+            width: 'auto',
+
+            //autocomplete_url:'test/fake_plaintext_endpoint.html' //jquery.autocomplete (not jquery ui)
+            autocomplete_url: 'test/fake_json_endpoint.html' // jquery ui autocomplete requires a json endpoint
+        });
+
+
+        // Uncomment this line to see the callback functions in action
+        //			$('input.tags').tagsInput({onAddTag:onAddTag,onRemoveTag:onRemoveTag,onChange: onChangeTag});
+
+        // Uncomment this line to see an input with no interface for adding new tags.
+        //			$('input.tags').tagsInput({interactive:false});
+    });
+
+</script>
 
 

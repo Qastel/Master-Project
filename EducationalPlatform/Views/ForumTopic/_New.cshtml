@@ -1,0 +1,19 @@
+﻿@model EducationalPlatform.Models.ForumTopic
+
+<div class="row justify-content-center">
+    <form method="post" action="/ForumTopic/New">
+        <div class="overflow-hidden">
+               
+                @Html.HiddenFor(m => m.UserId)
+                @Html.HiddenFor(m => m.CodebaseId)
+                @Html.HiddenFor(m => m.CreationDate)
+                <div class="mt-10">
+                    @Html.TextArea("Description", null, new { @class = "single-input-primary", @placeholder = "Write a question...", style = "width: 600px;" })
+                    @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger " })
+                </div>
+                
+            <button class="genric-btn success mt-10 float-right" type="submit" > Add question</button>
+        </div>
+        <br>
+    </form>
+</div>

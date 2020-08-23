@@ -16,6 +16,7 @@ namespace EducationalPlatform.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = ApplicationDbContext.Create();
 
         public ManageController()
         {
@@ -73,6 +74,12 @@ namespace EducationalPlatform.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+
+            if (User.IsInRole("Instructor"))
+            {
+                var x = db.Codebases.Include("User").Where(c => c.UserId == userId).ToList();
+                ViewBag.UserCodebases = x;
+            }
             return View(model);
         }
 
@@ -243,6 +250,23 @@ namespace EducationalPlatform.Controllers
             }
             AddErrors(result);
             return View(model);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UpdateUser(ApplicationUser model)
+        {
+            //get current user and update
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            user.FullName = model.FullName;
+            
+            var updateResult = await UserManager.UpdateAsync(user);
+            if (updateResult.Succeeded)
+            {
+                return View();
+            }
+            return View();
         }
 
         //
