@@ -37,24 +37,7 @@
 </section>
 <!-- End Banner Area -->
 
-<section class="mt-150 mb-150 ">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="section-title text-center">
-                    <h3>We were waiting for you...</h3>
-                    <br>
-                    <p>
-                        Hi there! Thank you for your help in building this community! You can contribute by adding the following requirements. Take your time,
-                        your help is highly valuable!
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="mt-100 mb-50">
+<section class="mt-100 feature-area">
     <div class="container">
         <div class="row justify-content-center">
             <div class=" col-lg-8 col-md-8 justify-content-center">
@@ -63,7 +46,7 @@
                         <i class="fas fa-info-circle mr-10"></i>
                         Add the codebase information in order to be saved and categorised among the others. 
                     </h3>
-                    <h6>  (You need to have the tasks for the learners already created because you need to have the Google Forms sheet. Access: @Html.ActionLink("Tasks Generation Instructions section", "Instructions", "Codebases") )</h6>
+                    <h6 class="mt-20">  (You need to have the Task Sheet already created in Google Forms. For more information access: @Html.ActionLink("Instructional Design", "Instructions", "Codebases") page )</h6>
                     <br>
                 </div>
             </div>
@@ -71,28 +54,30 @@
     </div>
 </section>
 
-<section class="">
+<section class="mb-100">
     <div class="container">
         <div class="row justify-content-center">
             <div class="codebase-category-wrapper col-lg-8 col-md-8 justify-content-center">
                 <form method="post" action="/Codebases/New" enctype='multipart/form-data'>
                     @Html.HiddenFor(m => m.UserId)
-                    <div class="mt-10">
-                        @Html.TextBox("CodebaseName", null, new { @class = "single-input-primary", @placeholder = "Codebase Name", style = "width: 600px;" })
-                        @Html.ValidationMessageFor(model => model.CodebaseName, null, new { @class = "text-danger " })
-                    </div>
-                    <div class="mt-10 overflow-hidden">
+                    <div class="mt-50 mb-50 ">
+                        <h5 class="mb-10"> Presentation</h5>
+                        <div class="mt-10">
+                            @Html.TextBox("CodebaseName", null, new { @class = "single-input-primary", @placeholder = "Codebase Name", style = "width: 600px;" })
+                            @Html.ValidationMessageFor(model => model.CodebaseName, null, new { @class = "text-danger " })
+                        </div>
+                        <div class="mt-10 overflow-hidden">
+                            @Html.TextArea("Description", null, new { @class = "single-textarea", @placeholder = "Description" })
+                            @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
 
-                        @Html.TextArea("Description", null, new { @class = "single-textarea", @placeholder = "Description" })
-                        @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
-
-                        <div class="tooltip">
-                            (?)dsad
-                            <span class="tooltiptext">Tooltip text</span>
+                            <div class="tooltip">
+                                (?)dsad
+                                <span class="tooltiptext">Tooltip text</span>
+                            </div>
                         </div>
                     </div>
-
                     <div class="mt-50 mb-70 ">
+                        <h5 class="mb-10"> Upload Your Codebase </h5>
                         <div class="mt-10  inline-flex">
                             @Html.TextBox("CodebaseLink", null, new { @class = "single-input-primary", @placeholder = "Link for the Codebase" })
                             @Html.ValidationMessageFor(model => model.CodebaseLink, null, new { @class = "text-danger " })
@@ -103,86 +88,102 @@
                         </div>
                     </div>
 
-                    <div class="mt-10">
-                        @Html.TextBox("GoogleFormsLink", null, new { @class = "single-input-primary", @placeholder = "Link for Google Forms" })
-                        @Html.ValidationMessageFor(model => model.GoogleFormsLink, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="mt-10">
-                        @Html.TextBox("GoogleFormsEmbedded", null, new { @class = "single-input-primary", @placeholder = "Embed Google Forms" })
-                        @Html.ValidationMessageFor(model => model.GoogleFormsEmbedded, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="mt-10">
-                        @Html.TextBox("Role", null, new { @class = "single-input-primary", @placeholder = "Position/Role" })
-                        @Html.ValidationMessageFor(model => model.Role, null, new { @class = "text-danger " })
-                    </div>
-                    <div class="mt-10">
-                        <div class="d-flex justify-content-between">
-                            <div class="mr-20 ml-20">
-                                @Html.Label("Sprints")
-                            </div>
-                            @Html.TextBox("Sprints", null, new { @class = "single-input-primary", @placeholder = "Sprints", @type = "number", @min = "1", style = "width: 200px;" })
+                    <div class="mt-50 mb-70 ">
+                        <h5 class="mb-10"> Provide Task Sheet </h5>
+                        <div class="mt-10">
+                            @Html.TextBox("GoogleFormsLink", null, new { @class = "single-input-primary", @placeholder = "Link for Google Forms" })
+                            @Html.ValidationMessageFor(model => model.GoogleFormsLink, null, new { @class = "text-danger" })
                         </div>
-                        @Html.ValidationMessageFor(model => model.Sprints, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="mt-10">
-                        <div class="d-flex justify-content-between">
-                            <div class="mr-20 ml-20">
-                                @Html.Label("Members")
-                            </div>
-                            @Html.TextBox("Members", null, new { @class = "single-input-primary", @placeholder = "Members", @type = "number", @min = "1", style = "width: 200px;" })
-                        </div>
-                        @Html.ValidationMessageFor(model => model.Members, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="mt-10">
-                        <div class="d-flex justify-content-between">
-                            <div class="mr-20 ml-20">
-                                @Html.Label("Time Limit (Hours)")
-                            </div>
-                            @Html.TextBox("TimeLimit", null, new { @class = "single-input-primary", @placeholder = "Hours", @type = "number", @min = "1", style = "width: 200px;" })
-                        </div>
-                        @Html.ValidationMessageFor(model => model.Members, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="mt-10">
-                        @Html.TextBox("Environment", null, new { @class = "single-input-primary", @placeholder = "Project Environment" })
-                        @Html.ValidationMessageFor(model => model.Environment, null, new { @class = "text-danger" })
-                    </div>
-                    <div class="mt-10">
-                        <div class="d-flex justify-content-between">
-                            <div class="mr-20 ml-20">
-                                @Html.Label("Technology")
-                            </div>
-                            <div class="default-select" id="default-select">
-                                @Html.DropDownListFor(m => m.SelectedTechnology, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Technology))), new { style = "width: 200px;" })
-                            </div>
+                        <div class="text-center">OR</div>
+                        <div class="mt-10">
+                            @Html.TextBox("GoogleFormsEmbedded", null, new { @class = "single-input-primary", @placeholder = "Embed Google Forms" })
+                            @Html.ValidationMessageFor(model => model.GoogleFormsEmbedded, null, new { @class = "text-danger" })
                         </div>
                     </div>
-                    <div class="mt-10">
-                        <div class="d-flex justify-content-between">
-                            <div class="mr-20 ml-20">
-                                @Html.Label("Difficulty")
-                            </div>
-                            <div class="default-select mr-1" id="default-select">
-                                @Html.DropDownListFor(m => m.SelectedDifficulty, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Difficulty))), new { @style = "width:200px;" })
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-10">
-                        <div class="d-flex justify-content-between">
-                            <div class="mr-20 ml-20">
-                                @Html.Label("Programming Language")
-                            </div>
-                            <div class="default-select mr-1" id="default-select">
-                                @Html.DropDownListFor(m => m.SelectedProgrammingLanguage, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Language))))
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-10">
-                        @Html.TextArea("Tags", null, new { @class = "single-textarea tags", @id = "tags_1", @type = "text", @placeholder = "Tags" })
 
-                        <!--<input id="tags_1" type="text" class="tags single-textarea tags" name="topics" value="" />-->
+                    <div class="mt-50 mb-70">
+                        <h5 class="mb-20"> Implementation Details </h5>
+                        <div class="mt-10">
+                            @Html.TextBox("Role", null, new { @class = "single-input-primary", @placeholder = "Learner Position/Role" })
+                            @Html.ValidationMessageFor(model => model.Role, null, new { @class = "text-danger " })
+                        </div>
+
+                        <div class="mt-10">
+                            <div class="d-flex justify-content-between">
+                                <div class="mr-20 ml-20">
+                                    @Html.Label("Contributors")
+                                </div>
+                                @Html.TextBox("Members", null, new { @class = "single-input-primary", @placeholder = "Members", @type = "number", @min = "1", style = "width: 200px;" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Members, null, new { @class = "text-danger" })
+                        </div>
+
+                        <div class="mt-10">
+                            @Html.TextBox("Environment", null, new { @class = "single-input-primary", @placeholder = "Project Environment/IDE" })
+                            @Html.ValidationMessageFor(model => model.Environment, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="mt-10">
+                            <div class="d-flex justify-content-between">
+                                <div class="mr-20 ml-20">
+                                    @Html.Label("Technology")
+                                </div>
+                                <div class="default-select" id="default-select">
+                                    @Html.DropDownListFor(m => m.SelectedTechnology, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Technology))), new { style = "width: 200px;" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-10">
+                            <div class="d-flex justify-content-between">
+                                <div class="mr-20 ml-20">
+                                    @Html.Label("Difficulty")
+                                </div>
+                                <div class="default-select mr-1" id="default-select">
+                                    @Html.DropDownListFor(m => m.SelectedDifficulty, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Difficulty))), new { @style = "width:200px;" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-10">
+                            <div class="d-flex justify-content-between">
+                                <div class="mr-20 ml-20">
+                                    @Html.Label("Programming Language")
+                                </div>
+                                <div class="default-select mr-1" id="default-select">
+                                    @Html.DropDownListFor(m => m.SelectedProgrammingLanguage, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Language))))
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <br>
-                    <button class="btn search-btn" type="submit">Add Codebase</button>
+                    <div class="mt-50 mb-70">
+                        <h5 class="mb-20"> Constraints </h5>
+                        <div class="mt-10">
+                            <div class="d-flex justify-content-between">
+                                <div class="mr-20 ml-20">
+                                    @Html.Label("Sprints")
+                                </div>
+                                @Html.TextBox("Sprints", null, new { @class = "single-input-primary", @placeholder = "Sprints", @type = "number", @min = "1", style = "width: 200px;" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Sprints, null, new { @class = "text-danger" })
+                        </div>
+                        <div class="mt-10">
+                            <div class="d-flex justify-content-between">
+                                <div class="mr-20 ml-20">
+                                    @Html.Label("Time Limit (Hours)")
+                                </div>
+                                @Html.TextBox("TimeLimit", null, new { @class = "single-input-primary", @placeholder = "Hours", @type = "number", @min = "1", style = "width: 200px;" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Members, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="mt-50 mb-70">
+                        <h5 class="mb-10"> Tags</h5> <p>(Important Features/Learning Outcomes)</p>
+                        <div class="mt-10">
+                            @Html.TextArea("Tags", null, new { @class = "single-textarea tags", @id = "tags_1", @type = "text", @placeholder = "Tags" })
+
+                            <!--<input id="tags_1" type="text" class="tags single-textarea tags" name="topics" value="" />-->
+                        </div>
+                    </div>
+                   
+                    <button class="genric-btn primary float-right" type="submit">Add Codebase</button>
                 </form>
             </div>
         </div>

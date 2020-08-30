@@ -7,6 +7,7 @@
 
 }
 
+
 <!-- Start Banner Area -->
 <section class="banner-area relative">
     <div class="container">
@@ -92,7 +93,7 @@
         <!--Start Feature Area -->
 
         @Html.ActionLink("Download", "Download", new { fileName = Model.CodebasePath })
-       
+
         <div class="text-center mb-50"> Description: @Model.Description</div>
         <div class="text-center mb-50"> Role: @Model.Role</div>
 
@@ -200,5 +201,17 @@
         document.getElementById("myFrame").height = "3000px";
         </text>
     }
+
 </script>
 
+<div id="defaultCountdown"></div>
+
+
+<script>
+    $(function () {
+        var austDay = new Date();
+        austDay = new Date(austDay.getFullYear() + 1, 1 - 1, 26);
+        $('#defaultCountdown').countdown({ until: austDay });
+        $('#year').text(austDay.getFullYear());
+    });
+</script>

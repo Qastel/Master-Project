@@ -239,12 +239,16 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\about.png" />
+    <Content Include="Content\Images\codebase-exploration.png" />
+    <Content Include="Content\Images\innovation.png" />
     <Content Include="css\animate.min.css" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap\bootstrap-grid.css" />
     <Content Include="css\bootstrap\bootstrap-reboot.css" />
     <Content Include="css\bootstrap\bootstrap.css" />
     <Content Include="css\font-awesome.min.css" />
+    <Content Include="css\jquery.countdown.css" />
+    <Content Include="Scripts\js\jquery.countdown.js" />
     <Content Include="css\jquery.DonutWidget.min.css" />
     <Content Include="css\jquerysctipttop.css" />
     <Content Include="css\linearicons.css" />
@@ -396,6 +400,7 @@
     <Content Include="Scripts\js\jquery.counterup.min.js" />
     <Content Include="Scripts\js\jquery.magnific-popup.min.js" />
     <Content Include="Scripts\js\jquery.nice-select.min.js" />
+    <Content Include="Scripts\js\jquery.plugin.js" />
     <Content Include="Scripts\js\jquery.sticky.js" />
     <Content Include="Scripts\js\jquery.tagsinput.js" />
     <Content Include="Scripts\js\mail-script.js" />
@@ -459,7 +464,6 @@
     <Content Include="Views\ForumTopic\Index.cshtml" />
     <Content Include="Views\ForumTopic\_New.cshtml" />
     <Content Include="Views\ForumResponse\Index.cshtml" />
-    <Content Include="Views\ForumResponse\_New.cshtml" />
     <Content Include="Views\ForumResponse\New.cshtml" />
     <Content Include="Views\Codebases\Instructions.cshtml" />
     <Content Include="Views\Codebases\Edit.cshtml" />

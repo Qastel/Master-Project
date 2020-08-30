@@ -10,13 +10,13 @@ namespace EducationalPlatform.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Page = "Home";
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
+            ViewBag.Page = "About";
             return View();
         }
 

@@ -60,6 +60,7 @@ namespace EducationalPlatform.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            ViewBag.Page = "Login";
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -142,6 +143,7 @@ namespace EducationalPlatform.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.Page = "Register";
             return View();
         }
 

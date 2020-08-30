@@ -16,6 +16,8 @@ namespace EducationalPlatform.Controllers
         // GET: Codebases
         public ActionResult Index(Codebases codebase, int pagination = 1, string search = null)
         {
+            ViewBag.Page = "Codebases";
+
             var allCodebases = db.Codebases;
 
             ViewBag.ActivePage = pagination;
@@ -110,9 +112,10 @@ namespace EducationalPlatform.Controllers
 
         public ActionResult Show(int Id)
         {
+            ViewBag.Page = "Codebases";
+
             var x = db.Codebases.Find(Id);
         
-
             ViewBag.DescriptionError = TempData["ErrorMessage"] as string;
 
             return View(x);
@@ -189,6 +192,7 @@ namespace EducationalPlatform.Controllers
 
         public ActionResult Instructions()
         {
+            ViewBag.Page = "Instructions";
             return View();
         }
 
@@ -196,6 +200,7 @@ namespace EducationalPlatform.Controllers
         [Authorize(Roles = "Instructor")]
         public ActionResult New()
         {
+            ViewBag.Page = "NewCodebase";
             Codebases codebase = new Codebases();
             //codebase.ProgrammingLanguages = GetAllProgrammingLanguages(); // get the list of programming languages for dropdown
             codebase.UserId = User.Identity.GetUserId();

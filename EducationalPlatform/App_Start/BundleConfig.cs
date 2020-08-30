@@ -22,6 +22,7 @@ namespace EducationalPlatform
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/jquery-3.3.1.min.js",
                       "~/Scripts/js/main.js",
                       "~/Scripts/js/vendor/jquery-2.2.4.min.js",
                       "~/Scripts/js/vendor/bootstrap.min.js",
@@ -39,7 +40,9 @@ namespace EducationalPlatform
                       "~/Scripts/js/wow.min.js",
                       "~/Scripts/js/jquery.counterup.min.js",
                       "~/Scripts/js/mail-script.js",
-                      "~/Scripts/js/jquery.tagsinput.js"
+                      "~/Scripts/js/jquery.tagsinput.js",
+                      "~/Scripts/js/jquery.plugin.js",
+                      "~/Scripts/js/jquery.countdown.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -53,7 +56,8 @@ namespace EducationalPlatform
                      "~/css/animate.min.css",
                      "~/css/owl.carousel.css",
                      "~/css/jquery.tagsinput.css",
-                     "~/Content/assets/css/fontawsom-all.min.css"
+                     "~/Content/assets/css/fontawsom-all.min.css",
+                     "~/css/jquery.countdown.css"
                      ));
         }
     }
