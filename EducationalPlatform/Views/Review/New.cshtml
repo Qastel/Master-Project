@@ -27,6 +27,7 @@
                     <div class="d-flex justify-content-center">
                         @Html.HiddenFor(m => m.UserId)
                         @Html.HiddenFor(m => m.CodebaseId)
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="mt-10">
                             @Html.TextArea("Description", null, new { @class = "single-input-primary", @placeholder = "Write review here...", style = "width: 600px;" })
                             @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger " })
@@ -40,7 +41,7 @@
                         </div>
                     </div>
                     <br>
-                    <button class="btn search-btn float-right" type="submit">Add review</button>
+                    <button class="btn ge float-right" type="submit">Add review</button>
                 </form>
             </div>
         </div>

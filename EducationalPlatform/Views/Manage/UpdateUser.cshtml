@@ -1,0 +1,41 @@
+﻿@model EducationalPlatform.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "UpdateUser";
+    Layout = null;
+}
+
+<form method="post" action="/Manage/UpdateUser">
+    @Html.AntiForgeryToken()
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+
+    <div class="form-horizontal mb-100">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @if (User.IsInRole("Instructor"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.Qualification, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Qualification, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Qualification, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Update details" class="genric-btn info float-right" />
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@ViewBag.Test

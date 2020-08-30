@@ -8,6 +8,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EducationalPlatform.Models;
 using System.Security.Claims;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 
 namespace EducationalPlatform.Controllers
 {
@@ -79,6 +81,7 @@ namespace EducationalPlatform.Controllers
             {
                 var x = db.Codebases.Include("User").Where(c => c.UserId == userId).ToList();
                 ViewBag.UserCodebases = x;
+                ViewBag.UserCodebasesNumber = x.Count();
             }
             return View(model);
         }
@@ -236,7 +239,7 @@ namespace EducationalPlatform.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return RedirectToAction("Index", model);
             }
             var result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
@@ -252,21 +255,48 @@ namespace EducationalPlatform.Controllers
             return View(model);
         }
 
+        public ActionResult UpdateUser()
+        {
+            ApplicationUser x = new ApplicationUser();
+            x = UserManager.FindById(User.Identity.GetUserId());
+            return View(x);
+        }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UpdateUser(ApplicationUser model)
+        [HttpPut]
+        public async Task<ActionResult> UpdateUser(ApplicationUser model, FormCollection form)
         {
             //get current user and update
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            user.FullName = model.FullName;
-            
-            var updateResult = await UserManager.UpdateAsync(user);
-            if (updateResult.Succeeded)
+            user.FullName = form["FullName"];
+            user.Qualification = form["Qualification"];
+            //user.Email = user.Email;
+            //user.UserName = user.UserName;
+            //user.PasswordHash = user.PasswordHash;
+            //user.SecurityStamp = user.SecurityStamp;
+
+            try
             {
-                return View();
+                var updateResult = await UserManager.UpdateAsync(user);
+
+                if (updateResult.Succeeded)
+                {
+                    ViewBag.Test = user.FullName;
+                    return RedirectToAction("Index", "Manage", model);
+                }
             }
-            return View();
+
+            catch (DbEntityValidationException dbEx)
+            {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage);
+                    }
+                }
+            }
+
+            return RedirectToAction("Index", "Home", model);
         }
 
         //

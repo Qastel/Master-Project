@@ -1,0 +1,200 @@
+﻿@model EducationalPlatform.Models.Codebases
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Edit @Model.CodebaseName
+                </h1>
+                <p>
+                    Change the codebase details
+                </p>
+                <div class="link-nav">
+                    <span class="box">
+                        <a href="@Url.Action("Index", "Manage")"> My Profile </a>
+                        <i class="lnr lnr-arrow-right"></i>
+                        <a href="@Url.Action("Edit", "Codebases", new { Id = Model.Id})">Edit Codebase</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rocket-img">
+        <img src="~/Content/Images/rocket.png" alt="">
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<section class="feature-area">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="codebase-category-wrapper col-lg-8 col-md-8 justify-content-center">
+                <form method="post" action="/Codebases/Edit/@Model.Id">
+                    @Html.AntiForgeryToken()
+                    @Html.HttpMethodOverride(HttpVerbs.Put)
+                    <div class="mt-10">
+                        @Html.Label("Codebase Name")
+                        @Html.TextBox("CodebaseName", null, new { @class = "single-input-primary", @placeholder = "Codebase Name", style = "width: 600px;" })
+                        @Html.ValidationMessageFor(model => model.CodebaseName, null, new { @class = "text-danger " })
+                    </div>
+                    <div class="mt-30 overflow-hidden">
+                        @Html.Label("Codebase Description")
+                        @Html.TextArea("Description", null, new { @class = "single-textarea", @placeholder = "Description" })
+                        @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
+
+                        <div class="tooltip">
+                            (?)dsad
+                            <span class="tooltiptext">Tooltip text</span>
+                        </div>
+                    </div>
+                    <div class="mt-30">
+                        @Html.Label("Codebase External Link")
+                        @Html.TextBox("CodebaseLink", null, new { @class = "single-input-primary", @placeholder = "" })
+                        @Html.ValidationMessageFor(model => model.CodebaseLink, null, new { @class = "text-danger " })
+                    </div>
+                    <div class="mt-30">
+                        @Html.Label("Google Forms Link")
+                        @Html.TextBox("GoogleFormsLink", null, new { @class = "single-input-primary", @placeholder = "" })
+                        @Html.ValidationMessageFor(model => model.GoogleFormsLink, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="mt-30">
+                        @Html.Label("Embedded Google Forms")
+                        @Html.TextBox("GoogleFormsEmbedded", null, new { @class = "single-input-primary", @placeholder = "" })
+                        @Html.ValidationMessageFor(model => model.GoogleFormsEmbedded, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="mt-30">
+                        @Html.Label("Learner's Role")
+                        @Html.TextBox("Role", null, new { @class = "single-input-primary", @placeholder = "" })
+                        @Html.ValidationMessageFor(model => model.Role, null, new { @class = "text-danger " })
+                    </div>
+                    <div class="mt-30">
+                        <div class="d-flex justify-content-between">
+                            <div class="mr-20 ml-20">
+                                @Html.Label("Sprints")
+                            </div>
+                            @Html.TextBox("Sprints", null, new { @class = "single-input-primary", @placeholder = "Sprints", @type = "number", @min = "1", style = "width: 200px;" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Sprints, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="mt-30">
+                        <div class="d-flex justify-content-between">
+                            <div class="mr-20 ml-20">
+                                @Html.Label("Members")
+                            </div>
+                            @Html.TextBox("Members", null, new { @class = "single-input-primary", @placeholder = "Members", @type = "number", @min = "1", style = "width: 200px;" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Members, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="mt-30">
+                        <div class="d-flex justify-content-between">
+                            <div class="mr-20 ml-20">
+                                @Html.Label("Time Limit (Hours)")
+                            </div>
+                            @Html.TextBox("TimeLimit", null, new { @class = "single-input-primary", @placeholder = "Hours", @type = "number", @min = "1", style = "width: 200px;" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Members, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="mt-30">
+                        @Html.Label("Project Environment")
+                        @Html.TextBox("Environment", null, new { @class = "single-input-primary", @placeholder = "" })
+                        @Html.ValidationMessageFor(model => model.Environment, null, new { @class = "text-danger" })
+                    </div>
+                    <div class="mt-30">
+                        <div class="d-flex justify-content-between">
+                            <div class="mr-20 ml-20">
+                                @Html.Label("Technology")
+                            </div>
+                            <div class="default-select" id="default-select">
+                                @Html.DropDownListFor(m => m.SelectedTechnology, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Technology))), new { style = "width: 200px;" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-30">
+                        <div class="d-flex justify-content-between">
+                            <div class="mr-20 ml-20">
+                                @Html.Label("Difficulty")
+                            </div>
+                            <div class="default-select mr-1" id="default-select">
+                                @Html.DropDownListFor(m => m.SelectedDifficulty, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Difficulty))), new { @style = "width:200px;" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-30">
+                        <div class="d-flex justify-content-between">
+                            <div class="mr-20 ml-20">
+                                @Html.Label("Programming Language")
+                            </div>
+                            <div class="default-select mr-1" id="default-select">
+                                @Html.DropDownListFor(m => m.SelectedProgrammingLanguage, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Language))))
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-30">
+                        @Html.TextArea("Tags", null, new { @class = "single-textarea tags", @id = "tags_1", @type = "text", @placeholder = "Tags" })
+                    </div>
+                    <br>
+                    <button class="genric-btn info float-right" type="submit">Save Changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- To test using the original jQuery.autocomplete, uncomment the following -->
+<!--
+<script type='text/javascript' src='http://xoxco.com/x/tagsinput/jquery-autocomplete/jquery.autocomplete.min.js'></script>
+<link rel="stylesheet" type="text/css" href="http://xoxco.com/x/tagsinput/jquery-autocomplete/jquery.autocomplete.css" />
+-->
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js'></script>
+
+<script type="text/javascript">
+
+    function onAddTag(tag) {
+        alert("Added a tag: " + tag);
+    }
+    function onRemoveTag(tag) {
+        alert("Removed a tag: " + tag);
+    }
+
+    function onChangeTag(input, tag) {
+        alert("Changed a tag: " + tag);
+    }
+
+    $(function () {
+
+        $('#tags_1').tagsInput({ width: 'auto' });
+        $('#tags_2').tagsInput({
+            width: 'auto',
+            onChange: function (elem, elem_tags) {
+                var languages = ['php', 'ruby', 'javascript'];
+                $('.tag', elem_tags).each(function () {
+                    if ($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0)
+                        $(this).css('background-color', 'yellow');
+                });
+            }
+        });
+        $('#tags_3').tagsInput({
+            width: 'auto',
+
+            //autocomplete_url:'test/fake_plaintext_endpoint.html' //jquery.autocomplete (not jquery ui)
+            autocomplete_url: 'test/fake_json_endpoint.html' // jquery ui autocomplete requires a json endpoint
+        });
+
+
+        // Uncomment this line to see the callback functions in action
+        //			$('input.tags').tagsInput({onAddTag:onAddTag,onRemoveTag:onRemoveTag,onChange: onChangeTag});
+
+        // Uncomment this line to see an input with no interface for adding new tags.
+        //			$('input.tags').tagsInput({interactive:false});
+    });
+
+</script>

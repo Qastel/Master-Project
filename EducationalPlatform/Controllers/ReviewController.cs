@@ -15,15 +15,21 @@ namespace EducationalPlatform.Controllers
         // GET: Review
         public ActionResult Index(int CodebaseId)
         {
-            var x = db.Reviews.Include("User").Include("Codebase").Where(c=>c.CodebaseId == CodebaseId);
-            ViewBag.Reviews = x;
+            var x = db.Reviews.Include("User").Include("Codebase").Where(c=> c.CodebaseId == CodebaseId && c.Description != null && c.Description != "").ToList();
+            if (x != null) 
+            {
+                ViewBag.Reviews = x;
+            }
+            else {
+                ViewBag.Reviews = new List<Review> ();
+            }
             return View();
         }
 
 
         public ActionResult New(int CodebaseId)
         {
-            var x = db.Reviews.Include("User").Include("Codebase").Where(c => c.CodebaseId == CodebaseId);
+            var x = db.Reviews.Include("User").Include("Codebase").Where(c => c.CodebaseId == CodebaseId).ToList();
             ViewBag.Reviews = x;
 
             Review y = new Review();
@@ -37,18 +43,26 @@ namespace EducationalPlatform.Controllers
         {
             x.User = db.Users.FirstOrDefault(u => u.Id == x.UserId);
             x.Codebase = db.Codebases.FirstOrDefault(c => c.Id == x.CodebaseId);
+
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    db.Reviews.Add(x);
+                    db.SaveChanges();
+                    TempData["message"] = "The review has been added!";
+                    return RedirectToAction("Show", "Codebases", new { Id = x.CodebaseId });
+                }
+                catch (Exception e)
+                {
+                    return RedirectToAction("Show", "Codebases", new { Id = x.CodebaseId });
+                }
+            }
            
-            try
-            {
-                db.Reviews.Add(x);
-                db.SaveChanges();
-                TempData["message"] = "Categoria a fost adaugata!";
-                return RedirectToAction("Show", "Codebases", new { Id = x.CodebaseId});
-            }
-            catch (Exception e)
-            {
-                return View();
-            }
+            TempData["ErrorMessage"] = "Description is reuquired!";
+            return RedirectToAction("Show", "Codebases", new { Id = x.CodebaseId });
+
         }
 
     }

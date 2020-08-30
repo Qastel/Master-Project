@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -110,7 +111,85 @@ namespace EducationalPlatform.Controllers
         public ActionResult Show(int Id)
         {
             var x = db.Codebases.Find(Id);
+        
+
+            ViewBag.DescriptionError = TempData["ErrorMessage"] as string;
+
             return View(x);
+        }
+
+
+        public ActionResult Edit(int Id)
+        {
+            Codebases c = db.Codebases.Find(Id);
+            return View(c);
+        }
+
+        [HttpPut]
+        public ActionResult Edit(int Id, Codebases updatedCodebase)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Codebases codebase = db.Codebases.Find(Id);
+
+                    if (codebase.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator"))
+                    {
+                        if (TryUpdateModel(codebase))
+                        {
+                            codebase.Members = updatedCodebase.Members;
+                            codebase.Role = updatedCodebase.Role;
+                            codebase.SelectedDifficulty = updatedCodebase.SelectedDifficulty;
+                            codebase.SelectedProgrammingLanguage = updatedCodebase.SelectedProgrammingLanguage;
+                            codebase.SelectedTechnology = updatedCodebase.SelectedTechnology;
+                            codebase.Sprints =  updatedCodebase.Sprints;
+                            codebase.Tags = updatedCodebase.Tags;
+                            codebase.TimeLimit = updatedCodebase.TimeLimit;
+                            codebase.CodebaseLink = updatedCodebase.CodebaseLink;
+                            codebase.GoogleFormsLink = updatedCodebase.GoogleFormsLink;
+                            codebase.GoogleFormsEmbedded = updatedCodebase.GoogleFormsEmbedded;
+                            codebase.CodebaseName = updatedCodebase.CodebaseName;
+                            codebase.Description = updatedCodebase.Description;
+                            codebase.Environment = updatedCodebase.Environment;
+
+                            db.SaveChanges();
+                            TempData["message"] = "Locatia a fost modificata!";
+                        }
+                        return RedirectToAction("Index", "Manage");
+                    }
+                    else
+                    {
+                        TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine!";
+                        return View();
+                    }
+
+
+                }
+                else
+                {
+                    return View();
+                }
+
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+        }
+
+
+
+        public FileResult Download(string fileName)
+        {
+            string fullPath = Path.Combine(Server.MapPath("~/UploadedCodebases"), fileName);
+            byte[] fileBytes = System.IO.File.ReadAllBytes(fullPath);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+        public ActionResult Instructions()
+        {
+            return View();
         }
 
 
@@ -134,6 +213,16 @@ namespace EducationalPlatform.Controllers
             //form["topics"].ToString() 
             try
             {
+                if (codebase.CodebaseFile != null)
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(codebase.CodebaseFile.FileName);
+                    string extension = Path.GetExtension(codebase.CodebaseFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yy_mm_ss_fff") + extension;
+                    codebase.CodebasePath = fileName;
+                    fileName = Path.Combine(Server.MapPath("~/UploadedCodebases/"), fileName);
+                    codebase.CodebaseFile.SaveAs(fileName);
+                }
+
                 db.Codebases.Add(codebase);
                 db.SaveChanges();
                 TempData["message"] = "Categoria a fost adaugata!";

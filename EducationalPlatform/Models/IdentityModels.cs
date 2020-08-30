@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Security.Principal;
@@ -12,6 +13,7 @@ namespace EducationalPlatform.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        [Required(ErrorMessage = "The name is required")]
         public string FullName { get; internal set; }
 
         public string Qualification { get; internal set; }
@@ -24,7 +26,6 @@ namespace EducationalPlatform.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
            
-
             userIdentity.AddClaim(new Claim("FullName", this.FullName));
            
             return userIdentity;
@@ -40,7 +41,6 @@ namespace EducationalPlatform.Models
         }
 
         public DbSet <Codebases> Codebases { get; set; }
-        public DbSet <Paragraph> Paragraphs { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<ForumTopic> ForumTopics { get; set; }
         public DbSet<ForumResponse> ForumResponses { get; set; }
