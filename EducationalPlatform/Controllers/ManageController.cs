@@ -10,6 +10,7 @@ using EducationalPlatform.Models;
 using System.Security.Claims;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace EducationalPlatform.Controllers
 {
@@ -85,7 +86,27 @@ namespace EducationalPlatform.Controllers
                 ViewBag.UserCodebases = x;
                 ViewBag.UserCodebasesNumber = x.Count();
             }
-            return View(model);
+            else if (User.IsInRole("Learner")) {
+                var y = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+
+                var codebasesIds =  y.LearnedCodebases.Split(',');
+               
+                List<Codebases> l = new List<Codebases>();
+               
+                foreach (string id in codebasesIds) {
+                    int number;
+                    if (Int32.TryParse(id, out number))
+                    {
+
+                        var c = db.Codebases.Find(Convert.ToInt32(number));
+                        l.Add(c);
+                        
+                    }
+                }
+                ViewBag.LearnedCodebases = l;
+            }
+
+                return View(model);
         }
 
         //

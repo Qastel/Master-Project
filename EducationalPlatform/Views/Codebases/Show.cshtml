@@ -34,47 +34,6 @@
     </div>
 </section>
 <!-- End Banner Area -->
-<!--
-
-<section class="about-area section-gap">
-    <div class="container shrink">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-lg-5 col-md-6 about-left">
-                <h2>
-                    Nice to see you here!
-                </h2>
-                <br>
-                <div class="wow fadeIn" data-wow-duration="1s">
-                    <p class="codebase-introduction ">
-                        Hi! Welcome to our new team of developers! My name is George, I am the team leader of this project.
-                        We developed a game for children but unfortunately, some bugs exist. Also, we want to expand the code to improve the users' experience.
-                        We need you to understand the current codebase and respond to Trouble Report requirements as well as considering Expanding the Code.
-                        Thanks for your help!
-                    </p>
-                </div>
-            </div>
-            <div class="offset-lg-2 col-lg-5 offset-md-0 col-md-12 about-right">
-                <div class="wow fadeIn" data-wow-duration="2s">
-                    <h3>
-                        Project management:
-                    </h3>
-                    <br>
-                    <ul>
-                        <li> <b>Environment</b> - Visual Studio Code  </li>
-                        <li> <b>Members</b> - 1  </li>
-                        <li> <b>Programming Language</b> - Python  </li>
-                        <li> <b>Technology</b> - Desktop  </li>
-                        <li> <b>Difficuty</b> - Easy  </li>
-                        <li> <b>Sprints</b> - 4  </li>
-                        <li> <b>Time</b> - 2 hours  </li>
-                        <li> <b>Version Control</b> - Github  </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Introduction Area -->
 
 <section class="about-area section-gap">
     <div class="container shrink codebase-step">
@@ -82,9 +41,6 @@
             <div class="col-lg-8">
                 <div class="section-title text-center">
                     <h1>Codebase Details</h1>
-                    <p>
-
-                    </p>
                     <hr>
                 </div>
             </div>
@@ -92,15 +48,13 @@
 
         <!--Start Feature Area -->
 
-        @Html.ActionLink("Download", "Download", new { fileName = Model.CodebasePath })
-
-        <div class="text-center mb-50"> Description: @Model.Description</div>
-        <div class="text-center mb-50"> Role: @Model.Role</div>
+        <div class="text-center mb-50"><h4 class="d-inline"> Description: </h4> @Model.Description</div>
+        <div class="text-center mb-50"><h4 class="d-inline"> Learner's Role: </h4> @Model.Role</div>
 
         <div class="feature-inner row">
             <div class="col-lg-6 col-md-6">
                 <div class="feature-item">
-                    <svg width="3em" height="3em" style="display:block; margin:auto;" viewBox="0 0 16 16" class="bi bi-code-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="3em" height="3em" style="display:block; margin:auto;" viewBox="0 0 16 16" class="bi bi-code-square" fill="#00CED1" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
                         <path fill-rule="evenodd" d="M6.854 4.646a.5.5 0 0 1 0 .708L4.207 8l2.647 2.646a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0zm2.292 0a.5.5 0 0 0 0 .708L11.793 8l-2.647 2.646a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708 0z" />
                     </svg>
@@ -118,7 +72,7 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="feature-item">
-                    <svg width="3em" height="3em" style="display:block; margin:auto;" viewBox="0 0 16 16" class="bi bi-exclamation-octagon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="3em" height="3em" style="display:block; margin:auto;" viewBox="0 0 16 16" class="bi bi-exclamation-octagon" fill="red" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1L1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z" />
                         <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z" />
                     </svg>
@@ -133,14 +87,14 @@
             </div>
             <div class="col-lg-6 col-md-6">
                 <div class="feature-item">
-                    <svg width="3em" height="3em" style="display:block; margin:auto;" viewBox="0 0 16 16" class="bi bi-tags" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="3em" height="3em" style="display:block; margin:auto;" viewBox="0 0 16 16" class="bi bi-tags" fill="#4B0082" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M3 2v4.586l7 7L14.586 9l-7-7H3zM2 2a1 1 0 0 1 1-1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 2 6.586V2z" />
                         <path fill-rule="evenodd" d="M5.5 5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1zm0 1a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
                         <path d="M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z" />
                     </svg>
                     <h4 class="text-center">Tags</h4>
                     <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".5s">
-                        <p class="text-justify">
+                        <p class="text-center">
                             @if (Model.Tags != null)
                             {
                                 foreach (string tag in Model.Tags.Split(','))
@@ -151,17 +105,16 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-6 col-md-6">
                 <div class="feature-item">
-                    <svg width="3em" height="3em" style="display:block; margin:auto;" viewBox="0 0 16 16" class="bi bi-star" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="3em" height="3em" style="display:block; margin:auto;" viewBox="0 0 16 16" class="bi bi-star" fill="#DAA520" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
                     </svg>
                     <h4 class="text-center">Rating</h4>
                     <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
                         @if (Model.MeanRating != 0)
                         {
-                            <p class="text-center">  @Model.MeanRating </p>
+                            <p class="text-center" style="color:#DAA520">  @Model.MeanRating / 5</p>
                         }
                         else
                         {
@@ -170,9 +123,72 @@
                     </div>
                 </div>
             </div>
-
+            <div class="center-element">
+            @Html.ActionLink("Save Codebase to My Profile", "StartLearning", "Codebases", new { Id = Model.Id }, new { @class = "genric-btn primary" })
+            </div>
         </div>
+    </div>
+</section>
 
+
+<section class="about-area section-gap">
+    <div class="container shrink codebase-step">
+        <div class="row justify-content-center">
+            <div class="">
+                <div class="text-center mb-30">
+                    <h1>Access the Codebase and Learning Instructions</h1>
+                    <hr>
+                </div>
+                <div>
+                    <div class="mb-50 text-right">
+                        <div class="text-center ">
+                            <div id="defaultCountdown" class="d-inline-block"> </div>
+                        </div>
+                        <div class="text-right">
+                            <button id="shortlyStart" class="genric-btn primary align-bottom "> Start Timmer</button>
+                        </div>
+                    </div>
+
+                    @if (Model.CodebasePath != null)
+                    {
+
+                    <div class=" center-element mt-40 mb-40">
+                        From here you can download the codebase:
+                        @Html.ActionLink("Download Codebase", "DownloadCodebase", new { fileName = Model.CodebasePath }, new { @class = "genric-btn success-border" })
+                    </div>
+                        <br>
+                    }
+                    @if (Model.CodebaseLink != null)
+                    {
+                        <div class="mb-40">
+                            <h6 class="d-inline"> You can find the codebase at this link: </h6> <a href="@Model.CodebaseLink"> @Model.CodebaseLink </a>
+                        </div>
+                    }
+                    @if (Model.GoogleFormsLink != null)
+                    {
+                        <div class="mb-40">
+                            <h6 class="d-inline">
+                                You can find the instructions and tasks that will help you with the codebase exploration
+                                at this link:
+                            </h6>
+                            <a href="@Model.GoogleFormsLink"> @Model.CodebaseLink </a>
+                        </div>
+                    }
+                    @if (Model.GoogleFormsEmbedded != null)
+                    {
+                        <iframe id="myFrame" src="" frameborder="0" marginheight="0" marginwidth="0" border="0" style="margin:0; padding:0;"></iframe>
+                    }
+
+                    @if (Model.ModelAnswersPath != null)
+                    {
+                        <div class="center-element mt-40 mb-40">
+                            From here you can check your aswers after you finish the learning process:
+                            @Html.ActionLink("Download Model Answers", "DownloadModelAnswers", new { fileName = Model.ModelAnswersPath }, new { @class = "genric-btn success-border" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -189,7 +205,6 @@
     </a>
 </div>
 
-<iframe id="myFrame" src="" frameborder="0" marginheight="0" marginwidth="0" border="0" style="margin:0; padding:0;"></iframe>
 
 
 
@@ -202,16 +217,8 @@
         </text>
     }
 
-</script>
 
-<div id="defaultCountdown"></div>
-
-
-<script>
-    $(function () {
-        var austDay = new Date();
-        austDay = new Date(austDay.getFullYear() + 1, 1 - 1, 26);
-        $('#defaultCountdown').countdown({ until: austDay });
-        $('#year').text(austDay.getFullYear());
-    });
+    $('#shortlyStart').click(function () {
+        $('#defaultCountdown').countdown( { until: '+' + @Model.TimeLimit +'h', format:'HMS'});
+    }); 
 </script>

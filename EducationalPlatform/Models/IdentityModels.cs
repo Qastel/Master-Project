@@ -18,6 +18,8 @@ namespace EducationalPlatform.Models
 
         public string Qualification { get; internal set; }
 
+        public string LearnedCodebases { get; internal set; }
+
         public IEnumerable<SelectListItem> AllRoles { get; internal set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

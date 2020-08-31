@@ -20,43 +20,47 @@ namespace EducationalPlatform.Models
         [Required(ErrorMessage = "The codebase Description is Required!")]
         public string Description { get; set; }
 
-        //[Required(ErrorMessage = "The codebase Link is Required!")]
         public string CodebaseLink { get; set; }
 
         [DisplayName("Upload Codebase")]
         public string CodebasePath { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase CodebaseFile { get; set; }
+
+        [DisplayName("Upload Codebase")]
+        public string ModelAnswersPath { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ModelAnswersFile { get; set; }
 
         public string GoogleFormsLink { get; set; }
 
         [AllowHtml]
         public string GoogleFormsEmbedded { get; set;}
 
-        [NotMapped]
-        public HttpPostedFileBase CodebaseFile { get; set; }
-
-        //[Required(ErrorMessage = "The codebase Description is Required!")]
+        [Required(ErrorMessage = "The Learner's Role is Required!")]
         public string Role { get; set; }
 
-        //[Required(ErrorMessage = "The codebase Description is Required!")]
+        [Required(ErrorMessage = "The codebase Number of Sprints is Required!")]
         public int Sprints { get; set; }
 
-        //[Required(ErrorMessage = "The codebase Description is Required!")]
+        [Required(ErrorMessage = "The codebase's Contributors number is Required!")]
         public int Members { get; set; }
 
-        //[Required(ErrorMessage = "The codebase Description is Required!")]
+       [Required(ErrorMessage = "The codebase Environment is Required!")]
         public string Environment { get; set; }
 
-        //[Required(ErrorMessage = "The codebase Description is Required!")]
+        [Required(ErrorMessage = "The codebase Technology is Required!")]
         public Technology? SelectedTechnology { get; set; }
 
-        //[Required(ErrorMessage = "The codebase Description is Required!")]
-        //public string SelectedProgrammingLanguage { get; set; }
-        //public IEnumerable<SelectListItem> ProgrammingLanguages { get; set; }
+        [Required(ErrorMessage = "The codebase Programming Language is Required!")]
         public Language? SelectedProgrammingLanguage { get; set; }
 
+        [Required(ErrorMessage = "The codebase Difficulty is Required!")]
         public Difficulty? SelectedDifficulty { get; set; }
 
-        //[Required(ErrorMessage = "The codebase Description is Required!")]
+        [Required(ErrorMessage = "The codebase Time Limit is Required!")]
         public int TimeLimit { get; set; }
 
         public string UserId { get; set; }

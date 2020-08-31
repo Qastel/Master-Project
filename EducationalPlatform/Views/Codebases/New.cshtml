@@ -104,7 +104,7 @@
                     <div class="mt-50 mb-70">
                         <h5 class="mb-20"> Implementation Details </h5>
                         <div class="mt-10">
-                            @Html.TextBox("Role", null, new { @class = "single-input-primary", @placeholder = "Learner Position/Role" })
+                            @Html.TextBox("Role", null, new { @class = "single-input-primary", @placeholder = "Learner's Role/ Mission" })
                             @Html.ValidationMessageFor(model => model.Role, null, new { @class = "text-danger " })
                         </div>
 
@@ -178,11 +178,16 @@
                         <h5 class="mb-10"> Tags</h5> <p>(Important Features/Learning Outcomes)</p>
                         <div class="mt-10">
                             @Html.TextArea("Tags", null, new { @class = "single-textarea tags", @id = "tags_1", @type = "text", @placeholder = "Tags" })
-
                             <!--<input id="tags_1" type="text" class="tags single-textarea tags" name="topics" value="" />-->
                         </div>
                     </div>
-                   
+                    <div class="mt-50 mb-70">
+                        <h5 class="mb-10"> Model Answers</h5> <p>(or you can use google form)</p>
+                        <div class="mt-10">
+                             <input type="file" class="btn-default" name="ModelAnswersFile">
+                        </div>
+                    </div>
+
                     <button class="genric-btn primary float-right" type="submit">Add Codebase</button>
                 </form>
             </div>

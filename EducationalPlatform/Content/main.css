@@ -3248,5 +3248,11 @@ height: 600px; }
 
 #defaultCountdown {
     width: 240px;
-    height: 45px;
+    height: 60px;
+}
+
+.center-element {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
 }
