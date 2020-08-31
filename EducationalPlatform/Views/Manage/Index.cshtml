@@ -60,76 +60,149 @@
     </div>
 </section>
 
+@if (User.IsInRole("Instructor"))
+{
+    <section class="mb-100">
+        <div class="container">
+            <div class="row justify-content-center ">
+                <div class="col-lg-8">
+                    <h4>Your uploaded Codebases</h4>
+                    <hr />
+                </div>
+            </div>
+            <div class="feature-inner row justify-content-center mt-20">
+                @if (ViewBag.UserCodebases == null || ViewBag.UserCodebasesNumber == 0)
+                {
+                    <h5> You do not have any codebases uploaded yet!</h5>
+                }
+                else
+                {
+                    foreach (EducationalPlatform.Models.Codebases codebase in ViewBag.UserCodebases)
+                    {
+                        <div class="col-lg-6 col-md-6">
+                            <a href="" class="codebase-box">
+                                <div class="feature-item">
+                                    <h4 style="display:inline-block;">@codebase.CodebaseName</h4>
+                                    @if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Easy)
+                                    {
+                                        <span class="codebase-difficulty level-easy"> @codebase.SelectedDifficulty </span>
+                                    }
+                                    else if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Medium)
+                                    {
+                                        <span class="codebase-difficulty level-medium"> @codebase.SelectedDifficulty </span>
+                                    }
+                                    else if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Hard)
+                                    {
+                                        <span class="codebase-difficulty level-hard"> @codebase.SelectedDifficulty </span>
+                                    }
+                                    <h5 class="wow fadeInRight" style="display:inline-block; float:right;">@codebase.SelectedProgrammingLanguage, @codebase.SelectedTechnology App</h5>
+                                    <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
+                                        <p class="description">
+                                            @codebase.Description
+                                        </p>
+                                    </div>
+                                    <br>
+                                    <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
+                                        <span class=""> Instructor: @codebase.User.FullName</span>
+                                        <span class="vertical-line"></span>
+                                        <span class=""> Qualification: @codebase.User.Qualification</span>
+                                        <span class="vertical-line"></span>
+                                        <span class=""> Project Limit: @codebase.TimeLimit hours</span>
+                                        <hr>
+                                    </div>
+                                    <div class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".1s">
+                                        @if (codebase.Tags != null)
+                                        {
+                                            foreach (string tag in codebase.Tags.Split(','))
+                                            {
+                                                <span class="codebase-topics">@tag</span>
+                                            }
+                                        }
+                                    </div>
+                                    <br>
+                                    <div class="overflow-hidden">
+                                        <form method="post" style="display:inline" action="/Codebases/Delete/@codebase.Id" class="float-left">
+                                            @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                            <button class="genric-btn danger" role="button" type="submit">Delete</button>
+                                        </form>
+                                        @Html.ActionLink("Edit", "Edit", "Codebases", new { Id = codebase.Id }, new { @class = "genric-btn info float-right" })
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </section>
+}
+
+else if (User.IsInRole("Learner")) {
 <section class="mb-100">
     <div class="container">
         <div class="row justify-content-center ">
             <div class="col-lg-8">
-                <h4>Your uploaded Codebases</h4>
+                <h4>Your Learned Codebases</h4>
                 <hr />
             </div>
         </div>
         <div class="feature-inner row justify-content-center mt-20">
-            @if (ViewBag.UserCodebases == null || ViewBag.UserCodebasesNumber == 0)
+        @if (ViewBag.LearnedCodebases == null )
+        {
+            <h5> You do not have any learned codebases yet!</h5>
+        }
+        else
+        {
+            foreach (EducationalPlatform.Models.Codebases codebase in ViewBag.LearnedCodebases)
             {
-                <h5> You do not have any codebases uploaded yet!</h5>
-            }
-            else
-            {
-                foreach (EducationalPlatform.Models.Codebases codebase in ViewBag.UserCodebases)
-                {
-                    <div class="col-lg-6 col-md-6">
-                        <a href="" class="codebase-box">
-                            <div class="feature-item">
-                                <h4 style="display:inline-block;">@codebase.CodebaseName</h4>
-                                @if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Easy)
-                                {
-                                    <span class="codebase-difficulty level-easy"> @codebase.SelectedDifficulty </span>
-                                }
-                                else if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Medium)
-                                {
-                                    <span class="codebase-difficulty level-medium"> @codebase.SelectedDifficulty </span>
-                                }
-                                else if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Hard)
-                                {
-                                    <span class="codebase-difficulty level-hard"> @codebase.SelectedDifficulty </span>
-                                }
-                                <h5 class="wow fadeInRight" style="display:inline-block; float:right;">@codebase.SelectedProgrammingLanguage, @codebase.SelectedTechnology App</h5>
-                                <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
-                                    <p class="description">
-                                        @codebase.Description
-                                    </p>
-                                </div>
-                                <br>
-                                <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
-                                    <span class=""> Instructor: @codebase.User.FullName</span>
-                                    <span class="vertical-line"></span>
-                                    <span class=""> Qualification: @codebase.User.Qualification</span>
-                                    <span class="vertical-line"></span>
-                                    <span class=""> Project Limit: @codebase.TimeLimit hours</span>
-                                    <hr>
-                                </div>
-                                <div class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".1s">
-                                    @if (codebase.Tags != null)
-                                    {
-                                        foreach (string tag in codebase.Tags.Split(','))
-                                        {
-                                            <span class="codebase-topics">@tag</span>
-                                        }
-                                    }
-                                </div>
-                                <br>
-                                <div class="overflow-hidden">
-                                    <form method="post" style="display:inline" action="/Codebases/Delete/@codebase.Id" class="float-left">
-                                        @Html.HttpMethodOverride(HttpVerbs.Delete)
-                                        <button class="genric-btn danger" role="button" type="submit">Delete</button>
-                                    </form>
-                                    @Html.ActionLink("Edit", "Edit", "Codebases", new { Id = codebase.Id }, new { @class = "genric-btn info float-right" })
-                                </div>
-                            </div>
-                        </a>
+            <div class="col-lg-6 col-md-6">
+            <a href="" class="codebase-box">
+                <div class="feature-item">
+                    <h4 style="display:inline-block;">@codebase.CodebaseName</h4>
+                    @if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Easy)
+                    {
+                        <span class="codebase-difficulty level-easy"> @codebase.SelectedDifficulty </span>
+                    }
+                    else if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Medium)
+                    {
+                        <span class="codebase-difficulty level-medium"> @codebase.SelectedDifficulty </span>
+                    }
+                    else if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Hard)
+                    {
+                        <span class="codebase-difficulty level-hard"> @codebase.SelectedDifficulty </span>
+                    }
+                    <h5 class="wow fadeInRight" style="display:inline-block; float:right;">@codebase.SelectedProgrammingLanguage, @codebase.SelectedTechnology App</h5>
+                    <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
+                        <p class="description">
+                            @codebase.Description
+                        </p>
                     </div>
-                }
+                    <br>
+                    <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
+                        <span class=""> Instructor: @codebase.User.FullName</span>
+                        <span class="vertical-line"></span>
+                        <span class=""> Qualification: @codebase.User.Qualification</span>
+                        <span class="vertical-line"></span>
+                        <span class=""> Project Limit: @codebase.TimeLimit hours</span>
+                        <hr>
+                    </div>
+                    <div class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".1s">
+                        @if (codebase.Tags != null)
+                        {
+                            foreach (string tag in codebase.Tags.Split(','))
+                            {
+                                <span class="codebase-topics">@tag</span>
+                            }
+                        }
+                    </div>
+                    <br>
+                </div>
+            </a>
+            </div>
             }
+        }
         </div>
     </div>
 </section>
+}
+ 

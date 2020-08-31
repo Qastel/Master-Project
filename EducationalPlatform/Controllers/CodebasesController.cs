@@ -1,9 +1,11 @@
 ﻿using EducationalPlatform.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,6 +14,32 @@ namespace EducationalPlatform.Controllers
     public class CodebasesController : Controller
     {
         private ApplicationDbContext db = ApplicationDbContext.Create();
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
+
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                _signInManager = value;
+            }
+        }
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: Codebases
         public ActionResult Index(Codebases codebase, int pagination = 1, string search = null)
@@ -113,14 +141,71 @@ namespace EducationalPlatform.Controllers
         public ActionResult Show(int Id)
         {
             ViewBag.Page = "Codebases";
-
             var x = db.Codebases.Find(Id);
-        
+
+            // update the rating
+            var CodebaseReviews = db.Reviews.Where(r => r.CodebaseId == x.Id).ToList();
+            var total = 0;
+            foreach (var r in CodebaseReviews)
+            {
+                total = total + r.Rating;
+            }
+            var rating = 0;
+            if (CodebaseReviews.Count() != 0)
+            {
+                rating = total / CodebaseReviews.Count(); // for one codebase
+            }
+            x.MeanRating = rating;
+           
+
             ViewBag.DescriptionError = TempData["ErrorMessage"] as string;
+
+            // check if learning of the current codebase has started
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            if (user.LearnedCodebases != null)
+            {
+                var l = user.LearnedCodebases.Split(',');
+                if (l.Contains(Convert.ToString(Id)))
+                {
+                    ViewBag.StartLearning = true;
+                }
+            }
 
             return View(x);
         }
 
+        public async Task<ActionResult> StartLearning(int Id)
+        {
+            var x = db.Codebases.Find(Id);
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            
+            // Update the learned Codebases, it will appear in My Profile section
+            if (user.LearnedCodebases != null)
+            {
+                var l = user.LearnedCodebases.Split(',');
+                if (!l.Contains(Convert.ToString(Id)))
+                {
+                    user.LearnedCodebases = user.LearnedCodebases + x.Id + ",";
+                    var updateResult = await UserManager.UpdateAsync(user);
+
+                    if (updateResult.Succeeded)
+                    {
+                        return RedirectToAction("Show", "Codebases", new { Id = Id });
+                    }
+                }
+            }
+            else {
+                user.LearnedCodebases = x.Id + ",";
+                var updateResult = await UserManager.UpdateAsync(user);
+
+                if (updateResult.Succeeded)
+                {
+                    return RedirectToAction("Show", "Codebases", new { Id = Id });
+                }
+            }
+
+            return RedirectToAction("Show", "Codebases", new { Id = Id });
+        }
 
         public ActionResult Edit(int Id)
         {
@@ -166,14 +251,11 @@ namespace EducationalPlatform.Controllers
                         TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine!";
                         return View();
                     }
-
-
                 }
                 else
                 {
                     return View();
                 }
-
             }
             catch (Exception e)
             {
@@ -181,14 +263,6 @@ namespace EducationalPlatform.Controllers
             }
         }
 
-
-
-        public FileResult Download(string fileName)
-        {
-            string fullPath = Path.Combine(Server.MapPath("~/UploadedCodebases"), fileName);
-            byte[] fileBytes = System.IO.File.ReadAllBytes(fullPath);
-            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
-        }
 
         public ActionResult Instructions()
         {
@@ -202,7 +276,6 @@ namespace EducationalPlatform.Controllers
         {
             ViewBag.Page = "NewCodebase";
             Codebases codebase = new Codebases();
-            //codebase.ProgrammingLanguages = GetAllProgrammingLanguages(); // get the list of programming languages for dropdown
             codebase.UserId = User.Identity.GetUserId();
             return View(codebase);
         }
@@ -212,10 +285,8 @@ namespace EducationalPlatform.Controllers
         [ValidateInput(false)]
         public ActionResult New(Codebases codebase, FormCollection form)
         {
-            //codebase.ProgrammingLanguages = GetAllProgrammingLanguages(); // save the obj with the list of programming languages in case we need further along to change it
             codebase.User = db.Users.FirstOrDefault(x => x.Id == codebase.UserId);
-                        
-            //form["topics"].ToString() 
+
             try
             {
                 if (codebase.CodebaseFile != null)
@@ -224,19 +295,42 @@ namespace EducationalPlatform.Controllers
                     string extension = Path.GetExtension(codebase.CodebaseFile.FileName);
                     fileName = fileName + DateTime.Now.ToString("yy_mm_ss_fff") + extension;
                     codebase.CodebasePath = fileName;
-                    fileName = Path.Combine(Server.MapPath("~/UploadedCodebases/"), fileName);
+                    fileName = Path.Combine(Server.MapPath("~/App_Data/UploadedCodebases/"), fileName);
                     codebase.CodebaseFile.SaveAs(fileName);
+                }
+                if (codebase.ModelAnswersFile != null) {
+                    string fileName = Path.GetFileNameWithoutExtension(codebase.ModelAnswersFile.FileName);
+                    string extension = Path.GetExtension(codebase.ModelAnswersFile.FileName);
+                    fileName = fileName + DateTime.Now.ToString("yy_mm_ss_fff") + extension;
+                    codebase.ModelAnswersPath = fileName;
+                    fileName = Path.Combine(Server.MapPath("~/App_Data/UploadedModelAnswers/"), fileName);
+                    codebase.ModelAnswersFile.SaveAs(fileName);
                 }
 
                 db.Codebases.Add(codebase);
                 db.SaveChanges();
-                TempData["message"] = "Categoria a fost adaugata!";
+                TempData["message"] = "The codebase has been added";
                 return RedirectToAction("Index");
             }
             catch (Exception e)
             {
                 return View();
             }
+        }
+
+        public FileResult DownloadCodebase(string fileName)
+        {
+            string fullPath = Path.Combine(Server.MapPath("~/App_Data/UploadedCodebases"), fileName);
+            byte[] fileBytes = System.IO.File.ReadAllBytes(fullPath);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
+
+
+        public FileResult DownloadModelAnswers(string fileName)
+        {
+            string fullPath = Path.Combine(Server.MapPath("~/App_Data/UploadedModelAnswers"), fileName);
+            byte[] fileBytes = System.IO.File.ReadAllBytes(fullPath);
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
 
         [HttpDelete]

@@ -469,9 +469,9 @@
     <Content Include="Views\Codebases\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\UploadedCodebases\" />
+    <Folder Include="App_Data\UploadedModelAnswers\" />
     <Folder Include="Content\assets\images\gallery\" />
-    <Folder Include="UploadedCodebases\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
