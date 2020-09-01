@@ -86,7 +86,7 @@ namespace EducationalPlatform.Controllers
                 ViewBag.UserCodebases = x;
                 ViewBag.UserCodebasesNumber = x.Count();
             }
-            else if (User.IsInRole("Learner")) {
+            if (User.IsInRole("Learner") || User.IsInRole("Instructor")) {
                 var y = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
                 var codebasesIds =  y.LearnedCodebases.Split(',');

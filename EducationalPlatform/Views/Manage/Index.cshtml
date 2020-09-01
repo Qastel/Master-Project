@@ -80,7 +80,7 @@
                     foreach (EducationalPlatform.Models.Codebases codebase in ViewBag.UserCodebases)
                     {
                         <div class="col-lg-6 col-md-6">
-                            <a href="" class="codebase-box">
+                            <a href="@Url.Action("Show", "Codebases", new { Id = codebase.Id} )" class="codebase-box">
                                 <div class="feature-item">
                                     <h4 style="display:inline-block;">@codebase.CodebaseName</h4>
                                     @if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Easy)
@@ -137,7 +137,7 @@
     </section>
 }
 
-else if (User.IsInRole("Learner")) {
+@if (User.IsInRole("Learner") || User.IsInRole("Instructor")) {
 <section class="mb-100">
     <div class="container">
         <div class="row justify-content-center ">
@@ -156,7 +156,7 @@ else if (User.IsInRole("Learner")) {
             foreach (EducationalPlatform.Models.Codebases codebase in ViewBag.LearnedCodebases)
             {
             <div class="col-lg-6 col-md-6">
-            <a href="" class="codebase-box">
+            <a href="@Url.Action("Show", "Codebases", new { Id = codebase.Id} )" class="codebase-box">
                 <div class="feature-item">
                     <h4 style="display:inline-block;">@codebase.CodebaseName</h4>
                     @if (codebase.SelectedDifficulty == EducationalPlatform.Models.Difficulty.Easy)

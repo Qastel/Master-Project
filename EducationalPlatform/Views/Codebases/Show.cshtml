@@ -102,6 +102,9 @@
                                     <span class="codebase-topics">@tag</span>
                                 }
                             }
+                            else {
+                                  <p class="text-center">  no tags added!</p>
+                            }
                     </div>
                 </div>
             </div>
@@ -124,7 +127,7 @@
                 </div>
             </div>
             <div class="center-element">
-            @Html.ActionLink("Save Codebase to My Profile", "StartLearning", "Codebases", new { Id = Model.Id }, new { @class = "genric-btn primary" })
+            @Html.ActionLink("Save Codebase to My Profile", "Index", "Manage", null, new { @class = "genric-btn primary" })
             </div>
         </div>
     </div>
@@ -171,11 +174,16 @@
                                 You can find the instructions and tasks that will help you with the codebase exploration
                                 at this link:
                             </h6>
-                            <a href="@Model.GoogleFormsLink"> @Model.CodebaseLink </a>
+                            <a href="@Model.GoogleFormsLink"> @Model.GoogleFormsLink </a>
                         </div>
                     }
                     @if (Model.GoogleFormsEmbedded != null)
                     {
+                        <div class="mb-40">
+                            <h6 class="d-inline">
+                                Bellow you can find the Google Forms sheet,  the instructions and tasks that will help you with the codebase exploration:
+                            </h6>
+                        </div>
                         <iframe id="myFrame" src="" frameborder="0" marginheight="0" marginwidth="0" border="0" style="margin:0; padding:0;"></iframe>
                     }
 
