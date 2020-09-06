@@ -17,7 +17,7 @@ namespace EducationalPlatform.Controllers
         {
             var x = db.ForumTopics.Include("User").Include("Codebase").Where(c => c.CodebaseId == CodebaseId);
             ViewBag.ForumTopics = x;
-
+            ViewBag.CurrentUser = User.Identity.GetUserId();
 
             ForumTopic y = new ForumTopic();
             y.UserId = User.Identity.GetUserId();
@@ -32,19 +32,19 @@ namespace EducationalPlatform.Controllers
             var x = db.ForumTopics.Include("User").Include("Codebase").Where(c => c.CodebaseId == CodebaseId);
             ViewBag.ForumTopics = x;
 
-            ForumTopic y = new ForumTopic();
-            y.UserId = User.Identity.GetUserId();
-            y.CodebaseId = CodebaseId;
-            return View(y);
+            return RedirectToAction("Index", "ForumTopic", new { x.Co});
         } 
         */
 
         [HttpPost]
+        [Authorize(Roles = "Instructor,Learner")]
         public ActionResult New(ForumTopic x)
         {
             x.User = db.Users.FirstOrDefault(u => u.Id == x.UserId);
             x.Codebase = db.Codebases.FirstOrDefault(c => c.Id == x.CodebaseId);
-            x.CreationDate = DateTime.Now.Date;
+            x.CreationDate = DateTime.Now;
+            x.UserId = User.Identity.GetUserId();
+ 
             try
             {
                 db.ForumTopics.Add(x);
@@ -57,5 +57,24 @@ namespace EducationalPlatform.Controllers
                 return RedirectToAction("Index", "ForumTopic", new { x.CodebaseId });
             }
         }
+
+        [HttpDelete]
+        [Authorize(Roles = "Instructor, Learner")]
+        public ActionResult Delete(int id, int CodebaseId)
+        {
+            ForumTopic t = db.ForumTopics.Find(id);
+
+            if (t != null && (t.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator")) )
+            {
+                db.ForumTopics.Remove(t);
+                db.SaveChanges();
+                return RedirectToAction("Index", "ForumTopic", new { CodebaseId});
+            }
+            else
+            {
+                return RedirectToAction("Index", "ForumTopic", new { CodebaseId });
+            }
+        }
+
     }
 }

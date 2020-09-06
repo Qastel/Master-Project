@@ -1,21 +1,52 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿
+<!-- Start Banner Area -->
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    About
+                </h1>
+                <p>
+                    Do you have a question? Open a topic bellow.
+                </p>
+                <div class="link-nav">
+                    <span class="box">
+                        <a href="@Url.Action("Index", "Home")"> Home </a>
+                        <i class="lnr lnr-arrow-right"></i>
+                        <a href="@Url.Action("About", "Home")"> About</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rocket-img">
+        <img src="~/Content/Images/rocket.png" alt="">
+    </div>
+</section>
+<!-- End Banner Area -->
 
-<p>Use this area to provide additional information.</p>
+<section class="feature-area section">
+    <div class="container shrink codebase-step overflow-hidden">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="section-title text-center">
+                   <h1> More about the platform...</h1>
+                    <hr>
+                    Most of the students encounter difficulties when trying to integrate with a project, reading it or adding more features. 
+                    Having a path for exploring first glance codebases may be as important as knowing problem solving. 
+                    Similar in many ways, codebase exploration uses some of the problem solving concepts, but on a higher level. 
+                    We do not try to find a solution, we already have it and we try to understand it. 
+                    Most of the students will explore codebases in a chaotic way, without being aware of the steps they take and only chasing a valid solution for their tasks . 
+                    Frustration and lack of confidence in their skills are first to come when pre-built projects are read. 
+                    This behaviour is the result of not having educational support for understanding a codebase environment. <br><br>
+                    The primordial objective of this platform is building a structural model for picking up codebases, 
+                    and understanding the model behaviour in order to generalise it on different scenarios.  
+                    More side benefits that will be analysed are: improve code reading skills, appreciate tasks difficulty,
+                    learn safe refactorings, and learn code review.
 
-<div style="background:url(../Content/Images/header-bg.png);">
-    You can specify background images<br>
-    for any visible HTML element.<br>
-    In this example, the background image<br>
-    is specified for a div element.<br>
-    By default, the background-image<br>
-    will repeat itself in the direction(s)<br>
-    where it is smaller than the element<br>
-    where it is specified. (Try resizing the<br>
-    browser window to see how the<br>
-    background image behaves.
-</div>
-<img src="@Url.Content("~/Content/Images/rocket.png")" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

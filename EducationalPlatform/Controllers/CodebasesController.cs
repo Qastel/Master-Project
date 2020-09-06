@@ -73,9 +73,9 @@ namespace EducationalPlatform.Controllers
 
             var x = db.Codebases.Include("User").ToList(); // save the codebases including the user
 
-            if (!String.IsNullOrEmpty(search)) // verify if search was run
+            if (!String.IsNullOrEmpty(search)) // verify if search was pressed
             {
-                x = x.Where(c => c.CodebaseName.Contains(search) || c.User.FullName.Contains(search)
+                x = x.Where(c => c.CodebaseName.ToLower().Contains(search.ToLower()) || c.User.FullName.ToLower().Contains(search.ToLower())
                 ).OrderBy(c => c.Id).Skip((pagination - 1) * 6).Take(6).ToList();
             }
             else {
@@ -84,7 +84,7 @@ namespace EducationalPlatform.Controllers
                     x = x.Where(d => d.SelectedProgrammingLanguage == codebase.SelectedProgrammingLanguage).ToList();
                 }
                 if (codebase.SelectedDifficulty != null) // verify if a codebase was selected
-                {  
+                {
                     x = x.Where(d => d.SelectedDifficulty == codebase.SelectedDifficulty).ToList();
                 }
                 if (codebase.SelectedTechnology != null) // verify if a technology was selected
@@ -95,10 +95,10 @@ namespace EducationalPlatform.Controllers
                 x = x.OrderBy(d => d.Id).Skip((pagination - 1) * 6).Take(6).ToList(); // if any of the selection has been applied take only the 6 codebases of the current paage
             }
 
-            foreach(var c in x) // set the rating for each codebase
+            foreach (var c in x) // set the rating for each codebase
             {
                 var CodebaseReviews = db.Reviews.Where(r => r.CodebaseId == c.Id).ToList();
-                
+
                 var total = 0;
                 foreach (var r in CodebaseReviews)
                 {
@@ -116,25 +116,6 @@ namespace EducationalPlatform.Controllers
             ViewBag.Codebases = x;
 
             return View();
-        }
-        
-
-        [NonAction]
-        public IEnumerable<SelectListItem> GetAllProgrammingLanguages()
-        {
-            // generam o lista goala
-            var selectList = new List<SelectListItem>();
-            // Extragem toate categoriile din baza de date
-            var categories = from cat in db.Codebases select cat;
-            // iteram prin categorii
-           
-            // Adaugam in lista elementele necesare pentru dropdown
-            selectList.Add(new SelectListItem
-            {
-                Value = "Python",
-                Text = "Python"
-            });
-            return selectList;
         }
 
 
@@ -156,12 +137,14 @@ namespace EducationalPlatform.Controllers
                 rating = total / CodebaseReviews.Count(); // for one codebase
             }
             x.MeanRating = rating;
-           
+
 
             ViewBag.DescriptionError = TempData["ErrorMessage"] as string;
 
             // check if learning of the current codebase has started
             var user = UserManager.FindById(User.Identity.GetUserId());
+
+            /*
             if (user.LearnedCodebases != null)
             {
                 var l = user.LearnedCodebases.Split(',');
@@ -170,42 +153,49 @@ namespace EducationalPlatform.Controllers
                     ViewBag.StartLearning = true;
                 }
             }
+            */
 
             return View(x);
         }
+
 
         public async Task<ActionResult> StartLearning(int Id)
         {
             var x = db.Codebases.Find(Id);
             var user = UserManager.FindById(User.Identity.GetUserId());
-            
-            // Update the learned Codebases, it will appear in My Profile section
-            if (user.LearnedCodebases != null)
+
+            if (user != null)
             {
-                var l = user.LearnedCodebases.Split(',');
-                if (!l.Contains(Convert.ToString(Id)))
+                // Update the learned Codebases, it will appear in My Profile section
+                if (user.LearnedCodebases != null)
                 {
-                    user.LearnedCodebases = user.LearnedCodebases + x.Id + ",";
+                    var l = user.LearnedCodebases.Split(',');
+                    if (!l.Contains(Convert.ToString(Id)))
+                    {
+                        user.LearnedCodebases = user.LearnedCodebases + x.Id + ",";
+                        var updateResult = await UserManager.UpdateAsync(user);
+
+                        if (updateResult.Succeeded)
+                        {
+                            return RedirectToAction("Index", "Manage");
+                        }
+                    }
+                }
+                else
+                {
+                    user.LearnedCodebases = x.Id + ",";
                     var updateResult = await UserManager.UpdateAsync(user);
 
                     if (updateResult.Succeeded)
                     {
-                        return RedirectToAction("Show", "Codebases", new { Id = Id });
+                        return RedirectToAction("Index", "Manage");
                     }
-                }
-            }
-            else {
-                user.LearnedCodebases = x.Id + ",";
-                var updateResult = await UserManager.UpdateAsync(user);
-
-                if (updateResult.Succeeded)
-                {
-                    return RedirectToAction("Show", "Codebases", new { Id = Id });
                 }
             }
 
             return RedirectToAction("Show", "Codebases", new { Id = Id });
         }
+
 
         public ActionResult Edit(int Id)
         {
@@ -213,7 +203,9 @@ namespace EducationalPlatform.Controllers
             return View(c);
         }
 
+
         [HttpPut]
+        [Authorize(Roles = "Instructor")]
         public ActionResult Edit(int Id, Codebases updatedCodebase)
         {
             try
@@ -226,6 +218,40 @@ namespace EducationalPlatform.Controllers
                     {
                         if (TryUpdateModel(codebase))
                         {
+                            if (updatedCodebase.CodebaseFile != null)
+                            {
+                                var path = Server.MapPath("~/App_Data/UploadedCodebases");
+
+                                if (!System.IO.Directory.Exists(path))
+                                {
+                                    System.IO.Directory.CreateDirectory(path);
+                                }
+
+                                string fileName = Path.GetFileNameWithoutExtension(updatedCodebase.CodebaseFile.FileName);
+                                string extension = Path.GetExtension(updatedCodebase.CodebaseFile.FileName);
+                                fileName = fileName + DateTime.Now.ToString("yy_mm_ss_fff") + extension;
+                                codebase.CodebasePath = fileName;
+                                fileName = Path.Combine(Server.MapPath("~/App_Data/UploadedCodebases/"), fileName);
+                                codebase.CodebaseFile.SaveAs(fileName);
+                            }
+
+                            if (updatedCodebase.ModelAnswersFile != null)
+                            {
+                                var path = Server.MapPath("~/App_Data/UploadedModelAnswers");
+
+                                if (!System.IO.Directory.Exists(path))
+                                {
+                                    System.IO.Directory.CreateDirectory(path);
+                                }
+
+                                string fileName = Path.GetFileNameWithoutExtension(updatedCodebase.ModelAnswersFile.FileName);
+                                string extension = Path.GetExtension(updatedCodebase.ModelAnswersFile.FileName);
+                                fileName = fileName + DateTime.Now.ToString("yy_mm_ss_fff") + extension;
+                                codebase.ModelAnswersPath = fileName;
+                                fileName = Path.Combine(Server.MapPath("~/App_Data/UploadedModelAnswers/"), fileName);
+                                codebase.ModelAnswersFile.SaveAs(fileName);
+                            }
+
                             codebase.Members = updatedCodebase.Members;
                             codebase.Role = updatedCodebase.Role;
                             codebase.SelectedDifficulty = updatedCodebase.SelectedDifficulty;
@@ -267,7 +293,7 @@ namespace EducationalPlatform.Controllers
         public ActionResult Instructions()
         {
             ViewBag.Page = "Instructions";
-            return View();
+            return View("Instructions");
         }
 
 
@@ -291,6 +317,13 @@ namespace EducationalPlatform.Controllers
             {
                 if (codebase.CodebaseFile != null)
                 {
+                    var path = Server.MapPath("~/App_Data/UploadedCodebases");
+
+                    if (!System.IO.Directory.Exists(path))
+                    {
+                        System.IO.Directory.CreateDirectory(path);
+                    }
+
                     string fileName = Path.GetFileNameWithoutExtension(codebase.CodebaseFile.FileName);
                     string extension = Path.GetExtension(codebase.CodebaseFile.FileName);
                     fileName = fileName + DateTime.Now.ToString("yy_mm_ss_fff") + extension;
@@ -299,6 +332,13 @@ namespace EducationalPlatform.Controllers
                     codebase.CodebaseFile.SaveAs(fileName);
                 }
                 if (codebase.ModelAnswersFile != null) {
+                    var path = Server.MapPath("~/App_Data/UploadedModelAnswers");
+
+                    if (!System.IO.Directory.Exists(path))
+                    {
+                        System.IO.Directory.CreateDirectory(path);
+                    }
+
                     string fileName = Path.GetFileNameWithoutExtension(codebase.ModelAnswersFile.FileName);
                     string extension = Path.GetExtension(codebase.ModelAnswersFile.FileName);
                     fileName = fileName + DateTime.Now.ToString("yy_mm_ss_fff") + extension;

@@ -41,8 +41,8 @@ namespace EducationalPlatform
                       "~/Scripts/js/jquery.counterup.min.js",
                       "~/Scripts/js/mail-script.js",
                       "~/Scripts/js/jquery.tagsinput.js",
-                      "~/Scripts/js/jquery.plugin.js",
-                      "~/Scripts/js/jquery.countdown.js"
+                      "~/ Scripts/js/jquery.countdown.js",
+                      "~/Scripts/js/jquery.plugin.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
@@ -50,15 +50,14 @@ namespace EducationalPlatform
                      "~/Content/main.css",
                      "~/Content/Site.css",
                      "~/css/linearicons.css",
-                     "~/css/font-awesome.min.css",
                      "~/css/magnific-popup.css",
                      "~/css/nice-select.css",
                      "~/css/animate.min.css",
                      "~/css/owl.carousel.css",
                      "~/css/jquery.tagsinput.css",
-                     "~/Content/assets/css/fontawsom-all.min.css",
-                     "~/css/jquery.countdown.css"
-                     ));
+                     "~/css/font-awesome.min.css"
+                     ).Include("~/Content/assets/css/fontawsom-all.min.css", new CssRewriteUrlTransform()).Include(
+                "~/css/jquery.countdown.css", new CssRewriteUrlTransform()));
         }
     }
 }

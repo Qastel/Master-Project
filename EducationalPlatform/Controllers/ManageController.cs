@@ -89,21 +89,22 @@ namespace EducationalPlatform.Controllers
             if (User.IsInRole("Learner") || User.IsInRole("Instructor")) {
                 var y = await UserManager.FindByIdAsync(User.Identity.GetUserId());
 
-                var codebasesIds =  y.LearnedCodebases.Split(',');
-               
-                List<Codebases> l = new List<Codebases>();
-               
-                foreach (string id in codebasesIds) {
-                    int number;
-                    if (Int32.TryParse(id, out number))
-                    {
+                if (y.LearnedCodebases != null) {
+                    var codebasesIds = y.LearnedCodebases.Split(',');
 
-                        var c = db.Codebases.Find(Convert.ToInt32(number));
-                        l.Add(c);
-                        
+                    List<Codebases> l = new List<Codebases>();
+
+                    foreach (string id in codebasesIds) {
+                        int number;
+                        if (Int32.TryParse(id, out number))
+                        {
+                            var c = db.Codebases.Find(Convert.ToInt32(number));
+                            l.Add(c);
+                        }
                     }
+                
+                    ViewBag.LearnedCodebases = l;
                 }
-                ViewBag.LearnedCodebases = l;
             }
 
                 return View(model);

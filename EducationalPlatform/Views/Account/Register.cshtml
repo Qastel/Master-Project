@@ -3,43 +3,6 @@
     ViewBag.Title = "Register";
 }
 
-
-<!--
-
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
-}
-
--->
-
-
 @section AddToHead {
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700" rel="stylesheet">
     <link rel="shortcut icon" href="~/Content/assets/images/fav.jpg">
@@ -73,6 +36,7 @@
                             </div>
                             <div class="login-row row no-margin">
                                 <i class="fas fa-unlock-alt"></i><label for="" class="form-label-psw"> Password </label>
+                                <p style="font-size:10px" class="ml-20">(at least one capital letter, one digit, and one non-digit)<p>
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-sm form-textbox-psw" })
                                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div>
@@ -84,6 +48,7 @@
                             <br /><br />
                             <p> Choose your profile: </p>
                             @Html.LabelFor(m => m.AccountType, "", new { @class = "col-md-2 control-label" })
+                            @Html.ValidationMessageFor(m => m.AccountType, "", new { @class = "text-danger" })
                             <div class="form-group form-check-inline">
                                 <label class="form-check-label">
                                     <input type="radio" class="form-check-input" value="Instructor" name="AccountType" onclick="showCompetenceTextBox()">Instructor
@@ -95,23 +60,22 @@
                                 </label>
                             </div>
                             <div class="competence">
-                                <a  data-toggle="tooltip" title="You need to have the right experience" style="cursor: help;">
-                                    <i class="fas fa-certificate"></i><label for="" class="form-label-qualification"> Qualification/Competence </label> 
+                                <a data-toggle="tooltip" title="You need to have the right experience" style="cursor: help;">
+                                    <i class="fas fa-certificate"></i><label for="" class="form-label-qualification"> Qualification/Competence </label>
                                     <span class="" style="font-size:12px; color:cornflowerblue;">(?)</span>
                                 </a>
                                 @Html.TextBoxFor(m => m.Qualification, new { @class = "form-textbox-qualification" })
                             </div>
                             <div class="login-row btnroo row no-margin">
-                                <button type="submit" value="Register" class="btn btn-primary btn-sm"> Register </button>
+                                <button type="submit" value="Register" class="btn btn-primary btn-sm center-element"> Register </button>
                                 <!-- <button class="btn btn-light  btn-sm">  @Html.ActionLink("Login", "Login")</button> -->
                             </div>
+
                             <div class="login-row donroo row no-margin">
                                 <p>You already have an account ?  @Html.ActionLink("Sign in", "Login")</p>
                             </div>
                         }
-
                         <p style="font-size:10px;">Designed by <a href="https://www.smarteyeapps.com/">www.smarteyeapps.com</a></p>
-
                     </div>
                 </div>
             </div>

@@ -127,19 +127,19 @@
                 </div>
             </div>
             <div class="center-element">
-            @Html.ActionLink("Save Codebase to My Profile", "Index", "Manage", null, new { @class = "genric-btn primary" })
+            @Html.ActionLink("Save Codebase to My Profile", "StartLearning", "Codebases", new { Id = Model.Id}, new { @class = "genric-btn primary" })
             </div>
         </div>
     </div>
 </section>
 
 
-<section class="about-area section-gap">
+<section class="about-area">
     <div class="container shrink codebase-step">
         <div class="row justify-content-center">
             <div class="">
                 <div class="text-center mb-30">
-                    <h1>Access the Codebase and Learning Instructions</h1>
+                    <h1>Learning Instructions</h1>
                     <hr>
                 </div>
                 <div>
@@ -148,7 +148,7 @@
                             <div id="defaultCountdown" class="d-inline-block"> </div>
                         </div>
                         <div class="text-right">
-                            <button id="shortlyStart" class="genric-btn primary align-bottom "> Start Timmer</button>
+                           <!-- <button id="shortlyStart" class="genric-btn primary align-bottom "> Start Timer</button> -->
                         </div>
                     </div>
 
@@ -157,7 +157,7 @@
 
                     <div class=" center-element mt-40 mb-40">
                         From here you can download the codebase:
-                        @Html.ActionLink("Download Codebase", "DownloadCodebase", new { fileName = Model.CodebasePath }, new { @class = "genric-btn success-border" })
+                        @Html.ActionLink("Download Codebase", "DownloadCodebase", new { fileName = Model.CodebasePath }, new { @class = "genric-btn primary ml-20" })
                     </div>
                         <br>
                     }
@@ -191,7 +191,7 @@
                     {
                         <div class="center-element mt-40 mb-40">
                             From here you can check your aswers after you finish the learning process:
-                            @Html.ActionLink("Download Model Answers", "DownloadModelAnswers", new { fileName = Model.ModelAnswersPath }, new { @class = "genric-btn success-border" })
+                            @Html.ActionLink("Download Model Answers", "DownloadModelAnswers", new { fileName = Model.ModelAnswersPath }, new { @class = "genric-btn primary ml-20" })
                         </div>
                     }
                 </div>
@@ -214,8 +214,8 @@
 </div>
 
 
-
-
+<script type="text/javascript" src="~/Scripts/js/jquery.plugin.js"></script>
+<script type="text/javascript" src="~/Scripts/js/jquery.countdown.js"></script>
 <script>
     @if (Model.GoogleFormsEmbedded != null && Model.GoogleFormsEmbedded.Split('"').Count() > 1) {
         <text>
@@ -227,6 +227,10 @@
 
 
     $('#shortlyStart').click(function () {
-        $('#defaultCountdown').countdown( { until: '+' + @Model.TimeLimit +'h', format:'HMS'});
+        $('#defaultCountdown').countdown({ until: '+' + @Model.TimeLimit + 'h' });
     }); 
+
+
+    $('#defaultCountdown').countdown({ until: '+' + @Model.TimeLimit + 'h' });
+
 </script>

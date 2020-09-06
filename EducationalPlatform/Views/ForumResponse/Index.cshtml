@@ -59,6 +59,14 @@
                     <div id="reply-div-@response.Id" class="ml-20" style="display:none;">
                         @Html.Action("New", "ForumResponse", new { TopicId = response.TopicId, FatherId = response.Id })
                     </div>
+                    <br>
+                    @if (response.UserId == ViewBag.CurrentUser)
+                    {
+                    <form method="post" style="display:inline" action="/ForumResponse/Delete/?id=@response.Id&TopicId=@response.TopicId" class="float-left">
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button class="genric-btn danger" role="button" type="submit">Delete</button>
+                    </form>
+                    }
                 </div>
                 }
             </div>

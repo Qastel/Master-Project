@@ -17,7 +17,7 @@ namespace EducationalPlatform.Controllers
         {
             var x = db.ForumResponses.Include("User").Include("Topic").Where(c => c.TopicId == TopicId);
             ViewBag.ForumResponses = x;
-
+            ViewBag.CurrentUser = User.Identity.GetUserId();
 
             ForumResponse y = new ForumResponse();
             y.UserId = User.Identity.GetUserId();
@@ -43,11 +43,13 @@ namespace EducationalPlatform.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Instructor, Learner")]
         public ActionResult New(ForumResponse x)
         {
             x.User = db.Users.FirstOrDefault(u => u.Id == x.UserId);
             x.Topic = db.ForumTopics.FirstOrDefault(c => c.Id == x.TopicId);
-            x.CreationDate = DateTime.Now.Date;
+            x.CreationDate = DateTime.Now;
+            x.UserId = User.Identity.GetUserId();
 
             if (x.FatherId != -1)
             {
@@ -63,6 +65,24 @@ namespace EducationalPlatform.Controllers
             catch (Exception e)
             {
                 return RedirectToAction("Index", "ForumResponse", new { x.TopicId });
+            }
+        }
+
+        [HttpDelete]
+        [Authorize(Roles = "Instructor, Learner")]
+        public ActionResult Delete(int id, int TopicId)
+        {
+            ForumResponse t = db.ForumResponses.Find(id);
+
+            if (t != null && (t.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator")))
+            {
+                db.ForumResponses.Remove(t);
+                db.SaveChanges();
+                return RedirectToAction("Index", "ForumResponse", new { TopicId });
+            }
+            else
+            {
+                return RedirectToAction("Index", "ForumResponse", new { TopicId });
             }
         }
 

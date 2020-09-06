@@ -13,7 +13,7 @@ namespace EducationalPlatform.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        [Required(ErrorMessage = "The name is required")]
+        [Required(ErrorMessage = "Your Full Name is required!")]
         public string FullName { get; internal set; }
 
         public string Qualification { get; internal set; }

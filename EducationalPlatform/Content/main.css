@@ -3256,3 +3256,46 @@ height: 600px; }
     margin: 0 auto;
     text-align: center;
 }
+
+@media screen and (max-width: 700px) {
+    .category-section {
+        flex-direction: column;
+    }
+
+    .search-box {
+        margin-top: 20px;
+    }
+
+    .dropdowns { /*center*/
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .category-filters { /*center*/
+        display: block !important;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .review{
+        flex-direction: column;
+    }
+
+    .review-button {
+        display: block !important;
+        float: none !important;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .topic, .response {
+        margin-left: 100px;
+    }
+
+    .topic-button, .response-button {
+        margin-right:120px;
+    }
+
+}
+

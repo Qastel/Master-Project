@@ -3,69 +3,11 @@
 @{
     ViewBag.Title = "Log in";
 }
-<!--
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
-
--->
-
 
 @section AddToHead {
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700" rel="stylesheet">
     <link rel="shortcut icon" href="~/Content/assets/images/fav.jpg">
     <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="~/Content/assets/css/fontawsom-all.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/assets/css/style.css" />
 }
 
@@ -93,14 +35,14 @@
                             </div>
 
                             <div class="login-row row no-margin">
-                                <i class="fas fa-unlock-alt"></i> <label for="" class="form-label-psw"> Password </label> 
+                                <i class="fas fa-unlock-alt"></i> <label for="" class="form-label-psw"> Password </label>
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-sm form-textbox-psw" })
                                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="login-row row forrr no-margin">
                                 <!-- <p> <input type="checkbox"> Remember Me</p> -->
-                                 <div class="checkbox">
+                                <div class="checkbox">
                                     @Html.CheckBoxFor(m => m.RememberMe)
                                     @Html.LabelFor(m => m.RememberMe)
                                 </div>
@@ -108,21 +50,19 @@
                             </div>
 
                             <div class="login-row btnroo row no-margin">
-                                <button type="submit" value="Log in" class="btn btn-primary btn-sm"> Log in</button>
+                                <button type="submit" value="Log in" class="btn btn-primary btn-sm center-element"> Log in</button>
                                 <!-- <button class="btn btn-light  btn-sm">  @Html.ActionLink("Create Account", "Register")</button> -->
                             </div>
                             <div class="login-row donroo row no-margin">
                                 <p>Dont have an Account ?  @Html.ActionLink("Sign Up", "Register")</p>
                             </div>
                         }
+                        <p style="font-size:10px;">Designed by <a href="https://www.smarteyeapps.com/">www.smarteyeapps.com</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="copyc">
-    <p>Designed by <a href="https://www.smarteyeapps.com/">www.smarteyeapps.com</a></p>
 </div>
 
 

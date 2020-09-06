@@ -38,7 +38,9 @@ namespace EducationalPlatform.Controllers
             return View(y);
         }
 
+
         [HttpPost]
+        [Authorize(Roles = "Instructor,Learner")]
         public ActionResult New(Review x)
         {
             x.User = db.Users.FirstOrDefault(u => u.Id == x.UserId);

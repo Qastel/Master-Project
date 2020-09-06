@@ -6,7 +6,7 @@
     Layout = null;
 }
 
-<section class="about-area section">
+<section class="about-area section-gap" >
     <div class="container shrink codebase-step">
         <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -22,9 +22,9 @@
 
         @Html.Partial("_Index")
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-8 overflow-hidden">
                 <form method="post" action="/Review/New" class="overflow-hidden">
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center review">
                         @Html.HiddenFor(m => m.UserId)
                         @Html.HiddenFor(m => m.CodebaseId)
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <br>
-                    <button class="genric-btn primary float-right" type="submit">Add review</button>
+                    <button class="genric-btn primary float-right review-button" type="submit">Add review</button>
                 </form>
             </div>
         </div>

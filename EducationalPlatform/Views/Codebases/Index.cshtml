@@ -47,28 +47,28 @@
                 </div>
             </div>
         </div>
-        <div class="codebase-category-wrapper">
-            <div class="d-flex justify-content-start">
+        <div class="codebase-category-wrapper category-section">
+            <div class="">
                 <form method="post" action="@Url.Action("Index", "Codebases", new { pagination = ViewBag.ActivePage })">
-                    <div class="codebase-category">
+                    <div class="codebase-category dropdowns">
                         <div class="default-select codebase-category" id="default-select">
-                            @Html.DropDownListFor(m => m.SelectedProgrammingLanguage, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Language))),"Select Language", new { @class = "" })
+                            @Html.DropDownListFor(m => m.SelectedProgrammingLanguage, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Language))), "Select Language", new { @class = "" })
                         </div>
                         <div class="default-select codebase-category" id="default-select">
-                            @Html.DropDownListFor(m => m.SelectedDifficulty, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Difficulty))),"Select Difficulty", new { @class = "" })
+                            @Html.DropDownListFor(m => m.SelectedDifficulty, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Difficulty))), "Select Difficulty", new { @class = "" })
                         </div>
                         <div class="default-select codebase-category" id="default-select">
-                            @Html.DropDownListFor(m => m.SelectedTechnology, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Technology))),"Select Technology", new { @class = "" })
+                            @Html.DropDownListFor(m => m.SelectedTechnology, new SelectList(Enum.GetValues(typeof(EducationalPlatform.Models.Technology))), "Select Technology", new { @class = "" })
                         </div>
                     </div>
-                    <button type="submit" class="genric-btn primary" style="margin-right:10px; vertical-align:top;">Apply Filter</button>
-                </form>
-                <form method="post" action="/Codebases/Index">
-                    <button type="submit" class="genric-btn warning">Clear All</button>
+                    <div class="category-filters overflow-hidden d-inline">
+                        <button type="submit" class="genric-btn primary" style=" vertical-align:top;">Apply Filter</button>
+                        <a type="submit" class="genric-btn warning" style="vertical-align:top;" href="/Codebases/Index">Clear All</a>
+                    </div>
                 </form>
             </div>
-            <div class="input-wrap codebase-category right" style="">
-                <form method="post" action="@Url.Action("Index", "Codebases")" class="form-box d-flex justify-content-between">
+            <div class="input-wrap codebase-category right overflow-hidden">
+                <form method="post" action="@Url.Action("Index", "Codebases")" class="form-box search-box d-flex justify-content-between">
                     <input type="text" placeholder="Search by codebase's or instructor's name" class="form-control codebase-search" name="search" size="35">
                     <button type="submit" class="genric-btn primary">Search</button>
                 </form>

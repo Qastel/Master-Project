@@ -80,11 +80,11 @@ namespace EducationalPlatform.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Your Full Name is required!")]
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Your Profile Type is required!")]
         [Display(Name = "Account Type")]
         public string AccountType { get; set; }
 

@@ -384,6 +384,7 @@
     <Content Include="Content\assets\webfonts\themify.ttf" />
     <Content Include="Content\assets\webfonts\themify.woff" />
     <Content Include="css\jquery.tagsinput.css" />
+    <None Include="Properties\PublishProfiles\EducationalPlatform - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

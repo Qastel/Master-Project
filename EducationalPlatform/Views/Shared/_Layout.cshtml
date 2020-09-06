@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - EducationalPlatform</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -13,6 +13,7 @@
     <link href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" rel="stylesheet" type="text/css" /> <!-- for account design -->
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/start/jquery-ui.css" /> <!-- for account design -->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> <!-- for time counter-->
+    <link rel="stylesheet" type="text/css" href="~/css/jquery.countdown.css">
     @RenderSection("AddToHead", required: false)
 </head>
 
@@ -38,15 +39,6 @@
                                 </ul>
                             }
                         </li>
-
-                        <!--
-                        <li class="menu-has-children">
-                            <a href="">Pages</a>
-                            <ul>
-                                <li><a href="elements.html">Elements</a></li>
-                            </ul>
-                        </li>
-                        -->
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </nav>
