@@ -13,7 +13,7 @@ namespace EducationalPlatform.Controllers
 {
     public class CodebasesController : Controller
     {
-        private ApplicationDbContext db = ApplicationDbContext.Create();
+        private ApplicationDbContext db = ApplicationDbContext.Create(); // Create database
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -29,6 +29,8 @@ namespace EducationalPlatform.Controllers
                 _signInManager = value;
             }
         }
+
+        // useful for modifying user details
         public ApplicationUserManager UserManager
         {
             get
@@ -41,16 +43,16 @@ namespace EducationalPlatform.Controllers
             }
         }
 
-        // GET: Codebases
+        // GET: All Codebases
         public ActionResult Index(Codebases codebase, int pagination = 1, string search = null)
         {
             ViewBag.Page = "Codebases";
 
-            var allCodebases = db.Codebases;
+            var allCodebases = db.Codebases; // get all codebases
 
-            ViewBag.ActivePage = pagination;
+            ViewBag.ActivePage = pagination; // chech the active page
 
-            // figure out how many pages do we need
+            // figure out how many pages do we need for the number of codebases (we accept maximum 6 codebases per page)
             if (allCodebases.Count() % 6 == 0) // check if the number of codebases is a multiple of 6
             {
                 ViewBag.CodebasesPages = allCodebases.Count() / 6; //  we have a complete number of pages 
@@ -118,10 +120,10 @@ namespace EducationalPlatform.Controllers
             return View();
         }
 
-
+        // Show the details of the selected codebase
         public ActionResult Show(int Id)
         {
-            ViewBag.Page = "Codebases";
+            ViewBag.Page = "Codebases";  // for the navbar, to know which one will be highlighted
             var x = db.Codebases.Find(Id);
 
             // update the rating
@@ -138,7 +140,6 @@ namespace EducationalPlatform.Controllers
             }
             x.MeanRating = rating;
 
-
             ViewBag.DescriptionError = TempData["ErrorMessage"] as string;
 
             // check if learning of the current codebase has started
@@ -154,23 +155,22 @@ namespace EducationalPlatform.Controllers
                 }
             }
             */
-
             return View(x);
         }
 
-
+        // save the Codebase to the LearnedCodebases variable
         public async Task<ActionResult> StartLearning(int Id)
         {
             var x = db.Codebases.Find(Id);
             var user = UserManager.FindById(User.Identity.GetUserId());
 
-            if (user != null)
+            if (user != null) // check if the user is logged in
             {
                 // Update the learned Codebases, it will appear in My Profile section
-                if (user.LearnedCodebases != null)
+                if (user.LearnedCodebases != null) // if is not the first learned codebase
                 {
                     var l = user.LearnedCodebases.Split(',');
-                    if (!l.Contains(Convert.ToString(Id)))
+                    if (!l.Contains(Convert.ToString(Id))) // check if the codebase was already added to the variable
                     {
                         user.LearnedCodebases = user.LearnedCodebases + x.Id + ",";
                         var updateResult = await UserManager.UpdateAsync(user);
@@ -185,7 +185,6 @@ namespace EducationalPlatform.Controllers
                 {
                     user.LearnedCodebases = x.Id + ",";
                     var updateResult = await UserManager.UpdateAsync(user);
-
                     if (updateResult.Succeeded)
                     {
                         return RedirectToAction("Index", "Manage");
@@ -196,14 +195,14 @@ namespace EducationalPlatform.Controllers
             return RedirectToAction("Show", "Codebases", new { Id = Id });
         }
 
-
+        // show the edit codebase details
         public ActionResult Edit(int Id)
         {
             Codebases c = db.Codebases.Find(Id);
             return View(c);
         }
 
-
+        // edit the codebase details
         [HttpPut]
         [Authorize(Roles = "Instructor")]
         public ActionResult Edit(int Id, Codebases updatedCodebase)
@@ -218,24 +217,24 @@ namespace EducationalPlatform.Controllers
                     {
                         if (TryUpdateModel(codebase))
                         {
-                            if (updatedCodebase.CodebaseFile != null)
+                            if (updatedCodebase.CodebaseFile != null) // edit the codebase upload
                             {
                                 var path = Server.MapPath("~/App_Data/UploadedCodebases");
 
-                                if (!System.IO.Directory.Exists(path))
+                                if (!System.IO.Directory.Exists(path)) // check if the directory exists
                                 {
-                                    System.IO.Directory.CreateDirectory(path);
+                                    System.IO.Directory.CreateDirectory(path); // create directory
                                 }
 
-                                string fileName = Path.GetFileNameWithoutExtension(updatedCodebase.CodebaseFile.FileName);
+                                string fileName = Path.GetFileNameWithoutExtension(updatedCodebase.CodebaseFile.FileName); // get the file
                                 string extension = Path.GetExtension(updatedCodebase.CodebaseFile.FileName);
-                                fileName = fileName + DateTime.Now.ToString("yy_mm_ss_fff") + extension;
-                                codebase.CodebasePath = fileName;
+                                fileName = fileName + DateTime.Now.ToString("yy_mm_ss_fff") + extension; // set unique name
+                                codebase.CodebasePath = fileName; // set the path
                                 fileName = Path.Combine(Server.MapPath("~/App_Data/UploadedCodebases/"), fileName);
-                                codebase.CodebaseFile.SaveAs(fileName);
+                                codebase.CodebaseFile.SaveAs(fileName); // save the file into the path mentioned
                             }
 
-                            if (updatedCodebase.ModelAnswersFile != null)
+                            if (updatedCodebase.ModelAnswersFile != null) // edit the uploaded model answers
                             {
                                 var path = Server.MapPath("~/App_Data/UploadedModelAnswers");
 
@@ -251,7 +250,7 @@ namespace EducationalPlatform.Controllers
                                 fileName = Path.Combine(Server.MapPath("~/App_Data/UploadedModelAnswers/"), fileName);
                                 codebase.ModelAnswersFile.SaveAs(fileName);
                             }
-
+                            // update each changed variable 
                             codebase.Members = updatedCodebase.Members;
                             codebase.Role = updatedCodebase.Role;
                             codebase.SelectedDifficulty = updatedCodebase.SelectedDifficulty;
@@ -268,13 +267,13 @@ namespace EducationalPlatform.Controllers
                             codebase.Environment = updatedCodebase.Environment;
 
                             db.SaveChanges();
-                            TempData["message"] = "Locatia a fost modificata!";
+                            TempData["message"] = "The Codebase was modified";
                         }
                         return RedirectToAction("Index", "Manage");
                     }
                     else
                     {
-                        TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui articol care nu va apartine!";
+                        TempData["message"] = "You do not have the permission to modify it!";
                         return View();
                     }
                 }
@@ -289,33 +288,33 @@ namespace EducationalPlatform.Controllers
             }
         }
 
-
+        // show the instructor training page
         public ActionResult Instructions()
         {
             ViewBag.Page = "Instructions";
             return View("Instructions");
         }
 
-
+        // show new codebase details
         [Authorize(Roles = "Instructor")]
         public ActionResult New()
         {
-            ViewBag.Page = "NewCodebase";
+            ViewBag.Page = "NewCodebase";  // save the name of the page for navbar highlighting
             Codebases codebase = new Codebases();
             codebase.UserId = User.Identity.GetUserId();
             return View(codebase);
         }
 
-
+        // save new codebase 
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult New(Codebases codebase, FormCollection form)
         {
-            codebase.User = db.Users.FirstOrDefault(x => x.Id == codebase.UserId);
+            codebase.User = db.Users.FirstOrDefault(x => x.Id == codebase.UserId); // save the User of the codebase
 
             try
             {
-                if (codebase.CodebaseFile != null)
+                if (codebase.CodebaseFile != null) // upload the codebase file
                 {
                     var path = Server.MapPath("~/App_Data/UploadedCodebases");
 
@@ -331,7 +330,7 @@ namespace EducationalPlatform.Controllers
                     fileName = Path.Combine(Server.MapPath("~/App_Data/UploadedCodebases/"), fileName);
                     codebase.CodebaseFile.SaveAs(fileName);
                 }
-                if (codebase.ModelAnswersFile != null) {
+                if (codebase.ModelAnswersFile != null) { // upload the model answer
                     var path = Server.MapPath("~/App_Data/UploadedModelAnswers");
 
                     if (!System.IO.Directory.Exists(path))
@@ -358,6 +357,7 @@ namespace EducationalPlatform.Controllers
             }
         }
 
+        // download the codebase on click 
         public FileResult DownloadCodebase(string fileName)
         {
             string fullPath = Path.Combine(Server.MapPath("~/App_Data/UploadedCodebases"), fileName);
@@ -365,7 +365,7 @@ namespace EducationalPlatform.Controllers
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
 
-
+        // download the model answers on click
         public FileResult DownloadModelAnswers(string fileName)
         {
             string fullPath = Path.Combine(Server.MapPath("~/App_Data/UploadedModelAnswers"), fileName);
@@ -373,6 +373,7 @@ namespace EducationalPlatform.Controllers
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
         }
 
+        // delete the your uploaded codebases
         [HttpDelete]
         [Authorize(Roles = "Instructor")]
         public ActionResult Delete(int id)
@@ -383,12 +384,12 @@ namespace EducationalPlatform.Controllers
             {
                 db.Codebases.Remove(c);
                 db.SaveChanges();
-                TempData["message"] = "Locatia a fost stearsa!";
+                TempData["message"] = "The codebase has been deleted";
                 return RedirectToAction("Index", "Manage");
             }
             else
             {
-                TempData["message"] = "Nu aveti dreptul sa stergeti o locatie care nu va apartine!";
+                TempData["message"] = "You do not have the right to delete the codebase!";
                 return RedirectToAction("Index", "Manage");
             }
         }

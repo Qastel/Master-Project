@@ -1,10 +1,7 @@
 ﻿@model EducationalPlatform.Models.Codebases
 
 @{
-    /**/
-
     ViewBag.Title = "Show";
-
 }
 
 
@@ -14,7 +11,7 @@
         <div class="row d-flex align-items-center justify-content-center">
             <div class="about-content col-lg-12">
                 <h1 class="text-white">
-                    Alien Invasion
+                    @Model.CodebaseName
                 </h1>
                 <p>
                     @Model.Description
@@ -23,7 +20,7 @@
                     <span class="box">
                         <a href="@Url.Action("Index", "Codebases")"> Codebases </a>
                         <i class="lnr lnr-arrow-right"></i>
-                        <a href="@Url.Action("Show", "Codebases", new { Id = Model.Id })"> Alien Invasion</a>
+                        <a href="@Url.Action("Show", "Codebases", new { Id = Model.Id })"> @Model.CodebaseName</a>
                     </span>
                 </div>
             </div>
@@ -34,7 +31,7 @@
     </div>
 </section>
 <!-- End Banner Area -->
-
+<!-- Start Codebase Details Area -->
 <section class="about-area section-gap">
     <div class="container shrink codebase-step">
         <div class="row justify-content-center">
@@ -45,12 +42,8 @@
                 </div>
             </div>
         </div>
-
-        <!--Start Feature Area -->
-
         <div class="text-center mb-50"><h4 class="d-inline"> Description: </h4> @Model.Description</div>
         <div class="text-center mb-50"><h4 class="d-inline"> Learner's Role: </h4> @Model.Role</div>
-
         <div class="feature-inner row">
             <div class="col-lg-6 col-md-6">
                 <div class="feature-item">
@@ -94,50 +87,52 @@
                     </svg>
                     <h4 class="text-center">Tags</h4>
                     <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".5s">
-                        <p class="text-center">
-                            @if (Model.Tags != null)
+                        @if (Model.Tags != null)
+                        {
+                            foreach (string tag in Model.Tags.Split(','))
                             {
-                                foreach (string tag in Model.Tags.Split(','))
-                                {
-                                    <span class="codebase-topics">@tag</span>
-                                }
+                                <span class="codebase-topics">@tag</span>
                             }
-                            else {
-                                  <p class="text-center">  no tags added!</p>
-                            }
+                        }
+                        else
+                        {
+                            <p class="text-center">  no tags added!</p>
+                        }
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
-                <div class="feature-item">
-                    <svg width="3em" height="3em" style="display:block; margin:auto;" viewBox="0 0 16 16" class="bi bi-star" fill="#DAA520" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
-                    </svg>
-                    <h4 class="text-center">Rating</h4>
-                    <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
-                        @if (Model.MeanRating != 0)
-                        {
-                            <p class="text-center" style="color:#DAA520">  @Model.MeanRating / 5</p>
-                        }
-                        else
-                        {
-                            <p class="text-center">  no ratings yet!</p>
-                        }
+                <a href="#rating">
+                    <div class="feature-item">
+                        <svg width="3em" height="3em" style="display:block; margin:auto;" viewBox="0 0 16 16" class="bi bi-star" fill="#DAA520" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.523-3.356c.329-.314.158-.888-.283-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767l-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288l1.847-3.658 1.846 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.564.564 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z" />
+                        </svg>
+                        <h4 class="text-center">Rating</h4>
+                        <div class="wow fadeIn" data-wow-duration="1s" data-wow-delay=".1s">
+                            @if (Model.MeanRating != 0)
+                            {
+                                <p class="text-center" style="color:#DAA520">  @Model.MeanRating / 5</p>
+                            }
+                            else
+                            {
+                                <p class="text-center">  no ratings yet!</p>
+                            }
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="center-element">
-            @Html.ActionLink("Save Codebase to My Profile", "StartLearning", "Codebases", new { Id = Model.Id}, new { @class = "genric-btn primary" })
+                @Html.ActionLink("Save Codebase to My Profile", "StartLearning", "Codebases", new { Id = Model.Id }, new { @class = "genric-btn primary" })
             </div>
         </div>
     </div>
 </section>
-
-
+<!-- End Codebase Details Area -->
+<!-- Start Learning Instructions Area -->
 <section class="about-area">
     <div class="container shrink codebase-step">
         <div class="row justify-content-center">
-            <div class="">
+            <div class="overflow-hidden">
                 <div class="text-center mb-30">
                     <h1>Learning Instructions</h1>
                     <hr>
@@ -148,17 +143,17 @@
                             <div id="defaultCountdown" class="d-inline-block"> </div>
                         </div>
                         <div class="text-right">
-                           <!-- <button id="shortlyStart" class="genric-btn primary align-bottom "> Start Timer</button> -->
+                            <!-- <button id="shortlyStart" class="genric-btn primary align-bottom "> Start Timer</button> -->
                         </div>
                     </div>
 
                     @if (Model.CodebasePath != null)
                     {
 
-                    <div class=" center-element mt-40 mb-40">
-                        From here you can download the codebase:
-                        @Html.ActionLink("Download Codebase", "DownloadCodebase", new { fileName = Model.CodebasePath }, new { @class = "genric-btn primary ml-20" })
-                    </div>
+                        <div class=" center-element mt-40 mb-40">
+                            From here you can download the codebase:
+                            @Html.ActionLink("Download Codebase", "DownloadCodebase", new { fileName = Model.CodebasePath }, new { @class = "genric-btn primary ml-20" })
+                        </div>
                         <br>
                     }
                     @if (Model.CodebaseLink != null)
@@ -199,10 +194,31 @@
         </div>
     </div>
 </section>
-
-
-@Html.Action("New", "Review", new { CodebaseId = Model.Id })
-
+<!-- End Learning Instructions Area -->
+<!-- Start Review Area -->
+<div id="rating">
+    @Html.Action("New", "Review", new { CodebaseId = Model.Id })
+</div>
+<!-- End Review Area -->
+<!-- Start Forum Area -->
+<section class="about-area">
+    <div class="container shrink codebase-step">
+        <div class="row justify-content-center">
+            <div class="">
+                <div class="text-center ">
+                    <h1>You need help?</h1>
+                    <hr>
+                    <a href=@Url.Action("Index", "ForumTopic", new { CodebaseId = Model.Id })>
+                        <img class="img-fluid" src="~/Content/Images/forum2.jpg" alt="" width="600">
+                    </a> <br>
+                    @Html.ActionLink(" Access Forum", "Index", "ForumTopic", new { CodebaseId = Model.Id }, new { @class = "genric-btn primary" })
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Forum Area -->
+<!-- Start Sticky Forum Element -->
 <div style="position: fixed; bottom: 20px; right: 20px; border: 2px solid #38a4ff; padding:5px;  border-radius: 20px;">
     <a href="@Url.Action("Index", "ForumTopic", new { CodebaseId = Model.Id })">
         <svg width="2em" height="1.5em" viewBox="0 0 16 16" class="bi bi-chat-right-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -212,10 +228,15 @@
         Forum
     </a>
 </div>
+<!-- End Sticky Forum Element -->
 
+@section scripts{
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> <!-- for time counter-->
+    <link rel="stylesheet" type="text/css" href="~/css/jquery.countdown.css">
+    <script type="text/javascript" src="~/Scripts/js/jquery.plugin.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/jquery.countdown.js"></script>
+}
 
-<script type="text/javascript" src="~/Scripts/js/jquery.plugin.js"></script>
-<script type="text/javascript" src="~/Scripts/js/jquery.countdown.js"></script>
 <script>
     @if (Model.GoogleFormsEmbedded != null && Model.GoogleFormsEmbedded.Split('"').Count() > 1) {
         <text>
@@ -228,7 +249,7 @@
 
     $('#shortlyStart').click(function () {
         $('#defaultCountdown').countdown({ until: '+' + @Model.TimeLimit + 'h' });
-    }); 
+    });
 
 
     $('#defaultCountdown').countdown({ until: '+' + @Model.TimeLimit + 'h' });

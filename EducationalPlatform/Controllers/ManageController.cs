@@ -99,7 +99,10 @@ namespace EducationalPlatform.Controllers
                         if (Int32.TryParse(id, out number))
                         {
                             var c = db.Codebases.Find(Convert.ToInt32(number));
-                            l.Add(c);
+                            if (c != null)
+                            {
+                                l.Add(c);
+                            }
                         }
                     }
                 
@@ -411,8 +414,6 @@ namespace EducationalPlatform.Controllers
 
             base.Dispose(disposing);
         }
-
-       
 
         #region Helpers
         // Used for XSRF protection when adding external logins

@@ -77,6 +77,8 @@ namespace EducationalPlatform.Controllers
                 return View(model);
             }
 
+            ViewBag.Page = "Login"; // for highlighting the navabar
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -154,6 +156,7 @@ namespace EducationalPlatform.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            
             using (var context = new ApplicationDbContext())
             {
                 if (ModelState.IsValid)
@@ -184,6 +187,7 @@ namespace EducationalPlatform.Controllers
                     AddErrors(result);
                 }
 
+                ViewBag.Page = "Register"; // for highlighting the navabar
 
                 // If we got this far, something failed, redisplay form
                 return View(model);

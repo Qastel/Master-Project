@@ -4,17 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>@ViewBag.Title - EducationalPlatform</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
 
+    @Styles.Render("~/Content/css")  <!-- Include all the css form Bundle.config  -->
+    @Scripts.Render("~/bundles/modernizr")
     <link rel="shortcut icon" href="@Url.Content("~/Content/Images/fav.png")">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,500,600" rel="stylesheet"> <!-- for account design -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500i" rel="stylesheet"> <!-- for account design -->
     <link href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" rel="stylesheet" type="text/css" /> <!-- for account design -->
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/start/jquery-ui.css" /> <!-- for account design -->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> <!-- for time counter-->
-    <link rel="stylesheet" type="text/css" href="~/css/jquery.countdown.css">
-    @RenderSection("AddToHead", required: false)
+    
+    @RenderSection("AddToHead", required: false)   <!-- Add section useful in case more css are needed for a particular page -->
+    @RenderSection("scripts", required: false)  <!-- Add section useful in case more scripts are needed for a particular page -->
 </head>
 
 <body>
@@ -34,12 +34,13 @@
                             @if (User.IsInRole("Instructor"))
                             {
                                 <ul>
-                                    <li class="instructions">@Html.ActionLink("Instructional Design", "Instructions", "Codebases")</li>
+                                    <li class="instructions">@Html.ActionLink("Instructor Training", "Instructions", "Codebases")</li>
                                     <li class="newcodebase">@Html.ActionLink("Add New Codebase", "New", "Codebases")</li>
                                 </ul>
                             }
                         </li>
                     </ul>
+                    <!-- call the account nav section -->
                     @Html.Partial("_LoginPartial")
                 </nav>
             </div>
@@ -50,62 +51,67 @@
     <div class="container body-content">
         @RenderBody()
 
-        <!-- Start Footer Area -->
-        <footer class="footer-area section-gap">
-            <div class="container shrink">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 single-footer-widget">
-                        <h4>Codebase Exploration</h4>
-                        <ul>
-                            <li>Resolve exercises</li>
-                            <li>View Feedback</li>
-                            <li>Timed Tasks</li>
-                        </ul>
+        @if (ViewBag.Page != "Login" && ViewBag.Page != "Register")
+        {
+            <!-- Start Footer Area -->
+            <footer class="footer-area section-gap">
+                <div class="container shrink">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 single-footer-widget">
+                            <h4>Codebase Exploration</h4>
+                            <ul>
+                                <li>Resolve exercises</li>
+                                <li>View Feedback</li>
+                                <li>Timed Tasks</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-6 single-footer-widget">
+                            <h4>Review Codebases</h4>
+                            <ul>
+                                <li>Add Commenets</li>
+                                <li>Add Rating</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-6 single-footer-widget">
+                            <h4>Access Forum</h4>
+                            <ul>
+                                <li>Add Topics</li>
+                                <li>Add Responses</li>
+                                <li>Reply to another learner</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3 col-md-6 single-footer-widget">
+                            <h4>Manage Profiles</h4>
+                            <ul>
+                                <li>Be a Learner</li>
+                                <li>Be an Instructor</li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 single-footer-widget">
-                        <h4>Review Codebases</h4>
-                        <ul>
-                            <li>Add Commenets</li>
-                            <li>Add Rating</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-6 single-footer-widget">
-                        <h4>Access Forum</h4>
-                        <ul>
-                            <li>Add Topics</li>
-                            <li>Add Responses</li>
-                            <li>Reply to another learner</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-3 col-md-6 single-footer-widget">
-                        <h4>Manage Profiles</h4>
-                        <ul>
-                            <li>Be a Learner</li>
-                            <li>Be an Instructor</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="footer-bottom row align-items-center">
-                    <p class="footer-text m-0 col-lg-8 col-md-12">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
+                    <div class="footer-bottom row align-items-center">
+                        <p class="footer-text m-0 col-lg-8 col-md-12">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
 
+                    </div>
                 </div>
-            </div>
-        </footer>
-        <!-- End Footer Area -->
+            </footer>
+            <!-- End Footer Area -->
+        }
     </div>
 
+    <!-- Add all the scripts from Bundle.config -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+   
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
     <script>
+        // activate the right page on the nav menu
         @if (ViewBag.Page == "Home") {
             <text>
             $(".home").addClass("menu-active");

@@ -17,9 +17,9 @@
                 </p>
                 <div class="link-nav">
                     <span class="box">
-                        <a href="@Url.Action("Index", "Codebases")"> Codebases </a>
+                        <a href="@Url.Action("Show", "Codebases", new { Id = Model.CodebaseId} )"> @Model.Codebase.CodebaseName </a>
                         <i class="lnr lnr-arrow-right"></i>
-                        <a href="@Url.Action("Show", "Codebases", new { Id = Model.Id} )"> Alien Invasion</a>
+                        <a href="@Url.Action("Index", "ForumTopic", new { CodebaseId = Model.CodebaseId})"> Forum Topic </a>
                     </span>
                 </div>
             </div>
@@ -30,7 +30,7 @@
     </div>
 </section>
 <!-- End Banner Area -->
-
+<!-- Start ForumTopic Area-->
 <section class="feature-area section">
     <div class="container shrink codebase-step overflow-hidden">
         <div class="row justify-content-center">
@@ -39,32 +39,47 @@
                     <h1>Topics for "@Model.Codebase.CodebaseName"</h1>
                     <hr>
                 </div>
-
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-11">
-                @foreach (EducationalPlatform.Models.ForumTopic topic in ViewBag.ForumTopics)
-                {
-                    <div style="background-color:#F0F8FF;" class="overflow-hidden">
-                         <a href="@Url.Action("Index", "ForumResponse", new { TopicId = topic.Id })" style="text-decoration: none; color:inherit;">
-                            <div class="d-flex justify-content-between pb-20 pt-20 mb-10 pl-5 pr-5" >
-                                <h6> @topic.Description </h6><p>  </p> by @topic.User.FullName, @topic.CreationDate
-                            </div>
-                        </a>
-
-                        @if (topic.UserId == ViewBag.CurrentUser)
-                        {
-                            <form method="post"  action="/ForumTopic/Delete/?id=@topic.Id&CodebaseId=@Model.CodebaseId" class="float-left">
-                                @Html.HttpMethodOverride(HttpVerbs.Delete)
-                                <button class="genric-btn danger ml-20 mb-10" role="button" type="submit">Delete</button>
-                            </form>
-                        }
+            @foreach (EducationalPlatform.Models.ForumTopic topic in ViewBag.ForumTopics)
+            {
+            <div style="background-color:#F0F8FF;" class="overflow-hidden topic-link">
+                <a href="@Url.Action("Index", "ForumResponse", new { TopicId = topic.Id })" style="text-decoration: none; color:inherit;">
+                    <div class="d-flex justify-content-between pb-20 pt-20 mb-10 pl-5 pr-5">
+                        <h6> @topic.Description </h6><p>   by @topic.User.FullName, @topic.CreationDate</p>
                     </div>
-                    <br>
+                </a>
+                @if (ViewBag.ResponsesNumber != null)
+                {
+                    var noResponses = false;
+                    foreach (var item in ViewBag.ResponsesNumber)
+                    {
+                        if (item.Key == topic.Id)
+                        {
+                            noResponses = true;
+                            <div class="float-right pr-5"> Responses so far: @item.Value </div>
+                        }
+                    }
+                    if (noResponses == false)
+                    {
+                        <div class="float-right pr-5"> Responses so far: 0 </div>
+                    }
                 }
+                @if (topic.UserId == ViewBag.CurrentUser)
+                {
+                    <form method="post" action="/ForumTopic/Delete/?id=@topic.Id&CodebaseId=@Model.CodebaseId" class="float-left">
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button class="genric-btn danger ml-20 mb-10" role="button" type="submit">Delete</button>
+                    </form>
+                }
+            </div>
+            <br>
+            }
             </div>
         </div>
         @Html.Partial("_New", Model)
     </div>
 </section>
+<!-- End ForumTopic Area-->

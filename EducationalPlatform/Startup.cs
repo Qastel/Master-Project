@@ -30,12 +30,16 @@ namespace EducationalPlatform
                 roleManager.Create(role);
 
                 // se adauga utilizatorul administrator
-                var user = new ApplicationUser();
-                user.UserName = "admin@admin.com";
-                user.Email = "admin@admin.com";
-                user.EmailConfirmed = true;
 
-                string password = "Admin1."; // MODIFICAT
+                var user = new ApplicationUser
+                {
+                    UserName = "admin@admin.com",
+                    Email = "admin@admin.com",
+                    
+                    FullName = "Admin",
+                };
+                   
+                string password = "Admin1."; 
 
                 var adminCreated = UserManager.Create(user, password);
                 if (adminCreated.Succeeded)

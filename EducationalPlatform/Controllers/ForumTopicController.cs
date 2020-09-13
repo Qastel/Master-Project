@@ -2,9 +2,11 @@
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace EducationalPlatform.Controllers
 {
@@ -16,8 +18,19 @@ namespace EducationalPlatform.Controllers
         public ActionResult Index(int CodebaseId)
         {
             var x = db.ForumTopics.Include("User").Include("Codebase").Where(c => c.CodebaseId == CodebaseId);
+            var responses = db.ForumResponses.Include("User").Include("Topic").GroupBy(id => id.TopicId).Select(g => new {TopicId = g.Key, Count = g.Count()}).ToList();
+            Dictionary<int, int> d = new Dictionary<int, int>();
+            if (responses != null)
+            {
+                foreach (var r in responses)
+                {
+                    d.Add(r.TopicId, r.Count);
+                }
+            }
+
             ViewBag.ForumTopics = x;
             ViewBag.CurrentUser = User.Identity.GetUserId();
+            ViewBag.ResponsesNumber = d;
 
             ForumTopic y = new ForumTopic();
             y.UserId = User.Identity.GetUserId();
@@ -26,15 +39,6 @@ namespace EducationalPlatform.Controllers
             return View(y);
         }
 
-        /*
-        public ActionResult New(int CodebaseId)
-        {
-            var x = db.ForumTopics.Include("User").Include("Codebase").Where(c => c.CodebaseId == CodebaseId);
-            ViewBag.ForumTopics = x;
-
-            return RedirectToAction("Index", "ForumTopic", new { x.Co});
-        } 
-        */
 
         [HttpPost]
         [Authorize(Roles = "Instructor,Learner")]

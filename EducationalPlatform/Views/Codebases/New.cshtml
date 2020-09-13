@@ -5,11 +5,6 @@
     ViewBag.Title = "New";
 }
 
-@section AddToHead {
-    
-}
-
-
 <!-- Start Banner Area -->
 <section class="banner-area relative">
     <div class="container">
@@ -19,11 +14,11 @@
                     New Codebase
                 </h1>
                 <p>
-                    Improve learners skills starting from pre-build projects.
+                    Improve learners skills starting from prebuilt projects.
                 </p>
                 <div class="link-nav">
                     <span class="box">
-                        <a href="@Url.Action("Index", "Home")"> Home </a>
+                        <a href="@Url.Action("Index", "Codebases")"> Codebases </a>
                         <i class="lnr lnr-arrow-right"></i>
                         <a href="@Url.Action("New", "Codebase")">New Codebase</a>
                     </span>
@@ -36,7 +31,7 @@
     </div>
 </section>
 <!-- End Banner Area -->
-
+<!-- Start About Area -->
 <section class="mt-100 feature-area">
     <div class="container">
         <div class="row justify-content-center">
@@ -44,16 +39,17 @@
                 <div class="section-title text-center">
                     <h3>
                         <i class="fas fa-info-circle mr-10"></i>
-                        Add the codebase information in order to be saved and categorised among the others. 
+                        Add the codebase information in order to be saved and categorised among the others.
                     </h3>
-                    <h6 class="mt-20">  (You need to have the Task Sheet already created in Google Forms. For more information access: @Html.ActionLink("Instructional Design", "Instructions", "Codebases") page )</h6>
+                    <h6 class="mt-20">  (You need to have the Task Sheet already created in Google Forms. For more information access: @Html.ActionLink("Instructor Training", "Instructions", "Codebases") page )</h6>
                     <br>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
+<!-- End About Area -->
+<!-- Start Add New Codebase Area -->
 <section class="mb-100">
     <div class="container">
         <div class="row justify-content-center">
@@ -184,68 +180,25 @@
                     <div class="mt-50 mb-70">
                         <h5 class="mb-10"> Model Answers</h5> <p>(or you can use google form)</p>
                         <div class="mt-10">
-                             <input type="file" class="btn-default" name="ModelAnswersFile">
+                            <input type="file" class="btn-default" name="ModelAnswersFile">
                         </div>
                     </div>
-
                     <button class="genric-btn primary float-right" type="submit">Add Codebase</button>
                 </form>
             </div>
         </div>
     </div>
 </section>
+<!-- End Add New Codebase Area -->
 
 
-
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<!-- To test using the original jQuery.autocomplete, uncomment the following -->
-<!--
-<script type='text/javascript' src='http://xoxco.com/x/tagsinput/jquery-autocomplete/jquery.autocomplete.min.js'></script>
-<link rel="stylesheet" type="text/css" href="http://xoxco.com/x/tagsinput/jquery-autocomplete/jquery.autocomplete.css" />
--->
-<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js'></script>
-
-<script type="text/javascript">
-
-    function onAddTag(tag) {
-        alert("Added a tag: " + tag);
-    }
-    function onRemoveTag(tag) {
-        alert("Removed a tag: " + tag);
-    }
-
-    function onChangeTag(input, tag) {
-        alert("Changed a tag: " + tag);
-    }
-
-    $(function () {
-
-        $('#tags_1').tagsInput({ width: 'auto' });
-        $('#tags_2').tagsInput({
-            width: 'auto',
-            onChange: function (elem, elem_tags) {
-                var languages = ['php', 'ruby', 'javascript'];
-                $('.tag', elem_tags).each(function () {
-                    if ($(this).text().search(new RegExp('\\b(' + languages.join('|') + ')\\b')) >= 0)
-                        $(this).css('background-color', 'yellow');
-                });
-            }
-        });
-        $('#tags_3').tagsInput({
-            width: 'auto',
-
-            //autocomplete_url:'test/fake_plaintext_endpoint.html' //jquery.autocomplete (not jquery ui)
-            autocomplete_url: 'test/fake_json_endpoint.html' // jquery ui autocomplete requires a json endpoint
-        });
-
-
-        // Uncomment this line to see the callback functions in action
-        //			$('input.tags').tagsInput({onAddTag:onAddTag,onRemoveTag:onRemoveTag,onChange: onChangeTag});
-
-        // Uncomment this line to see an input with no interface for adding new tags.
-        //			$('input.tags').tagsInput({interactive:false});
-    });
-
-</script>
-
-
+@section scripts{
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- To test using the original jQuery.autocomplete, uncomment the following -->
+    <!--
+    <script type='text/javascript' src='http://xoxco.com/x/tagsinput/jquery-autocomplete/jquery.autocomplete.min.js'></script>
+    <link rel="stylesheet" type="text/css" href="http://xoxco.com/x/tagsinput/jquery-autocomplete/jquery.autocomplete.css" />
+    -->
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js'></script>
+    <script type='text/javascript' src="~/Scripts/js/manipulate-tags.js"></script>
+}

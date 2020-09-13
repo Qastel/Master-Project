@@ -40,24 +40,20 @@ namespace EducationalPlatform
                       "~/Scripts/js/wow.min.js",
                       "~/Scripts/js/jquery.counterup.min.js",
                       "~/Scripts/js/mail-script.js",
-                      "~/Scripts/js/jquery.tagsinput.js",
-                      "~/ Scripts/js/jquery.countdown.js",
-                      "~/Scripts/js/jquery.plugin.js"
-                      ));
+                      "~/Scripts/js/jquery.tagsinput.js") 
+                    );
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                     "~/css/bootstrap.css",
+                     "~/Content/bootstrap.css",
                      "~/Content/main.css",
-                     "~/Content/Site.css",
-                     "~/css/linearicons.css",
-                     "~/css/magnific-popup.css",
-                     "~/css/nice-select.css",
-                     "~/css/animate.min.css",
-                     "~/css/owl.carousel.css",
-                     "~/css/jquery.tagsinput.css",
-                     "~/css/font-awesome.min.css"
-                     ).Include("~/Content/assets/css/fontawsom-all.min.css", new CssRewriteUrlTransform()).Include(
-                "~/css/jquery.countdown.css", new CssRewriteUrlTransform()));
+                     "~/Content/linearicons.css",
+                     "~/Content/magnific-popup.css",
+                     "~/Content/nice-select.css",
+                     "~/Content/animate.min.css",
+                     "~/Content/owl.carousel.css",
+                     "~/Content/jquery.tagsinput.css",
+                     "~/Content/font-awesome.min.css"
+                     ).Include("~/Content/assets/css/fontawsom-all.min.css", new CssRewriteUrlTransform()));
         }
     }
 }

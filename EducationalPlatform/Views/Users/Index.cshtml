@@ -1,0 +1,59 @@
+﻿@model EducationalPlatform.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "All Users";
+}
+
+<!-- Start Banner Area -->
+<section class="banner-area relative">
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    All Users
+                </h1>
+                <p>
+
+                </p>
+                <div class="link-nav">
+                    <span class="box">
+                        <a href="@Url.Action("Index", "Home")"> Home</a>
+                        <i class="lnr lnr-arrow-right"></i>
+                        <a href="@Url.Action("Index", "Users")"> Users</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rocket-img">
+        <img src="~/Content/Images/rocket.png" alt="">
+    </div>
+</section>
+<!-- End Banner Area -->
+
+
+<section class="feature-area section">
+    <div class="container shrink codebase-step overflow-hidden">
+        <div class="row justify-content-center">
+            <div class="col-lg-11">
+                @foreach (EducationalPlatform.Models.ApplicationUser user in ViewBag.Users)
+                {
+                    <div class="panel-heading">User Name: @user.FullName</div>
+                    <div class="panel-body">
+                        <i class="glyphicon glyphicon-envelope"></i> User Email: <span class="label label-default">@user.Email</span>
+                        <br /><br />
+                    </div>
+
+                    <form class="d-inline" method="post" action="/Users/Delete/@Model.Id">
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button class="btn btn-sm btn-danger" role="button" type="submit">Delete User</button>
+                    </form>
+                    <br /><br />
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

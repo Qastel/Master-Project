@@ -17,9 +17,9 @@
                 </p>
                 <div class="link-nav">
                     <span class="box">
-                        <a href="@Url.Action("Index", "Codebases")"> Codebases </a>
+                        <a href="@Url.Action("Index", "ForumTopic", new { CodebaseId = Model.Topic.CodebaseId})"> Forum Topic </a>
                         <i class="lnr lnr-arrow-right"></i>
-                        <a href="@Url.Action("Show", "Codebases", new { Id = Model.Id} )"> Alien Invasion</a>
+                        <a href="@Url.Action("Index", "ForumResponse", new { TopicId = Model.TopicId} )"> Forum Responses </a>
                     </span>
                 </div>
             </div>
@@ -31,6 +31,7 @@
 </section>
 <!-- End Banner Area -->
 
+<!-- Start Response Area-->
 <section class="feature-area section">
     <div class="container shrink codebase-step">
         <div class="row justify-content-center">
@@ -47,17 +48,19 @@
                @foreach (EducationalPlatform.Models.ForumResponse response in ViewBag.ForumResponses)
                {
 
-                <div class="pb-20 pt-20 mb-10 pl-5 pr-5 overflow-hidden" style="background-color:#F5F5F5; border: 1px solid gray;">
+                <div class="pb-20 pt-20 mb-10 pl-5 pr-5 overflow-hidden " style="background-color:#F5F5F5;">
                     @if (response.FatherResponse != null)
                     {
                         <div class=" pb-20 pt-20 mb-10 pl-5 pr-5 overflow-hidden" style="background-color:#ECF1EF; border: 1px solid gray;">
                             <h6>Replied to: @response.FatherResponse.Description</h6> by  @response.FatherResponse.User.FullName
                         </div>
                     }
-                    <h6> @response.Description </h6> by @response.User.FullName, @response.CreationDate
-                    <button id="reply" onclick="display_reply(@response.Id)" class="float-right genric-btn default">Reply</button>
+                    <div class="d-flex justify-content-between">
+                        <h6> @response.Description </h6> by @response.User.FullName, @response.CreationDate
+                    </div>
+                    <button id="reply" onclick="display_reply(@response.Id)" class="float-right genric-btn default mt-25">Reply</button>
                     <div id="reply-div-@response.Id" class="ml-20" style="display:none;">
-                        @Html.Action("New", "ForumResponse", new { TopicId = response.TopicId, FatherId = response.Id })
+                        @Html.Action("New", "ForumResponse", new { TopicId = response.TopicId, FatherId = response.Id })  <!-- Include New Response Form Inside Another Response-->
                     </div>
                     <br>
                     @if (response.UserId == ViewBag.CurrentUser)
@@ -71,12 +74,12 @@
                 }
             </div>
         </div>
-        @Html.Action("New", "ForumResponse")
+        @Html.Action("New", "ForumResponse")   <!-- Include New Response Form Inside Index-->
     </div>
 </section>
+<!--End Response Area-->
 
 <script>
-   
     document.getElementById("reply-div").style.display = 'none';
 
     function display_reply(divId) {

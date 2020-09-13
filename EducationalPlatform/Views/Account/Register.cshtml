@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/assets/css/style.css" />
 }
 
+<!-- Start Register Box -->
 <div class="container-fluid">
     <div class="container">
         <div class="col-xl-10 col-lg-11 login-container">
@@ -37,8 +38,8 @@
                             <div class="login-row row no-margin">
                                 <i class="fas fa-unlock-alt"></i><label for="" class="form-label-psw"> Password </label>
                                 <p style="font-size:10px" class="ml-20">(at least one capital letter, one digit, and one non-digit)<p>
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-sm form-textbox-psw" })
-                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-sm form-textbox-psw" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div>
                             <div class="login-row row forrr no-margin">
                                 <i class="fas fa-unlock-alt"></i><label for="" class="form-label-repsw"> Confirm Password </label>
@@ -82,7 +83,7 @@
         </div>
     </div>
 </div>
-
+<!-- End Register Box -->
 
 
 

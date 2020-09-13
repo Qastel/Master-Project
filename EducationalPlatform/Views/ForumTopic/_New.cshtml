@@ -1,6 +1,6 @@
 ﻿@model EducationalPlatform.Models.ForumTopic
 
-
+<!-- Start New ForumTopic Area-->
 <div class="row justify-content-center overflow-hidden">
     <div class="">
         <form method="post" action="/ForumTopic/New">
@@ -12,9 +12,10 @@
                     @Html.TextArea("Description", null, new { @class = "single-input-primary", @placeholder = "Write a question...", style = "width: 600px;" })
                     @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger " })
                 </div>
-                <button class="genric-btn success mt-10 float-right topic-button" type="submit"> Add question</button>
+                <button class="genric-btn primary mt-10 float-right topic-button" type="submit"> Add question</button>
             </div>
             <br>
         </form>
     </div>
 </div>
+<!-- End New ForumTopic Area-->

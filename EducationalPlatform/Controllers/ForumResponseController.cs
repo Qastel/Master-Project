@@ -73,9 +73,13 @@ namespace EducationalPlatform.Controllers
         public ActionResult Delete(int id, int TopicId)
         {
             ForumResponse t = db.ForumResponses.Find(id);
+            var resp = db.ForumResponses.Where(d => d.FatherId == id);
 
             if (t != null && (t.UserId == User.Identity.GetUserId() || User.IsInRole("Administrator")))
             {
+                foreach (var r in resp) {
+                    r.FatherId = -1;
+                }
                 db.ForumResponses.Remove(t);
                 db.SaveChanges();
                 return RedirectToAction("Index", "ForumResponse", new { TopicId });
