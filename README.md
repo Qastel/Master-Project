@@ -1,13 +1,13 @@
 # Master-Project
 
 
-PUBLIC
+##PUBLIC
 The application has been published at: https://educationalplatform.azurewebsites.net/.
 
-GITHUB
+##GITHUB
 The application versions has been kept in Github at: https://github.com/Qastel/Master-Project
 
-LOCALLY
+##LOCALLY
 The application has been developed using Visual Studio 2017 and run locally from the IDE.
 
 
