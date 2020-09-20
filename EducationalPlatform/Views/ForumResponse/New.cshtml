@@ -7,19 +7,17 @@
 <!-- Start New Response Form-->
 <div class="row justify-content-center overflow-hidden">
     <form method="post" action="/ForumResponse/New">
-        <div class="">
-            <div class="">
-                @Html.HiddenFor(m => m.UserId)
-                @Html.HiddenFor(m => m.TopicId)
-                @Html.HiddenFor(m => m.CreationDate)
-                @Html.HiddenFor(m => m.FatherId)
-                <div class="mt-10 response">
-                    @Html.TextArea("Description", null, new { @class = "single-input-primary", @placeholder = "Reply...", style = "width: 600px;" })
-                    @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger " })
-                </div>
+        <div class="overflow-hidden">
+            @Html.HiddenFor(m => m.UserId)
+            @Html.HiddenFor(m => m.TopicId)
+            @Html.HiddenFor(m => m.CreationDate)
+            @Html.HiddenFor(m => m.FatherId)
+            <div class="mt-10 response">
+                @Html.TextArea("Description", null, new { @class = "single-input-primary", @placeholder = "Reply...", style = "width: 600px;" })
+                @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger " })
             </div>
-            <button class="genric-btn primary mt-10 float-right response-button" type="submit">Add Response</button>
         </div>
+        <button class="genric-btn primary mt-10 float-right response-button" type="submit">Add Response</button>
         <br>
     </form>
 </div>

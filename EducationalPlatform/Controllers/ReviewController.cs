@@ -45,9 +45,9 @@ namespace EducationalPlatform.Controllers
         {
             x.User = db.Users.FirstOrDefault(u => u.Id == x.UserId);
             x.Codebase = db.Codebases.FirstOrDefault(c => c.Id == x.CodebaseId);
+            x.UserId = User.Identity.GetUserId();
 
-
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && x.Description != null && x.Description != "") // check if all required fields are filled and if a description exists
             {
                 try
                 {
@@ -61,8 +61,8 @@ namespace EducationalPlatform.Controllers
                     return RedirectToAction("Show", "Codebases", new { Id = x.CodebaseId });
                 }
             }
-           
-            TempData["ErrorMessage"] = "Description is reuquired!";
+            
+            TempData["ErrorMessage"] = "A review description is required!";
             return RedirectToAction("Show", "Codebases", new { Id = x.CodebaseId });
 
         }

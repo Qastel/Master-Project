@@ -55,17 +55,23 @@ namespace EducationalPlatform.Controllers
             {
                 x.FatherResponse = db.ForumResponses.FirstOrDefault(c => c.Id == x.FatherId);
             }
-            try
+
+            if (ModelState.IsValid && x.Description != null && x.Description != "") // check if all required fields are filled and if a description exists
             {
-                db.ForumResponses.Add(x);
-                db.SaveChanges();
-                TempData["message"] = "Categoria a fost adaugata!";
-                return RedirectToAction("Index", "ForumResponse", new { x.TopicId });
+                try
+                {
+                    db.ForumResponses.Add(x);
+                    db.SaveChanges();
+                    TempData["message"] = "Your response has been added!";
+                    return RedirectToAction("Index", "ForumResponse", new { x.TopicId });
+                }
+                catch (Exception e)
+                {
+                    return RedirectToAction("Index", "ForumResponse", new { x.TopicId });
+                }
             }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "ForumResponse", new { x.TopicId });
-            }
+            TempData["ErrorMessage"] = "A response description is required!";
+            return RedirectToAction("Index", "ForumResponse", new { x.TopicId });
         }
 
         [HttpDelete]

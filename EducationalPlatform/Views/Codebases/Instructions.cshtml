@@ -9,7 +9,7 @@
         <div class="row d-flex align-items-center justify-content-center">
             <div class="about-content col-lg-12">
                 <h1 class="text-white">
-                    Instructors' Training
+                    Instructor Training
                 </h1>
                 <p>
                     Understanding how to pick up codebases follows the next Intructional Design.
@@ -18,7 +18,7 @@
                     <span class="box">
                         <a href="@Url.Action("Index", "Codebases")"> Codebases </a>
                         <i class="lnr lnr-arrow-right"></i>
-                        <a href="@Url.Action("Instructions", "Codebases")">Instructors' Training</a>
+                        <a href="@Url.Action("Instructions", "Codebases")">Instructor Training</a>
                     </span>
                 </div>
             </div>
@@ -52,7 +52,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="codebase-step col-lg-8 col-md-8 justify-content-center">
-                <h3 class="mr-15 text-center">Instructors' Agenda </h3>
+                <h3 class="mr-15 text-center">Instructor Agenda </h3>
                 <br>
                 <div></div>
                 <br>
@@ -224,7 +224,10 @@
                     <br />
 
                     <span class="codebase-topics font-weight-bold">Welcome and Roleplay Presentation</span>
-                    <p class="mt-2">- make it interactive, write about the person responsible for the mentoring during the codebase exploration and his support.</p>
+                    <p class="mt-2">- make it interactive, write about the person responsible for the mentoring during the codebase exploration and his support.  A recommended explanation will be:</p>
+                    <p class="font-italic"> Hi! Welcome to our new team of developers! 
+                    My name is George, I am the team leader of this project and I'll be here to help you through our app development. 
+                    I will show you the steps to understand the most important aspects of the codebase. </p>
                     <br>
 
                     <span class="codebase-topics font-weight-bold">Learning Methods </span>
@@ -233,7 +236,12 @@
                         - explain any Side Notes that you may use for more explanations  or other purpose, and where the learners can find them.
                         Overall, these sidenotes are meant to complete the learning technique.
                         In this paragraph you can mention any information that you will use to help the learners' experience.
-                        It is recommended to use these for making the learners aware of the reusable roadmap.
+                        It is recommended to use these for making the learners aware of the reusable roadmap. A recommended explanation will be:
+                    </p>
+                    <p class="font-italic">
+                        How are we going to tackle the codebase? What learning method we can use? 
+                        This project uses a bottom-up approach which implies getting only enough general knowledge for dive in and understand the raw code of the project. 
+                        Then we have time to get on the outer layers and analyse high level architecture.
                     </p>
                     <br>
 
@@ -242,8 +250,12 @@
                         - make learners aware of the more generic reusable model (roadmap) and skills.
                         Overall, the lerners' purpose is to get the necessary experience and skills to faster and better understand new codebases.
                         The learning will happen at different levels: one for this particular codebase and one for any similar project.
-                        The students will understand their goals from the start.
+                        The students will understand their goals from the start.  A recommended explanation will be:
                     </p>
+                    <p class="font-italic"> You need to know that some of the steps presented here are reusable. 
+                    The whole codebase model and tasks are built to illustrate a roadmap for codebases exploration. 
+                    Such that, besides understanding the particularities of this specific project, you are in the process of learning a more generic technique of codebase understanding! 
+                    This is the purpose of reading codebases: you get the experience that makes your time easier next time.</p>
                     <br>
 
                     <span class="codebase-topics font-weight-bold">Learning Structure</span>
@@ -301,21 +313,12 @@
 
                     <h5>Important Topics that you can consider:</h5>
                     <br />
-
-                    <span class="codebase-topics font-weight-bold"> Section General Purpose </span>
+                    <span class="codebase-topics font-weight-bold mb-10">Resources Types</span>
                     <p class="mt-2">
-                        - explain what is the purpose of this section and why is it important to be read. We always want the learners to know what is the result of each section.
-                        Try to convince the learners that even is not part of the codebase it will improve their experience. Talk about the benefits and resources types. A recommended explanation will be:
+                        - clarify which resources are conventional and which are particular to the codebase. Learners will understand code characteristics.
+                        A recommended explanation will be.
                     </p>
-                    <p class="font-italic">
-                        This section will help you level your knowledge and prepare you for the codebase exploration.
-                        We want all students to have at least the minimum amount of knowledge to explore the codebase.
-                        Do you already know some of the things? That's great! You can skip this step but we highly recommend you to revise them.
-                        Do not forget that working on this project already implies having some understanding of different programming areas.
-                        You did not see these things before? No problem, you will be guided through each step.
-                    </p>
-                    <br>
-
+                    <p class="font-italic"> What are they based on? The resources contain both generic information like language conventions, and specific information that helped the team of developers implementing this particular application. So you already get that these will improve your experience not only with this codebase but with similar architectures. Build your knowledge with every occasion! </p>
 
                     <span class="codebase-topics font-weight-bold mb-10">Programming Langauge Conventions</span>
                     <p class="mt-2">
@@ -344,10 +347,12 @@
 
                     <span class="codebase-topics font-weight-bold">Project Structure: Documentation, .gitingore, licences</span>
                     <p class="mt-2">
-                        - think of any generic information that will improve the learners visual understanding when exploring codebase's files. This is part of the conventional aspects and it will help learners recognise the pattern for a generic set of projects.
+                        - think of any generic information that will improve the learners visual understanding when exploring codebase's files.
+                        This is part of the conventional aspects and it will help learners recognise the pattern for a generic set of projects.
+                        A recommended explanation will be:
                     </p>
                     <p class="font-italic">
-                        Side Note: For an arbitrary codebase you can build your own prerequisite. Take a look at the programming language, system and project environment, IDE if mentioned, programming style (OOP), best practices and project structure and architecture.
+                        
                     </p>
                     <br>
                 </div>
@@ -379,7 +384,9 @@
                     <h3 class="text-center"> E3. Project Overview</h3>
                     <div class="mb-50">
                         <h5 class="mb-10">Section Insights:</h5>
-                        <p>The section's purpose is to create a better picture of the codebase that the learners will be explore. It will help them build a mental model of the application, understanding its most significant features and objectives. Also, the learners will understand the project requirements and therefore, their role and their motivations.</p>
+                        <p>The section's purpose is to create a better picture of the codebase that the learners will be explore. 
+                        It will help them build a mental model of the application at the functional level, understanding its most significant features and objectives.
+                        Also, the learners will understand the project requirements and therefore, their role and their motivations.</p>
                     </div>
                     <hr>
 
@@ -389,10 +396,11 @@
 
                     <span class="codebase-topics font-weight-bold"> Description </span>
                     <p>
-                        - describe what the application is about
+                        - describe what the application is about. A recommended explanation will be:
                     </p>
                     <p class="font-italic">
-                        What we are working on? We developed a game for children, a shooter more specific where the whole idea is to destroy the enemy aliens. Unfortunately, some bugs exist. Also, we want to expand the code to improve the users' experience.
+                        What we are working on? We developed a game for children, a shooter more specific where the whole idea is to destroy the enemy aliens. 
+                        Unfortunately, some bugs exist. Also, we want to expand the code to improve the users' experience.
                     </p>
                     <br>
 
@@ -406,7 +414,7 @@
 
                     <span class="codebase-topics font-weight-bold"> Current Stage and Goals </span>
                     <p>
-                        - describe the current situation of the project, what are the needs and the problems. This will complete the history lesson given previously.
+                        - describe the current situation of the project, what are the needs and the problems. This will complete the history lesson given previously. A recommended explanation will be:
                     </p>
                     <p class="font-italic">
                         Unfortunately, some bugs exist. Moreover, we want to expand the code to improve the users' experience.
@@ -453,8 +461,13 @@
                     <div class="mt-20 mb-50">
                         <h5 class="mb-10">Section Insights:</h5>
                         <p>
-                            This section comprises the project working principles and culture. It will create the context in which the "team of developers" are working and the desired environment. These can offer learners the environmental requirements needed before starting codebase exploration. They can prepare beforehand their machines for supporting the best experience. The setup illustrated is not the only option, but it guarantees the compilation and development of the project.
-                            This whole environment contributes to the background knowledge needed for learning the codebase. It represents a bridge to the further explained learning model.
+                            This section comprises the project working principles and culture. 
+                            It will create the context in which the "team of developers" are working and the desired environment.
+                            These can offer learners the environmental requirements needed before starting codebase exploration. 
+                            They can prepare beforehand their machines for supporting the best experience. 
+                            The setup illustrated is not the only option, but it guarantees the compilation and development of the project.
+                            This whole environment contributes to the background knowledge needed for learning the codebase. 
+                            It represents a bridge to the further explained learning model.
                         </p>
                     </div>
                     <hr>
@@ -463,51 +476,39 @@
                         <h5>Important Topics that you can consider:</h5>
                         <br />
 
-                        <span class="codebase-topics font-weight-bold"> General Purpose </span>
-                        <p>
-                            - describe what is the purpose of this section
-                        </p>
-                        <p class="font-italic">
-                            First things first, I want to introduce you to our developing environment, our setup and what is recommended for you to use. Then I'll show you some project details and restrictions that will make you aware of the project architecture and team goals. This section will set up the context in which the project will grow.
-                        </p>
-                        <br>
-
-
-                        <span class="codebase-topics font-weight-bold"> Explanations </span>
-                        <p>
-                            - describe any terminology and their importance
-                        </p>
-                        <p class="font-italic">
-                            System-level and Project-level environments are very important when projects are developed in a team. These represent the digital world in which our application will grow. Usually, the project needs to use similar environments for not expecting any compatibility errors. Of course, this is not strictly but it is a highly desirable feature. Our team created and maintain the project by using the following structure:
-                        </p>
-                        <br>
-
                         <span class="codebase-topics font-weight-bold"> System and Project Environments </span>
                         <p>
-                            - present the details for each
+                            - present the requirements of the project such that the learners will be able to install the sofware needed and explore the context in which the project will grow.
+                            A recommended explanation will be:
                         </p>
                         <p class="font-italic">
-                            System Environment: Windows, Codebase Environment: Visual Studio, Version Control: Github, Time Limit: 2 hours, Sprints: 1
+                            System Environment: Windows, <br>
+                            Codebase Environment: Visual Studio, <br>
+                            Version Control: Github <br>
                         </p>
                         <br>
 
                         <span class="codebase-topics font-weight-bold">Codebase Implementation Details</span>
                         <p>
-                            - present the details
+                            - present the implementation details; learners will match their background with the required skills. A recommended explanation will be:
                         </p>
                         <p class="font-italic">
-                            Why are you here? Because you want to contribute to our development and get some experience. What do we want?
-                            We want you to understand the current codebase and respond to Trouble Report requirements as well as considering Expanding the Code.
+                            Contributors so far: 3 <br>
+                            Difficulty: Intermediate <br>
+                            Programming Language: Python <br>
+                            Technology: Desktop Application <br>
+                            Programming Architecture: OOP <br>
+                            Extra Skills: Git (basic), command prompt (basic) <br>
                         </p>
                         <br>
 
                         <span class="codebase-topics font-weight-bold">Codebase Development Constraints</span>
                         <p>
-                            - mention the time limit and any other constraints
+                            - mention the time limit and any other constraints; this will simulate a realistic environment. A recommended explanation will be:
                         </p>
                         <p class="font-italic">
-                            Why are you here? Because you want to contribute to our development and get some experience. What do we want?
-                            We want you to understand the current codebase and respond to Trouble Report requirements as well as considering Expanding the Code.
+                            Time limit: 2 hours <br>
+                            Sprints: 1 (you need to check your understanding after each sprint) <br>
                         </p>
                         <br>
                     </div>
@@ -544,8 +545,16 @@
                     <div class="mt-20 mb-50">
                         <h5 class="mb-10">Section Insights:</h5>
                         <p>
-                            This section represents the first step from the learning model, and here the learners take the first contact with the codebase. So far, the learners had to be prepared by the instructor and create a supportive environment. Now, the learners need to see what is the highest outcome they can get with the least effort. Observing the application running is a massive impact over the learner's mental comfort. Also, from the project perspective, the setup breaks the barrier, transposing the learner from an observer to a developer (player). The student can be considered after this stage, part of the project team. Consequently, now the learners will have an entry path to the codebase examination, and more important, testing. This strategy brings benefits to the learners, such as taking action on source files and testing the interface.
-                            Reading documentation and checking code structure is the basis for correctly completing the project setup. Because the underlying idea is not going too deep into either documentation or code files, for now, learners are advised to make hypotheses.
+                            This section represents the first step from the learning model, and here the learners take the first contact with the codebase. 
+                            So far, the learners had to be prepared by the instructor and create a supportive environment. 
+                            Now, the learners need to see what is the highest outcome they can get with the least effort.
+                            Observing the application running is a massive impact over the learner's mental comfort. 
+                            Also, from the project perspective, the setup breaks the barrier, transposing the learner from an observer to a developer (player). 
+                            The student can be considered after this stage, part of the project team. 
+                            Consequently, now the learners will have an entry path to the codebase examination, and more important, testing. 
+                            This strategy brings benefits to the learners, such as taking action on source files and testing the interface.
+                            Reading documentation and checking code structure is the basis for correctly completing the project setup. 
+                            Because the underlying idea is not going too deep into either documentation or code files, for now, learners are advised to make hypotheses.
                         </p>
                     </div>
                     <hr>
@@ -554,29 +563,30 @@
                         <h5>Important Steps that you can consider for creating the tasks: </h5> <br>
                         <span class="codebase-topics font-weight-bold"> 1. Skim the documentation  </span>
                         <p>
-                            - describe what is the purpose of this section
+                            - describe what is the purpose of this section. A recommended task will be:
                         </p>
                         <p class="font-italic">
-                            First things first, I want to introduce you to our developing environment, our setup and what is recommended for you to use. Then I'll show you some project details and restrictions that will make you aware of the project architecture and team goals. This section will set up the context in which the project will grow.
+                            Skimming the documentation, what do you find important? As a hint look at the names used. The documentation tries to explain how files are used or what requirements the app has. All are objects or names and the documentation gravitates around them. Make a shortlist of keywords:
                         </p>
                         <br>
 
 
                         <span class="codebase-topics font-weight-bold"> 2. Skim through the files and map their structure with the documentation (figure out how to setup & run it) </span>
                         <p>
-                            - describe any terminology and their importance
+                            - describe any terminology and their importance. A recommended task will be:
                         </p>
                         <p class="font-italic">
-                            System-level and Project-level environments are very important when projects are developed in a team. These represent the digital world in which our application will grow. Usually, the project needs to use similar environments for not expecting any compatibility errors. Of course, this is not strictly but it is a highly desirable feature. Our team created and maintain the project by using the following structure:
+                            How are the files organised? Can you see any logic?
+                            Now that you know the most important features of the documentation, take a large perspective over the project files and map them with the documentation. Here we want to evidentiate the file organisation and based on this, the files that help the setup and run the application.
                         </p>
                         <br>
 
                         <span class="codebase-topics font-weight-bold"> 3. Make the project setup (install dependencies/requirements) and run it without errors  </span>
                         <p>
-                            - present the details for each
+                            - present the details for each. A recommended task will be:
                         </p>
                         <p class="font-italic">
-                            System Environment: Windows, Codebase Environment: Visual Studio, Version Control: Github, Time Limit: 2 hours, Sprints: 1
+                            We will use the documentation at every step. Read in the documentation on how to download the project. If you do not have Gitbash installed you can do a classic download, from the button in GitHub page.
                         </p>
                         <br>
                     </div>
@@ -628,6 +638,7 @@
                         <span class="codebase-topics font-weight-bold"> 1. Explore the interface  </span>
                         <p>
                             - the learners should try to find all possible states of the interface. Testing it and asking themselves what is happening and why is it happening will help learners understand how those objects have been implemented.
+                            A recommended task will be:
                         </p>
                         <p class="font-italic">
                             What is happening when you press the button? Why should there be that button there? <br>
@@ -687,6 +698,7 @@
                         <span class="codebase-topics font-weight-bold"> 1. Take a look at the configuration of the files and match each with what you saw in the interface </span>
                         <p>
                             - comprise the importance of understanding the app more than a simple gathering of files, and gives each a meaning, an action and a place in the app features.
+                            A recommended task will be:
                         </p>
                         <p class="font-italic">
                             Skim the files again and Match each with the interface object: <br>
@@ -697,7 +709,6 @@
                             utils.py - the area that keeps the numbers for ship lives, levels, points <br>
                         </p>
                         <br>
-
 
                         <span class="codebase-topics font-weight-bold"> 2. Try to figure out an one line description for each file </span>
                         <p>
@@ -710,8 +721,10 @@
                         <p>
                             - It is important to find the file that contains most of the game behaviour because this will control all the application features by making most of the application logic.
                             It will give different priorities to each file.
+                            A recommended task will be:
                         </p>
                         <p class="font-italic">
+                            Which file is responsible with the game behaviour? Controls the objects and makes most of the logic game? Responsible for moving the ship, fire the bullets, create the fleet, manage alien-ship and bullet-alien impact etc?
                             Side Note: Here the general aspect that we are aiming for is to find the file with the most influence over the others. Consequently, this file will be the core of the project and will map each of the other files inside it. You need to know where the biggest mountain is, right? Is important to know where to go in case further along you want to change the app functionality. This also will help in building the mental model of files connections.
                         </p>
                         <br>
@@ -772,11 +785,27 @@
                             <span class="codebase-topics font-weight-bold d-block">    5. Skim functions and search links between them </span>
                         </div>
                         <p class="mt-10">
-                            This stage covers different alternatives to be considered by the learners when choosing the file. The best approach will be to let the learner decide the path, choosing between starting with the runnable/main file, most evident file giving the interface or first in the order of the files. Such that learners will repeat the choosing technique for all the others. Reading the files sequential, one by one, but this style will let you make fewer connections. You can read the files related to the interface objects and choose the most evident first. In this way, you can better observe the app behaviour. Also, another method is to start from the main file and search for the functions that are called. This strategy will help learners because the main function will call anything relevant, and those will expand furthermore. Remember: always is good to make connections between files. The idea is not to understand each of the file's purposes separately!
-                            During these steps, learners will check code rationale based on the knowledge previously gathered from project structure, interface functionalities and application behaviour. From the survey taken, there can be considered two approaches in analysing the code: one is a brief understanding of each file and making connections only inside each file after all are analysed the process is retaken with a more focus on connections between files. The second approach referees to understanding during the code exploration of the linkages between specific variables and functions, going back and forth between the files. During the stage of understanding the links between the files, learners are advised to look after the most evident variables or functions because these will be the easiest to understand. Also, learners can benefit from the “search” function built in the IDE to search for keywords and improve the process. Moreover, learners should always check code questions with interface functionalities and application behaviour.
+                            This stage covers different alternatives to be considered by the learners when choosing files' order. 
+                            The best approach will be to let the learner decide the path, choosing between starting with the runnable/main file, most evident file giving the interface or first in the order of the files. 
+                            Such that learners will repeat the choosing technique for all the others. 
+                            Reading the files sequential, one by one, but this style will let you make fewer connections. 
+                            You can read the files related to the interface objects and choose the most evident first. In this way, you can better observe the app behaviour. 
+                            Also, another method is to start from the main file and search for the functions that are called. 
+                            This strategy will help learners because the main function will call anything relevant, and those will expand furthermore. 
+                            Remember: always is good to make connections between files. The idea is not to understand each of the file's purposes separately!
+                            During these steps, learners will check code rationale based on the knowledge previously gathered from project structure, interface functionalities and application behaviour. 
+                            <br> <br>
+                            There can be considered two approaches in analysing the code: one is a brief understanding of each file and making connections only inside each file after all are analysed the process is retaken with a more focus on connections between files. The second approach referees to understanding during the code exploration of the linkages between specific variables and functions, going back and forth between the files. During the stage of understanding the links between the files, learners are advised to look after the most evident variables or functions because these will be the easiest to understand. Also, learners can benefit from the “search” function built in the IDE to search for keywords and improve the process. Moreover, learners should always check code questions with interface functionalities and application behaviour.
+                            A recommended task will be:
                         </p>
                         <p class="font-italic">
-                            What are the imports? How many classes are imported in alien-invasion? How many are imports from outside libraries?
+                            What are the imports?
+                            How many classes are imported in alien-invasion?
+                            How many are imports from outside libraries?
+                            Read all functions names ( & the comments). Understand their purpose.
+                            What function calls increase_level()?
+                            How is the alien invasion fleet created? What are the functions that take part?
+                            We barely explored two files until now: "driver.py" and "alien_invasion.py".  What we have done so far is a pattern. An iterative step that can be applied for all other files.
                         </p>
                         <br>
 
@@ -794,6 +823,7 @@
                         <p>
                             These are separate tasks aiming to manipulate code. All are designed to better understand code format and code management at a low level.
                             These tasks cover learners knoowledge with another layer of understanding.
+                            A recommended task will be:
                         </p>
                         <p class="font-italic">
                             Select the bullet_speed variable and use the IDE Debugger. In how many files it is used?
@@ -853,10 +883,11 @@
                             Searching for external communications channels like libraries, API’s, third parties, will help learners better understand the purpose of the app. Also, the implementation of the support features that these procedures bring will improve the learners’ knowledge in a wider context. Analysing the extensions of the files, learners will classify and weight the technologies used. It will offer them insights into project structure and effort allocation.
                             Considering the internal communication channels, learners are advised to understand the compatibility between the components and information exchange. This approach will ease the debugging process and also will improve the learners’ knowledge in a wider context.
                             The last steps include the data flow analyse, data storing and processing, and bring the benefits of better understanding the application information manipulation.
-
+                            A recommended task will be:
                         </p>
                         <p class="font-italic">
-                            How is the interaction with the database being done? Try to find how the data is saved in the database.
+                            How is the interaction with the database being done? Try to find how the data is saved in the database. <br>
+                            How is the interaction between different files extensions being done? You need to be aware of the strategy and compatibility applicable. <br>
                         </p>
                         <br>
                     </div>
@@ -915,10 +946,15 @@
                         <p class="mt-20">
                             This section considers separation and classification of the codebase architecture, users, and objectives. This strategy is simulating the same procedures as the ones followed by the developers when the codebase was created. It will help learners understand the application from the perspective of an active developer rather than a person who tries to understand others’ work.
 
-                            The steps comprise a higher understanding of the computational model, resulting in tasks that consider major changes or overall conceptions. Such that, for improving the learning model for novice programmers the tasks will consider more app behaviour and research related questions than modifications.
+                            The steps comprise a higher understanding of the computational model, resulting in tasks that consider major changes or overall conceptions. 
+                            Such that, for improving the learning model for novice programmers the tasks will consider more app behaviour and research related questions than modifications.
+                            A recommandation task will be:
                         </p>
                         <p class="font-italic">
-
+                            We need to gather data for further application development. Can you figure out who are the users? Do they have only one profile? <br>
+                            We need to have a clear picture of the code architecture. Is this application based on OOP principals or procedural programming? <br>
+                            We want to prioritise the code functionalities in order to better integrate the new ones. Please, enumerate functionalities of the code (short description of the game): <br>
+                            The design of the application is based on its objectives. This will help us understand how the interface needs to look like. What is the application purpose?
                         </p>
                         <br>
                     </div>
@@ -929,7 +965,7 @@
 </section>
 
 <div style="position: fixed; bottom: 20px; right: 20px; border: 2px solid #38a4ff; padding:5px;  border-radius: 20px;" class="text-justify">
-    <a href="#IA" class="d-block">Instructors' Agenda </a>
+    <a href="#IA" class="d-block">Instructor Agenda </a>
     <a href="#E1" class="d-block"> E1. Orientation </a>
     <a href="#E2" class="d-block"> E2. Prerequisite </a>
     <a href="#E3" class="d-block"> E3. Project Overview </a>

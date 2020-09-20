@@ -3,6 +3,7 @@
 <!-- Start New ForumTopic Area-->
 <div class="row justify-content-center overflow-hidden">
     <div class="">
+        <span class="text-danger"> @TempData["ErrorMessage"] </span>
         <form method="post" action="/ForumTopic/New">
             <div class="overflow-hidden forum">
                 @Html.HiddenFor(m => m.UserId)

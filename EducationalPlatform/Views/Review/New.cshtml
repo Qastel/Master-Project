@@ -20,11 +20,12 @@
                 </div>
             </div>
         </div>
-
         @Html.Partial("_Index")
         <div class="row justify-content-center">
             <div class="col-lg-8 overflow-hidden">
-                <form method="post" action="/Review/New" class="overflow-hidden">
+                <span class="text-danger"> @TempData["ErrorMessage"] </span>
+                @using (Html.BeginForm("New", "Review", FormMethod.Post, new { @class = "form-horizontal overflow-hidden", role = "form" }))
+                {
                     <div class="d-flex justify-content-center review">
                         @Html.HiddenFor(m => m.UserId)
                         @Html.HiddenFor(m => m.CodebaseId)
@@ -43,7 +44,7 @@
                     </div>
                     <br>
                     <button class="genric-btn primary float-right review-button" type="submit">Add review</button>
-                </form>
+                }
             </div>
         </div>
     </div>

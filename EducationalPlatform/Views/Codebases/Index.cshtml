@@ -75,9 +75,16 @@
             </div>
         </div>
         <div class="feature-inner row">
-            @if (ViewBag.CodebasesPages == 0) {
-                <div class="section-title justify-content-center">
-                    <h3 class="ml-50">"No codebases added yet!"</h3>
+            @if (ViewBag.CodebasesPages == 0)
+            {
+                <div class="section-title center-element">
+                    <h3>"No codebases added yet!"</h3>
+                </div>
+            }
+            else if (ViewBag.CodebasesNumber == 0)
+            {
+                <div class="section-title center-element">
+                    <h3>"No codebases match the filters that you select!"</h3>
                 </div>
             }
             @foreach (EducationalPlatform.Models.Codebases codebase in ViewBag.Codebases)
@@ -126,7 +133,7 @@
                                 <div style="color:#DAA520">
                                     @if (codebase.MeanRating != 0)
                                     {
-                                        <text>Rating:</text>  @codebase.MeanRating <text>/5</text>
+                                        <text>Rating:</text> @codebase.MeanRating <text>/5</text>
                                     }
                                 </div>
                             </div>

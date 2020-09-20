@@ -48,18 +48,23 @@ namespace EducationalPlatform.Controllers
             x.Codebase = db.Codebases.FirstOrDefault(c => c.Id == x.CodebaseId);
             x.CreationDate = DateTime.Now;
             x.UserId = User.Identity.GetUserId();
- 
-            try
+
+            if (ModelState.IsValid && x.Description != null && x.Description != "") // check if all required fields are filled and if a description exists
             {
-                db.ForumTopics.Add(x);
-                db.SaveChanges();
-                TempData["message"] = "Categoria a fost adaugata!";
-                return RedirectToAction("Index", "ForumTopic", new { x.CodebaseId });
+                try
+                {
+                    db.ForumTopics.Add(x);
+                    db.SaveChanges();
+                    TempData["message"] = "The topic has been added!";
+                    return RedirectToAction("Index", "ForumTopic", new { x.CodebaseId });
+                }
+                catch (Exception e)
+                {
+                    return RedirectToAction("Index", "ForumTopic", new { x.CodebaseId });
+                }
             }
-            catch (Exception e)
-            {
-                return RedirectToAction("Index", "ForumTopic", new { x.CodebaseId });
-            }
+            TempData["ErrorMessage"] = "A topic description is required!";
+            return RedirectToAction("Index", "ForumTopic", new { x.CodebaseId });
         }
 
         [HttpDelete]

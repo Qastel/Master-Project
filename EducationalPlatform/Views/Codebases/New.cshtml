@@ -53,7 +53,7 @@
 <section class="mb-100">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="codebase-category-wrapper col-lg-8 col-md-8 justify-content-center">
+            <div class="codebase-step codebase-category-wrapper col-lg-8 col-md-8 justify-content-center">
                 <form method="post" action="/Codebases/New" enctype='multipart/form-data'>
                     @Html.HiddenFor(m => m.UserId)
                     <div class="mt-50 mb-50 ">
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="mt-50 mb-70 ">
-                        <h5 class="mb-10"> Upload Your Codebase </h5>
+                        <h5 class="mb-10"> Your Codebase (link or zip)</h5>
                         <div class="mt-10">
                             @Html.TextBox("CodebaseLink", null, new { @class = "single-input-primary", @placeholder = "Link for the Codebase" })
                             @Html.ValidationMessageFor(model => model.CodebaseLink, null, new { @class = "text-danger " })

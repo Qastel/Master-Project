@@ -5,14 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>@ViewBag.Title - EducationalPlatform</title>
 
-    @Styles.Render("~/Content/css")  <!-- Include all the css form Bundle.config  -->
+    @Styles.Render("~/Styles/css")  <!-- Include all the css form Bundle.config  -->
     @Scripts.Render("~/bundles/modernizr")
     <link rel="shortcut icon" href="@Url.Content("~/Content/Images/fav.png")">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,500,600" rel="stylesheet"> <!-- for account design -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500i" rel="stylesheet"> <!-- for account design -->
-    <link href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" rel="stylesheet" type="text/css" /> <!-- for account design -->
-    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/start/jquery-ui.css" /> <!-- for account design -->
-    
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,500,600" rel="stylesheet"> <!-- for site design -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500i" rel="stylesheet"> <!-- for site design -->
+    <link href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" rel="stylesheet" type="text/css" /> <!-- for site design -->
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/start/jquery-ui.css" /> <!-- for site design -->
+    <link rel="stylesheet" href="~/Content/linearicons.css"> <!-- for site design -->
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css"> <!-- for site design -->
+    <link rel="stylesheet" href="~/Content/bootstrap.css"> <!-- for site design -->
+    <link rel="stylesheet" href="~/Content/magnific-popup.css"> <!-- for site design -->
+    <link rel="stylesheet" href="~/Content/nice-select.css"> <!-- for site design -->
+    <link rel="stylesheet" href="~/Content/animate.min.css"> <!-- for site design -->
+    <link rel="stylesheet" href="~/Content/owl.carousel.css"> <!-- for site design -->
+    <link rel="stylesheet" href="~/Content/main.css"> <!-- for site design -->
     @RenderSection("AddToHead", required: false)   <!-- Add section useful in case more css are needed for a particular page -->
     @RenderSection("scripts", required: false)  <!-- Add section useful in case more scripts are needed for a particular page -->
 </head>
@@ -106,7 +113,6 @@
     <!-- Add all the scripts from Bundle.config -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-   
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>

@@ -61,6 +61,17 @@ namespace EducationalPlatform.Controllers
         public ActionResult Login(string returnUrl)
         {
             ViewBag.Page = "Login";
+            if (returnUrl != null)
+            {
+                var newUrl = returnUrl.Split('/');
+                if (newUrl.Count() == 4 && newUrl[1] == "Review")
+                {
+                    returnUrl = "/Codebases/Show/" + newUrl[3];
+                }
+                else {
+                    returnUrl = null;
+                }
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

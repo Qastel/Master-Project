@@ -43,40 +43,40 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-11">
-            @foreach (EducationalPlatform.Models.ForumTopic topic in ViewBag.ForumTopics)
-            {
-            <div style="background-color:#F0F8FF;" class="overflow-hidden topic-link">
-                <a href="@Url.Action("Index", "ForumResponse", new { TopicId = topic.Id })" style="text-decoration: none; color:inherit;">
-                    <div class="d-flex justify-content-between pb-20 pt-20 mb-10 pl-5 pr-5">
-                        <h6> @topic.Description </h6><p>   by @topic.User.FullName, @topic.CreationDate</p>
-                    </div>
-                </a>
-                @if (ViewBag.ResponsesNumber != null)
+                @foreach (EducationalPlatform.Models.ForumTopic topic in ViewBag.ForumTopics)
                 {
-                    var noResponses = false;
-                    foreach (var item in ViewBag.ResponsesNumber)
-                    {
-                        if (item.Key == topic.Id)
+                    <div style="background-color:#F0F8FF;" class="overflow-hidden topic-link">
+                        <a href="@Url.Action("Index", "ForumResponse", new { TopicId = topic.Id })" style="text-decoration: none; color:inherit;">
+                            <div class="d-flex justify-content-between pb-20 pt-20 mb-10 pl-5 pr-5">
+                                <h6> @topic.Description </h6> <p>by @topic.User.FullName, @topic.CreationDate</p>
+                            </div>
+                        </a>
+                        @if (ViewBag.ResponsesNumber != null)
                         {
-                            noResponses = true;
-                            <div class="float-right pr-5"> Responses so far: @item.Value </div>
+                            var noResponses = false;
+                            foreach (var item in ViewBag.ResponsesNumber)
+                            {
+                                if (item.Key == topic.Id)
+                                {
+                                    noResponses = true;
+                                    <div class="float-right pr-5"> Responses so far: @item.Value </div>
+                                }
+                            }
+                            if (noResponses == false)
+                            {
+                                <div class="float-right pr-5"> Responses so far: 0 </div>
+                            }
                         }
-                    }
-                    if (noResponses == false)
-                    {
-                        <div class="float-right pr-5"> Responses so far: 0 </div>
-                    }
+                        @if (topic.UserId == ViewBag.CurrentUser)
+                        {
+                            <form method="post" action="/ForumTopic/Delete/?id=@topic.Id&CodebaseId=@Model.CodebaseId" class="float-left">
+                                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                <button class="genric-btn danger ml-20 mb-10" role="button" type="submit">Delete</button>
+                            </form>
+                        }
+                    </div>
+                    <br>
                 }
-                @if (topic.UserId == ViewBag.CurrentUser)
-                {
-                    <form method="post" action="/ForumTopic/Delete/?id=@topic.Id&CodebaseId=@Model.CodebaseId" class="float-left">
-                        @Html.HttpMethodOverride(HttpVerbs.Delete)
-                        <button class="genric-btn danger ml-20 mb-10" role="button" type="submit">Delete</button>
-                    </form>
-                }
-            </div>
-            <br>
-            }
             </div>
         </div>
         @Html.Partial("_New", Model)

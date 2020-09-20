@@ -116,6 +116,7 @@ namespace EducationalPlatform.Controllers
             }
 
             ViewBag.Codebases = x;
+            ViewBag.CodebasesNumber = x.Count();
 
             return View();
         }

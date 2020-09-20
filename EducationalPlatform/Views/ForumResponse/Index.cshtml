@@ -43,35 +43,36 @@
 
             </div>
         </div>
-        <div class="row justify-content-center" >
+        <div class="row justify-content-center">
             <div class="col-lg-11">
-               @foreach (EducationalPlatform.Models.ForumResponse response in ViewBag.ForumResponses)
-               {
+                @foreach (EducationalPlatform.Models.ForumResponse response in ViewBag.ForumResponses)
+                {
 
-                <div class="pb-20 pt-20 mb-10 pl-5 pr-5 overflow-hidden " style="background-color:#F5F5F5;">
-                    @if (response.FatherResponse != null)
-                    {
-                        <div class=" pb-20 pt-20 mb-10 pl-5 pr-5 overflow-hidden" style="background-color:#ECF1EF; border: 1px solid gray;">
-                            <h6>Replied to: @response.FatherResponse.Description</h6> by  @response.FatherResponse.User.FullName
+                    <div class="pb-20 pt-20 mb-10 pl-5 pr-5 overflow-hidden " style="background-color:#F5F5F5;">
+                        @if (response.FatherResponse != null)
+                        {
+                            <div class=" pb-20 pt-20 mb-10 pl-5 pr-5 overflow-hidden" style="background-color:#ECF1EF; border: 1px solid gray;">
+                                <h6>Replied to: @response.FatherResponse.Description</h6> by  @response.FatherResponse.User.FullName
+                            </div>
+                        }
+                        <div class="d-flex justify-content-between">
+                            <h6> @response.Description </h6> by @response.User.FullName, @response.CreationDate
                         </div>
-                    }
-                    <div class="d-flex justify-content-between">
-                        <h6> @response.Description </h6> by @response.User.FullName, @response.CreationDate
+                        <button id="reply" onclick="display_reply(@response.Id)" class="float-right genric-btn default mt-25">Reply</button>
+                        <div id="reply-div-@response.Id" class="ml-20" style="display:none;">
+                            @Html.Action("New", "ForumResponse", new { TopicId = response.TopicId, FatherId = response.Id })  <!-- Include New Response Form Inside Another Response-->
+                        </div>
+                        <br>
+                        @if (response.UserId == ViewBag.CurrentUser)
+                        {
+                            <form method="post" style="display:inline" action="/ForumResponse/Delete/?id=@response.Id&TopicId=@response.TopicId" class="float-left">
+                                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                <button class="genric-btn danger" role="button" type="submit">Delete</button>
+                            </form>
+                        }
                     </div>
-                    <button id="reply" onclick="display_reply(@response.Id)" class="float-right genric-btn default mt-25">Reply</button>
-                    <div id="reply-div-@response.Id" class="ml-20" style="display:none;">
-                        @Html.Action("New", "ForumResponse", new { TopicId = response.TopicId, FatherId = response.Id })  <!-- Include New Response Form Inside Another Response-->
-                    </div>
-                    <br>
-                    @if (response.UserId == ViewBag.CurrentUser)
-                    {
-                    <form method="post" style="display:inline" action="/ForumResponse/Delete/?id=@response.Id&TopicId=@response.TopicId" class="float-left">
-                        @Html.HttpMethodOverride(HttpVerbs.Delete)
-                        <button class="genric-btn danger" role="button" type="submit">Delete</button>
-                    </form>
-                    }
-                </div>
                 }
+                <span class="text-danger center-element"> @TempData["ErrorMessage"] </span> <br>
             </div>
         </div>
         @Html.Action("New", "ForumResponse")   <!-- Include New Response Form Inside Index-->

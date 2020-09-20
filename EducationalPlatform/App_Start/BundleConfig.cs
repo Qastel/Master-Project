@@ -20,10 +20,9 @@ namespace EducationalPlatform
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/bootstrap.min.js",
-                      "~/Scripts/jquery-3.3.1.min.js",
-                      "~/Scripts/js/main.js",
+                      //"~/Scripts/bootstrap.js",
+                      //"~/Scripts/bootstrap.min.js",
+                      //"~/Scripts/jquery-3.3.1.min.js",
                       "~/Scripts/js/vendor/jquery-2.2.4.min.js",
                       "~/Scripts/js/vendor/bootstrap.min.js",
                       "~/Scripts/js/easing.min.js",
@@ -40,20 +39,22 @@ namespace EducationalPlatform
                       "~/Scripts/js/wow.min.js",
                       "~/Scripts/js/jquery.counterup.min.js",
                       "~/Scripts/js/mail-script.js",
+                      "~/Scripts/js/main.js",
                       "~/Scripts/js/jquery.tagsinput.js") 
                     );
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                     "~/Content/bootstrap.css",
-                     "~/Content/main.css",
-                     "~/Content/linearicons.css",
-                     "~/Content/magnific-popup.css",
-                     "~/Content/nice-select.css",
-                     "~/Content/animate.min.css",
-                     "~/Content/owl.carousel.css",
-                     "~/Content/jquery.tagsinput.css",
-                     "~/Content/font-awesome.min.css"
-                     ).Include("~/Content/assets/css/fontawsom-all.min.css", new CssRewriteUrlTransform()));
+            bundles.Add(new StyleBundle("~/Styles/css").Include(    
+                "~/Content/main.css", new CssRewriteUrlTransform()).Include(
+                "~/Content/assets/css/fontawsom-all.min.css", new CssRewriteUrlTransform()).Include(
+                //"~/Content/bootstrap.css", new CssRewriteUrlTransform()).Include(
+                //"~/Content/linearicons.css", new CssRewriteUrlTransform()).Include(
+                //"~/Content/magnific-popup.css", new CssRewriteUrlTransform()).Include(
+                //"~/Content/nice-select.css", new CssRewriteUrlTransform()).Include(
+                 //"~/Content/animate.min.css", new CssRewriteUrlTransform()).Include(
+                 //"~/Content/owl.carousel.css", new CssRewriteUrlTransform()).Include(
+                "~/Content/jquery.tagsinput.css", new CssRewriteUrlTransform()).Include(
+                //"~/Content/font-awesome.min.css", new CssRewriteUrlTransform()
+                ));
         }
     }
 }
