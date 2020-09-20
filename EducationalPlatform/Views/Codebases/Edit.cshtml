@@ -74,7 +74,7 @@
                         </div>
                         <div class="text-center">OR</div>
                         <div class="mt-10">
-                            @Html.TextBox("GoogleFormsEmbedded", null, new { @class = "single-input-primary", @placeholder = "Embed Google Forms" })
+                            @Html.TextArea("GoogleFormsEmbedded", null, new { @class = "single-input-primary", @placeholder = "Embed Google Forms" })
                             @Html.ValidationMessageFor(model => model.GoogleFormsEmbedded, null, new { @class = "text-danger" })
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                     <div class="mt-50 mb-70">
                         <h5 class="mb-20"> Implementation Details </h5>
                         <div class="mt-10">
-                            @Html.TextBox("Role", null, new { @class = "single-input-primary", @placeholder = "Learner's Role/ Mission" })
+                            @Html.TextArea("Role", null, new { @class = "single-input-primary", @placeholder = "Learner's Role/ Mission" })
                             @Html.ValidationMessageFor(model => model.Role, null, new { @class = "text-danger " })
                         </div>
 
